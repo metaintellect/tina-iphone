@@ -108,6 +108,9 @@ xcuserdata
 
 
 ####
-# UNKNOWN: recommended by others, but I can't discover what these files are
+# CocoaPods 
 #
-# ...none. Everything is now explained.
+# Exclude the CocoaPods downloaded files
+#
+
+Pods/

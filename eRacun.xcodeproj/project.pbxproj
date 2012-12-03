@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C548352F87FF49EC9917F823 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0027CA2A38FA4D0BA46B33E1 /* libPods.a */; };
 		D46D3AA2166CF606000BB30B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D46D3AA1166CF606000BB30B /* UIKit.framework */; };
 		D46D3AA4166CF606000BB30B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D46D3AA3166CF606000BB30B /* Foundation.framework */; };
 		D46D3AA6166CF606000BB30B /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D46D3AA5166CF606000BB30B /* CoreGraphics.framework */; };
@@ -18,9 +19,12 @@
 		D46D3AB8166CF606000BB30B /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D46D3AB7166CF606000BB30B /* Default@2x.png */; };
 		D46D3ABA166CF606000BB30B /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D46D3AB9166CF606000BB30B /* Default-568h@2x.png */; };
 		D46D3ABD166CF606000BB30B /* eRacun.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D46D3ABB166CF606000BB30B /* eRacun.xcdatamodeld */; };
+		D46D3ACF166CFD90000BB30B /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D46D3ACE166CFD90000BB30B /* QuartzCore.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0027CA2A38FA4D0BA46B33E1 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		216F4CC40EF5419DA3CACF90 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
 		D46D3A9D166CF606000BB30B /* eRacun.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = eRacun.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D46D3AA1166CF606000BB30B /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		D46D3AA3166CF606000BB30B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -36,6 +40,7 @@
 		D46D3AB7166CF606000BB30B /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		D46D3AB9166CF606000BB30B /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		D46D3ABC166CF606000BB30B /* eRacun.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = eRacun.xcdatamodel; sourceTree = "<group>"; };
+		D46D3ACE166CFD90000BB30B /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -43,10 +48,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D46D3ACF166CFD90000BB30B /* QuartzCore.framework in Frameworks */,
 				D46D3AA2166CF606000BB30B /* UIKit.framework in Frameworks */,
 				D46D3AA4166CF606000BB30B /* Foundation.framework in Frameworks */,
 				D46D3AA6166CF606000BB30B /* CoreGraphics.framework in Frameworks */,
 				D46D3AA8166CF606000BB30B /* CoreData.framework in Frameworks */,
+				C548352F87FF49EC9917F823 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -59,6 +66,7 @@
 				D46D3AA9166CF606000BB30B /* eRacun */,
 				D46D3AA0166CF606000BB30B /* Frameworks */,
 				D46D3A9E166CF606000BB30B /* Products */,
+				216F4CC40EF5419DA3CACF90 /* Pods.xcconfig */,
 			);
 			sourceTree = "<group>";
 		};
@@ -73,10 +81,12 @@
 		D46D3AA0166CF606000BB30B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D46D3ACE166CFD90000BB30B /* QuartzCore.framework */,
 				D46D3AA1166CF606000BB30B /* UIKit.framework */,
 				D46D3AA3166CF606000BB30B /* Foundation.framework */,
 				D46D3AA5166CF606000BB30B /* CoreGraphics.framework */,
 				D46D3AA7166CF606000BB30B /* CoreData.framework */,
+				0027CA2A38FA4D0BA46B33E1 /* libPods.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -116,6 +126,7 @@
 				D46D3A99166CF606000BB30B /* Sources */,
 				D46D3A9A166CF606000BB30B /* Frameworks */,
 				D46D3A9B166CF606000BB30B /* Resources */,
+				5871E9A808CD4AA09A7E57F5 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -166,6 +177,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		5871E9A808CD4AA09A7E57F5 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		D46D3A99166CF606000BB30B /* Sources */ = {
@@ -244,6 +272,7 @@
 		};
 		D46D3AC1166CF606000BB30B /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 216F4CC40EF5419DA3CACF90 /* Pods.xcconfig */;
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "eRacun/eRacun-Prefix.pch";
@@ -255,6 +284,7 @@
 		};
 		D46D3AC2166CF606000BB30B /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 216F4CC40EF5419DA3CACF90 /* Pods.xcconfig */;
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "eRacun/eRacun-Prefix.pch";
@@ -283,6 +313,7 @@
 				D46D3AC2166CF606000BB30B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
