@@ -1,0 +1,303 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		D46D3AA2166CF606000BB30B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D46D3AA1166CF606000BB30B /* UIKit.framework */; };
+		D46D3AA4166CF606000BB30B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D46D3AA3166CF606000BB30B /* Foundation.framework */; };
+		D46D3AA6166CF606000BB30B /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D46D3AA5166CF606000BB30B /* CoreGraphics.framework */; };
+		D46D3AA8166CF606000BB30B /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D46D3AA7166CF606000BB30B /* CoreData.framework */; };
+		D46D3AAE166CF606000BB30B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D46D3AAC166CF606000BB30B /* InfoPlist.strings */; };
+		D46D3AB0166CF606000BB30B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D46D3AAF166CF606000BB30B /* main.m */; };
+		D46D3AB4166CF606000BB30B /* MIAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D46D3AB3166CF606000BB30B /* MIAppDelegate.m */; };
+		D46D3AB6166CF606000BB30B /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = D46D3AB5166CF606000BB30B /* Default.png */; };
+		D46D3AB8166CF606000BB30B /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D46D3AB7166CF606000BB30B /* Default@2x.png */; };
+		D46D3ABA166CF606000BB30B /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D46D3AB9166CF606000BB30B /* Default-568h@2x.png */; };
+		D46D3ABD166CF606000BB30B /* eRacun.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D46D3ABB166CF606000BB30B /* eRacun.xcdatamodeld */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		D46D3A9D166CF606000BB30B /* eRacun.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = eRacun.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		D46D3AA1166CF606000BB30B /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		D46D3AA3166CF606000BB30B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		D46D3AA5166CF606000BB30B /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		D46D3AA7166CF606000BB30B /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		D46D3AAB166CF606000BB30B /* eRacun-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "eRacun-Info.plist"; sourceTree = "<group>"; };
+		D46D3AAD166CF606000BB30B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		D46D3AAF166CF606000BB30B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		D46D3AB1166CF606000BB30B /* eRacun-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "eRacun-Prefix.pch"; sourceTree = "<group>"; };
+		D46D3AB2166CF606000BB30B /* MIAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MIAppDelegate.h; sourceTree = "<group>"; };
+		D46D3AB3166CF606000BB30B /* MIAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MIAppDelegate.m; sourceTree = "<group>"; };
+		D46D3AB5166CF606000BB30B /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		D46D3AB7166CF606000BB30B /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		D46D3AB9166CF606000BB30B /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		D46D3ABC166CF606000BB30B /* eRacun.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = eRacun.xcdatamodel; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		D46D3A9A166CF606000BB30B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D46D3AA2166CF606000BB30B /* UIKit.framework in Frameworks */,
+				D46D3AA4166CF606000BB30B /* Foundation.framework in Frameworks */,
+				D46D3AA6166CF606000BB30B /* CoreGraphics.framework in Frameworks */,
+				D46D3AA8166CF606000BB30B /* CoreData.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		D46D3A92166CF606000BB30B = {
+			isa = PBXGroup;
+			children = (
+				D46D3AA9166CF606000BB30B /* eRacun */,
+				D46D3AA0166CF606000BB30B /* Frameworks */,
+				D46D3A9E166CF606000BB30B /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		D46D3A9E166CF606000BB30B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D46D3A9D166CF606000BB30B /* eRacun.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		D46D3AA0166CF606000BB30B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D46D3AA1166CF606000BB30B /* UIKit.framework */,
+				D46D3AA3166CF606000BB30B /* Foundation.framework */,
+				D46D3AA5166CF606000BB30B /* CoreGraphics.framework */,
+				D46D3AA7166CF606000BB30B /* CoreData.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		D46D3AA9166CF606000BB30B /* eRacun */ = {
+			isa = PBXGroup;
+			children = (
+				D46D3AB2166CF606000BB30B /* MIAppDelegate.h */,
+				D46D3AB3166CF606000BB30B /* MIAppDelegate.m */,
+				D46D3ABB166CF606000BB30B /* eRacun.xcdatamodeld */,
+				D46D3AAA166CF606000BB30B /* Supporting Files */,
+			);
+			path = eRacun;
+			sourceTree = "<group>";
+		};
+		D46D3AAA166CF606000BB30B /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				D46D3AAB166CF606000BB30B /* eRacun-Info.plist */,
+				D46D3AAC166CF606000BB30B /* InfoPlist.strings */,
+				D46D3AAF166CF606000BB30B /* main.m */,
+				D46D3AB1166CF606000BB30B /* eRacun-Prefix.pch */,
+				D46D3AB5166CF606000BB30B /* Default.png */,
+				D46D3AB7166CF606000BB30B /* Default@2x.png */,
+				D46D3AB9166CF606000BB30B /* Default-568h@2x.png */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		D46D3A9C166CF606000BB30B /* eRacun */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D46D3AC0166CF606000BB30B /* Build configuration list for PBXNativeTarget "eRacun" */;
+			buildPhases = (
+				D46D3A99166CF606000BB30B /* Sources */,
+				D46D3A9A166CF606000BB30B /* Frameworks */,
+				D46D3A9B166CF606000BB30B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = eRacun;
+			productName = eRacun;
+			productReference = D46D3A9D166CF606000BB30B /* eRacun.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		D46D3A94166CF606000BB30B /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = MI;
+				LastUpgradeCheck = 0450;
+				ORGANIZATIONNAME = Metaintellect;
+			};
+			buildConfigurationList = D46D3A97166CF606000BB30B /* Build configuration list for PBXProject "eRacun" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = D46D3A92166CF606000BB30B;
+			productRefGroup = D46D3A9E166CF606000BB30B /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				D46D3A9C166CF606000BB30B /* eRacun */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		D46D3A9B166CF606000BB30B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D46D3AAE166CF606000BB30B /* InfoPlist.strings in Resources */,
+				D46D3AB6166CF606000BB30B /* Default.png in Resources */,
+				D46D3AB8166CF606000BB30B /* Default@2x.png in Resources */,
+				D46D3ABA166CF606000BB30B /* Default-568h@2x.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		D46D3A99166CF606000BB30B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D46D3AB0166CF606000BB30B /* main.m in Sources */,
+				D46D3AB4166CF606000BB30B /* MIAppDelegate.m in Sources */,
+				D46D3ABD166CF606000BB30B /* eRacun.xcdatamodeld in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		D46D3AAC166CF606000BB30B /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D46D3AAD166CF606000BB30B /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		D46D3ABE166CF606000BB30B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		D46D3ABF166CF606000BB30B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		D46D3AC1166CF606000BB30B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "eRacun/eRacun-Prefix.pch";
+				INFOPLIST_FILE = "eRacun/eRacun-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		D46D3AC2166CF606000BB30B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "eRacun/eRacun-Prefix.pch";
+				INFOPLIST_FILE = "eRacun/eRacun-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		D46D3A97166CF606000BB30B /* Build configuration list for PBXProject "eRacun" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D46D3ABE166CF606000BB30B /* Debug */,
+				D46D3ABF166CF606000BB30B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D46D3AC0166CF606000BB30B /* Build configuration list for PBXNativeTarget "eRacun" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D46D3AC1166CF606000BB30B /* Debug */,
+				D46D3AC2166CF606000BB30B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		D46D3ABB166CF606000BB30B /* eRacun.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				D46D3ABC166CF606000BB30B /* eRacun.xcdatamodel */,
+			);
+			currentVersion = D46D3ABC166CF606000BB30B /* eRacun.xcdatamodel */;
+			path = eRacun.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = D46D3A94166CF606000BB30B /* Project object */;
+}
