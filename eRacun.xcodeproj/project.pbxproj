@@ -20,6 +20,8 @@
 		D46D3ABA166CF606000BB30B /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D46D3AB9166CF606000BB30B /* Default-568h@2x.png */; };
 		D46D3ABD166CF606000BB30B /* eRacun.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D46D3ABB166CF606000BB30B /* eRacun.xcdatamodeld */; };
 		D46D3ACF166CFD90000BB30B /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D46D3ACE166CFD90000BB30B /* QuartzCore.framework */; };
+		D46D3ADC166D1751000BB30B /* eRacun-57.png in Resources */ = {isa = PBXBuildFile; fileRef = D46D3ADB166D1751000BB30B /* eRacun-57.png */; };
+		D46D3ADE166D17E9000BB30B /* eRacun-114.png in Resources */ = {isa = PBXBuildFile; fileRef = D46D3ADD166D17E9000BB30B /* eRacun-114.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,6 +43,8 @@
 		D46D3AB9166CF606000BB30B /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		D46D3ABC166CF606000BB30B /* eRacun.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = eRacun.xcdatamodel; sourceTree = "<group>"; };
 		D46D3ACE166CFD90000BB30B /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		D46D3ADB166D1751000BB30B /* eRacun-57.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "eRacun-57.png"; sourceTree = SOURCE_ROOT; };
+		D46D3ADD166D17E9000BB30B /* eRacun-114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "eRacun-114.png"; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,9 +98,10 @@
 		D46D3AA9166CF606000BB30B /* eRacun */ = {
 			isa = PBXGroup;
 			children = (
+				D46D3ADA166CFEA7000BB30B /* View Controllers */,
 				D46D3AB2166CF606000BB30B /* MIAppDelegate.h */,
 				D46D3AB3166CF606000BB30B /* MIAppDelegate.m */,
-				D46D3ABB166CF606000BB30B /* eRacun.xcdatamodeld */,
+				D46D3AD9166CFE93000BB30B /* Core Data */,
 				D46D3AAA166CF606000BB30B /* Supporting Files */,
 			);
 			path = eRacun;
@@ -105,6 +110,8 @@
 		D46D3AAA166CF606000BB30B /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				D46D3ADD166D17E9000BB30B /* eRacun-114.png */,
+				D46D3ADB166D1751000BB30B /* eRacun-57.png */,
 				D46D3AAB166CF606000BB30B /* eRacun-Info.plist */,
 				D46D3AAC166CF606000BB30B /* InfoPlist.strings */,
 				D46D3AAF166CF606000BB30B /* main.m */,
@@ -114,6 +121,21 @@
 				D46D3AB9166CF606000BB30B /* Default-568h@2x.png */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		D46D3AD9166CFE93000BB30B /* Core Data */ = {
+			isa = PBXGroup;
+			children = (
+				D46D3ABB166CF606000BB30B /* eRacun.xcdatamodeld */,
+			);
+			name = "Core Data";
+			sourceTree = "<group>";
+		};
+		D46D3ADA166CFEA7000BB30B /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "View Controllers";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -173,6 +195,8 @@
 				D46D3AB6166CF606000BB30B /* Default.png in Resources */,
 				D46D3AB8166CF606000BB30B /* Default@2x.png in Resources */,
 				D46D3ABA166CF606000BB30B /* Default-568h@2x.png in Resources */,
+				D46D3ADC166D1751000BB30B /* eRacun-57.png in Resources */,
+				D46D3ADE166D17E9000BB30B /* eRacun-114.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
