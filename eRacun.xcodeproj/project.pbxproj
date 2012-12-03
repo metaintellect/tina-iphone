@@ -22,6 +22,10 @@
 		D46D3ACF166CFD90000BB30B /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D46D3ACE166CFD90000BB30B /* QuartzCore.framework */; };
 		D46D3ADC166D1751000BB30B /* eRacun-57.png in Resources */ = {isa = PBXBuildFile; fileRef = D46D3ADB166D1751000BB30B /* eRacun-57.png */; };
 		D46D3ADE166D17E9000BB30B /* eRacun-114.png in Resources */ = {isa = PBXBuildFile; fileRef = D46D3ADD166D17E9000BB30B /* eRacun-114.png */; };
+		D46D3AE9166D1ABC000BB30B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D46D3AE7166D1ABC000BB30B /* Main.storyboard */; };
+		D46D3AED166D1B7C000BB30B /* login_button.png in Resources */ = {isa = PBXBuildFile; fileRef = D46D3AEB166D1B7C000BB30B /* login_button.png */; };
+		D46D3AEE166D1B7C000BB30B /* login_input_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = D46D3AEC166D1B7C000BB30B /* login_input_bg.png */; };
+		D46D3AF1166D1C4D000BB30B /* MILoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D46D3AF0166D1C4D000BB30B /* MILoginViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,6 +49,11 @@
 		D46D3ACE166CFD90000BB30B /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		D46D3ADB166D1751000BB30B /* eRacun-57.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "eRacun-57.png"; sourceTree = SOURCE_ROOT; };
 		D46D3ADD166D17E9000BB30B /* eRacun-114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "eRacun-114.png"; sourceTree = SOURCE_ROOT; };
+		D46D3AE8166D1ABC000BB30B /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/Main.storyboard; sourceTree = "<group>"; };
+		D46D3AEB166D1B7C000BB30B /* login_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = login_button.png; sourceTree = "<group>"; };
+		D46D3AEC166D1B7C000BB30B /* login_input_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = login_input_bg.png; sourceTree = "<group>"; };
+		D46D3AEF166D1C4D000BB30B /* MILoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MILoginViewController.h; sourceTree = "<group>"; };
+		D46D3AF0166D1C4D000BB30B /* MILoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MILoginViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,6 +119,8 @@
 		D46D3AAA166CF606000BB30B /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				D46D3AE7166D1ABC000BB30B /* Main.storyboard */,
+				D46D3AEA166D1B43000BB30B /* images */,
 				D46D3ADD166D17E9000BB30B /* eRacun-114.png */,
 				D46D3ADB166D1751000BB30B /* eRacun-57.png */,
 				D46D3AAB166CF606000BB30B /* eRacun-Info.plist */,
@@ -134,8 +145,19 @@
 		D46D3ADA166CFEA7000BB30B /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				D46D3AEF166D1C4D000BB30B /* MILoginViewController.h */,
+				D46D3AF0166D1C4D000BB30B /* MILoginViewController.m */,
 			);
 			name = "View Controllers";
+			sourceTree = "<group>";
+		};
+		D46D3AEA166D1B43000BB30B /* images */ = {
+			isa = PBXGroup;
+			children = (
+				D46D3AEB166D1B7C000BB30B /* login_button.png */,
+				D46D3AEC166D1B7C000BB30B /* login_input_bg.png */,
+			);
+			name = images;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -197,6 +219,9 @@
 				D46D3ABA166CF606000BB30B /* Default-568h@2x.png in Resources */,
 				D46D3ADC166D1751000BB30B /* eRacun-57.png in Resources */,
 				D46D3ADE166D17E9000BB30B /* eRacun-114.png in Resources */,
+				D46D3AE9166D1ABC000BB30B /* Main.storyboard in Resources */,
+				D46D3AED166D1B7C000BB30B /* login_button.png in Resources */,
+				D46D3AEE166D1B7C000BB30B /* login_input_bg.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -227,6 +252,7 @@
 				D46D3AB0166CF606000BB30B /* main.m in Sources */,
 				D46D3AB4166CF606000BB30B /* MIAppDelegate.m in Sources */,
 				D46D3ABD166CF606000BB30B /* eRacun.xcdatamodeld in Sources */,
+				D46D3AF1166D1C4D000BB30B /* MILoginViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -239,6 +265,14 @@
 				D46D3AAD166CF606000BB30B /* en */,
 			);
 			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		D46D3AE7166D1ABC000BB30B /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D46D3AE8166D1ABC000BB30B /* en */,
+			);
+			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
