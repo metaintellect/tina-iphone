@@ -78,6 +78,57 @@
                     <view key="view" contentMode="scaleToFill" id="gxU-Pa-cW4">
                         <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" id="fSl-KO-g9g">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="100"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <subviews>
+                                    <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="cJr-Cm-SF3">
+                                        <rect key="frame" x="20" y="17" width="280" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="17"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter product code" clearsOnBeginEditing="YES" minimumFontSize="17" clearButtonMode="whileEditing" id="vPg-Rl-9v2">
+                                        <rect key="frame" x="10" y="13" width="300" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="numberPad" returnKeyType="next"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="Kdx-y7-DET" id="Tfe-7X-Enb"/>
+                                        </connections>
+                                    </textField>
+                                    <textField hidden="YES" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Quantity" clearsOnBeginEditing="YES" minimumFontSize="17" clearButtonMode="whileEditing" id="OX6-Fi-one">
+                                        <rect key="frame" x="10" y="59" width="192" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="numberPad" returnKeyType="go"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="Kdx-y7-DET" id="Xpw-gw-3Cs"/>
+                                        </connections>
+                                    </textField>
+                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="l1K-uT-2RB">
+                                        <rect key="frame" x="247" y="56" width="54" height="36"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                        <state key="normal" title="Add">
+                                            <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <state key="highlighted">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
+                            </view>
+                            <view contentMode="scaleToFill" id="9bw-tM-2xB">
+                                <rect key="frame" x="0.0" y="99" width="320" height="405"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="New bill" id="y5r-Ic-Xaw">
@@ -86,8 +137,22 @@
                                 <action selector="revealLeftMenu:" destination="Kdx-y7-DET" id="NZe-9R-ead"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Save" id="9MW-ns-eJ1"/>
+                        <barButtonItem key="rightBarButtonItem" title="Save" id="9MW-ns-eJ1">
+                            <connections>
+                                <action selector="save:" destination="Kdx-y7-DET" id="97D-d2-CIi"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="AddButton" destination="l1K-uT-2RB" id="bJC-Ez-lms"/>
+                        <outlet property="ProductLabel" destination="cJr-Cm-SF3" id="Gwa-ec-pER"/>
+                        <outlet property="addButton" destination="l1K-uT-2RB" id="dBP-FZ-43i"/>
+                        <outlet property="bottomView" destination="9bw-tM-2xB" id="NZb-ft-VCT"/>
+                        <outlet property="productCodeTextField" destination="vPg-Rl-9v2" id="ehv-1m-52P"/>
+                        <outlet property="productLabel" destination="cJr-Cm-SF3" id="ytg-4K-hZh"/>
+                        <outlet property="quantityTextField" destination="OX6-Fi-one" id="fvs-0I-oDy"/>
+                        <outlet property="topView" destination="fSl-KO-g9g" id="Kil-KO-i6b"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1eG-GH-HWh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -167,7 +232,13 @@
             <source key="sourceIdentifier" type="project" relativePath="./Classes/MIMainViewController.h"/>
             <relationships>
                 <relationship kind="action" name="revealLeftMenu:" candidateClass="UIBarButtonItem"/>
-                <relationship kind="action" name="revealLeftSidebar:" candidateClass="UIBarButtonItem"/>
+                <relationship kind="action" name="save:"/>
+                <relationship kind="outlet" name="addButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="bottomView" candidateClass="UIView"/>
+                <relationship kind="outlet" name="productCodeTextField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="productLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="quantityTextField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="topView" candidateClass="UIView"/>
             </relationships>
         </class>
     </classes>

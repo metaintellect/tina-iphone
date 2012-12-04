@@ -9,7 +9,21 @@
 #import <UIKit/UIKit.h>
 
 
-@interface MIMainViewController : UIViewController
+@interface MIMainViewController : UIViewController <UITextFieldDelegate>
+
+@property (weak, nonatomic) IBOutlet UITextField *productCodeTextField;
+
+@property (weak, nonatomic) IBOutlet UILabel *productLabel;
+
+@property (weak, nonatomic) IBOutlet UITextField *quantityTextField;
+
+@property (weak, nonatomic) IBOutlet UIButton *addButton;
+
+@property (weak, nonatomic) IBOutlet UIView *topView;
+
+@property (weak, nonatomic) IBOutlet UIView *bottomView;
 
 - (IBAction)revealLeftMenu:(UIBarButtonItem *)sender;
+
+- (IBAction)save:(id)sender;
 @end

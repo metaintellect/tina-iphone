@@ -92,6 +92,7 @@
 				216F4CC40EF5419DA3CACF90 /* Pods.xcconfig */,
 			);
 			sourceTree = "<group>";
+			wrapsLines = 1;
 		};
 		D46D3A9E166CF606000BB30B /* Products */ = {
 			isa = PBXGroup;

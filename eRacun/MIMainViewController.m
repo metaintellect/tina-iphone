@@ -20,4 +20,7 @@
     self.viewDeckController.leftLedge = 50.0;
     [self.viewDeckController toggleLeftViewAnimated:YES];
 }
+
+- (IBAction)save:(id)sender {
+}
 @end
