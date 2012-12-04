@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		C548352F87FF49EC9917F823 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0027CA2A38FA4D0BA46B33E1 /* libPods.a */; };
+		D45E0E11166E7D08003CDFD7 /* total-background.png in Resources */ = {isa = PBXBuildFile; fileRef = D45E0E10166E7D08003CDFD7 /* total-background.png */; };
 		D46D3AA2166CF606000BB30B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D46D3AA1166CF606000BB30B /* UIKit.framework */; };
 		D46D3AA4166CF606000BB30B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D46D3AA3166CF606000BB30B /* Foundation.framework */; };
 		D46D3AA6166CF606000BB30B /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D46D3AA5166CF606000BB30B /* CoreGraphics.framework */; };
@@ -35,6 +36,7 @@
 /* Begin PBXFileReference section */
 		0027CA2A38FA4D0BA46B33E1 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		216F4CC40EF5419DA3CACF90 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
+		D45E0E10166E7D08003CDFD7 /* total-background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "total-background.png"; sourceTree = "<group>"; };
 		D46D3A9D166CF606000BB30B /* eRacun.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = eRacun.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D46D3AA1166CF606000BB30B /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		D46D3AA3166CF606000BB30B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -169,6 +171,7 @@
 		D46D3AEA166D1B43000BB30B /* images */ = {
 			isa = PBXGroup;
 			children = (
+				D45E0E10166E7D08003CDFD7 /* total-background.png */,
 				D46D3AF5166D2498000BB30B /* ButtonMenu.png */,
 				D46D3AF7166D24A4000BB30B /* ButtonMenu@2x.png */,
 				D46D3AEB166D1B7C000BB30B /* login_button.png */,
@@ -241,6 +244,7 @@
 				D46D3AEE166D1B7C000BB30B /* login_input_bg.png in Resources */,
 				D46D3AF6166D2498000BB30B /* ButtonMenu.png in Resources */,
 				D46D3AF8166D24A4000BB30B /* ButtonMenu@2x.png in Resources */,
+				D45E0E11166E7D08003CDFD7 /* total-background.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

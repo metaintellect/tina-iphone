@@ -16,6 +16,11 @@
 
 @implementation MILoginViewController
 
+- (void)viewDidLoad
+{
+    [[self usernameTextFileld] becomeFirstResponder];
+}
+
 - (IBAction)login:(id)sender
 {
     [self _validateAndRedirect:sender];
