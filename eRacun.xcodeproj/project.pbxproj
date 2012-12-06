@@ -8,9 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		C548352F87FF49EC9917F823 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0027CA2A38FA4D0BA46B33E1 /* libPods.a */; };
-		D43ADD6C1670207B0004C0EF /* Bill.m in Sources */ = {isa = PBXBuildFile; fileRef = D43ADD6B1670207B0004C0EF /* Bill.m */; };
-		D43ADD6F1670207B0004C0EF /* BillItem.m in Sources */ = {isa = PBXBuildFile; fileRef = D43ADD6E1670207B0004C0EF /* BillItem.m */; };
-		D43ADD721670207B0004C0EF /* Product.m in Sources */ = {isa = PBXBuildFile; fileRef = D43ADD711670207B0004C0EF /* Product.m */; };
 		D45E0E11166E7D08003CDFD7 /* total-background.png in Resources */ = {isa = PBXBuildFile; fileRef = D45E0E10166E7D08003CDFD7 /* total-background.png */; };
 		D46D3AA2166CF606000BB30B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D46D3AA1166CF606000BB30B /* UIKit.framework */; };
 		D46D3AA4166CF606000BB30B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D46D3AA3166CF606000BB30B /* Foundation.framework */; };
@@ -34,17 +31,14 @@
 		D46D3AF6166D2498000BB30B /* ButtonMenu.png in Resources */ = {isa = PBXBuildFile; fileRef = D46D3AF5166D2498000BB30B /* ButtonMenu.png */; };
 		D46D3AF8166D24A4000BB30B /* ButtonMenu@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D46D3AF7166D24A4000BB30B /* ButtonMenu@2x.png */; };
 		D46D3AFE166D2A3C000BB30B /* MIInitialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D46D3AFD166D2A3C000BB30B /* MIInitialViewController.m */; };
+		D4AD232F1670653F00F21E96 /* Bill.m in Sources */ = {isa = PBXBuildFile; fileRef = D4AD232E1670653F00F21E96 /* Bill.m */; };
+		D4AD23321670653F00F21E96 /* BillItem.m in Sources */ = {isa = PBXBuildFile; fileRef = D4AD23311670653F00F21E96 /* BillItem.m */; };
+		D4AD23351670653F00F21E96 /* Product.m in Sources */ = {isa = PBXBuildFile; fileRef = D4AD23341670653F00F21E96 /* Product.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		0027CA2A38FA4D0BA46B33E1 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		216F4CC40EF5419DA3CACF90 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
-		D43ADD6A1670207B0004C0EF /* Bill.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Bill.h; sourceTree = "<group>"; };
-		D43ADD6B1670207B0004C0EF /* Bill.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Bill.m; sourceTree = "<group>"; };
-		D43ADD6D1670207B0004C0EF /* BillItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BillItem.h; sourceTree = "<group>"; };
-		D43ADD6E1670207B0004C0EF /* BillItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BillItem.m; sourceTree = "<group>"; };
-		D43ADD701670207B0004C0EF /* Product.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Product.h; sourceTree = "<group>"; };
-		D43ADD711670207B0004C0EF /* Product.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Product.m; sourceTree = "<group>"; };
 		D45E0E10166E7D08003CDFD7 /* total-background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "total-background.png"; sourceTree = "<group>"; };
 		D46D3A9D166CF606000BB30B /* eRacun.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = eRacun.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D46D3AA1166CF606000BB30B /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -75,6 +69,12 @@
 		D46D3AF7166D24A4000BB30B /* ButtonMenu@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ButtonMenu@2x.png"; sourceTree = "<group>"; };
 		D46D3AFC166D2A3C000BB30B /* MIInitialViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MIInitialViewController.h; sourceTree = "<group>"; };
 		D46D3AFD166D2A3C000BB30B /* MIInitialViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MIInitialViewController.m; sourceTree = "<group>"; };
+		D4AD232D1670653F00F21E96 /* Bill.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Bill.h; sourceTree = "<group>"; };
+		D4AD232E1670653F00F21E96 /* Bill.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Bill.m; sourceTree = "<group>"; };
+		D4AD23301670653F00F21E96 /* BillItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BillItem.h; sourceTree = "<group>"; };
+		D4AD23311670653F00F21E96 /* BillItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BillItem.m; sourceTree = "<group>"; };
+		D4AD23331670653F00F21E96 /* Product.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Product.h; sourceTree = "<group>"; };
+		D4AD23341670653F00F21E96 /* Product.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Product.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -159,13 +159,13 @@
 		D46D3AD9166CFE93000BB30B /* Core Data */ = {
 			isa = PBXGroup;
 			children = (
-				D43ADD701670207B0004C0EF /* Product.h */,
-				D43ADD711670207B0004C0EF /* Product.m */,
-				D43ADD6D1670207B0004C0EF /* BillItem.h */,
-				D43ADD6E1670207B0004C0EF /* BillItem.m */,
-				D43ADD6A1670207B0004C0EF /* Bill.h */,
-				D43ADD6B1670207B0004C0EF /* Bill.m */,
 				D46D3ABB166CF606000BB30B /* eRacun.xcdatamodeld */,
+				D4AD23331670653F00F21E96 /* Product.h */,
+				D4AD23341670653F00F21E96 /* Product.m */,
+				D4AD23301670653F00F21E96 /* BillItem.h */,
+				D4AD23311670653F00F21E96 /* BillItem.m */,
+				D4AD232D1670653F00F21E96 /* Bill.h */,
+				D4AD232E1670653F00F21E96 /* Bill.m */,
 			);
 			name = "Core Data";
 			sourceTree = "<group>";
@@ -293,9 +293,9 @@
 				D46D3AF1166D1C4D000BB30B /* MILoginViewController.m in Sources */,
 				D46D3AF4166D23B1000BB30B /* MIMainViewController.m in Sources */,
 				D46D3AFE166D2A3C000BB30B /* MIInitialViewController.m in Sources */,
-				D43ADD6C1670207B0004C0EF /* Bill.m in Sources */,
-				D43ADD6F1670207B0004C0EF /* BillItem.m in Sources */,
-				D43ADD721670207B0004C0EF /* Product.m in Sources */,
+				D4AD232F1670653F00F21E96 /* Bill.m in Sources */,
+				D4AD23321670653F00F21E96 /* BillItem.m in Sources */,
+				D4AD23351670653F00F21E96 /* Product.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -15,6 +15,7 @@
 @dynamic id;
 @dynamic productId;
 @dynamic quantity;
+@dynamic productName;
 @dynamic bill;
 
 @end

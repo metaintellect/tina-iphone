@@ -14,38 +14,38 @@
 
 @end
 
-@implementation MILoginViewController
-{
+@implementation MILoginViewController {
+    
 }
 
 
 #pragma mark - View Controller base methods
 
-- (void)viewDidLoad
-{
-    [[self usernameTextFileld] becomeFirstResponder];
+- (void)viewDidLoad {
+    
+    [self.usernameTextFileld becomeFirstResponder];
 }
 
 
 #pragma mark - IBAction methods
 
-- (IBAction)login:(id)sender
-{
+- (IBAction)login:(id)sender {
+    
     [self _validateAndRedirect:sender];
 }
 
 
 #pragma mark - Text Field Delegate methods
 
-- (BOOL)textFieldShouldReturn:(UITextField *)textField
-{
-    if (textField.tag == 1)
-    {
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    
+    if (textField.tag == 1) {
+        
         UITextField *passwordTextField = (UITextField *)[self.view viewWithTag:2];
         [passwordTextField becomeFirstResponder];
-    }
-    else
-    {
+        
+    } else {
+        
         [textField resignFirstResponder];
         [self _validateAndRedirect:textField];
     }
@@ -54,24 +54,24 @@
 }
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range
-replacementString:(NSString *)string
-{
+                                                       replacementString:(NSString *)string {
+    
     if (([textField tag] == 2 && [allTrim([self.usernameTextFileld text]) length] != 0)
-        || ( [textField tag] == 1 && [allTrim([self.passwordTextField text]) length] != 0))
-    {
+        || ( [textField tag] == 1 && [allTrim([self.passwordTextField text]) length] != 0)) {
+        
         [self.loginButton setEnabled:YES];
     }
     
     return YES;
 }
 
--(void) textFieldDidBeginEditing:(UITextField *)textField
-{
+-(void) textFieldDidBeginEditing:(UITextField *)textField {
+    
     [self _animateLoginControlsOnYAxis:102 usernameTextField:108 passwordTextField:147 loginButton:194];
 }
 
-- (BOOL)textFieldShouldClear:(UITextField *)textField
-{
+- (BOOL)textFieldShouldClear:(UITextField *)textField {
+    
     [self.loginButton setEnabled: NO];
     return YES;
 }
@@ -79,7 +79,8 @@ replacementString:(NSString *)string
 
 #pragma mark - UIResponder
 
-- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+    
     [self.view endEditing:YES];
     [super touchesBegan:touches withEvent:event];
     [self _animateLoginControlsOnYAxis:162 usernameTextField:168 passwordTextField:207 loginButton:254];
@@ -88,15 +89,15 @@ replacementString:(NSString *)string
 
 #pragma mark - Private methods
 
-- (void)_validateAndRedirect:(id)sender
-{
+- (void)_validateAndRedirect:(id)sender {
+    
     if ([[self.usernameTextFileld text] isEqualToString:@"xajler"]
-        && [[self.passwordTextField text] isEqualToString:@"aeon"])
-    {
+        && [[self.passwordTextField text] isEqualToString:@"aeon"]) {
+        
         [self performSegueWithIdentifier:@"LoginSegue" sender:sender];
-    }
-    else
-    {
+    
+    } else {
+    
         [self.passwordTextField setText:@""];
         [self.passwordTextField becomeFirstResponder];
     }
@@ -105,9 +106,8 @@ replacementString:(NSString *)string
 - (void)_animateLoginControlsOnYAxis:(CGFloat)yInputImageValue
                    usernameTextField:(CGFloat)yUsernameValue
                    passwordTextField:(CGFloat)yPasswordValue
-                         loginButton:(CGFloat)yButtonValue
-
-{
+                         loginButton:(CGFloat)yButtonValue {
+    
     [UIView animateWithDuration:0.2 animations:^{
         CGRect frame;
         

@@ -16,14 +16,7 @@
 @property (nonatomic, retain) NSNumber * id;
 @property (nonatomic, retain) NSNumber * productId;
 @property (nonatomic, retain) NSNumber * quantity;
-@property (nonatomic, retain) NSSet *bill;
-@end
-
-@interface BillItem (CoreDataGeneratedAccessors)
-
-- (void)addBillObject:(Bill *)value;
-- (void)removeBillObject:(Bill *)value;
-- (void)addBill:(NSSet *)values;
-- (void)removeBill:(NSSet *)values;
+@property (nonatomic, retain) NSString * productName;
+@property (nonatomic, retain) Bill *bill;
 
 @end

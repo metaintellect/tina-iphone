@@ -13,6 +13,8 @@
 @interface MIMainViewController : UIViewController <UITextFieldDelegate,
                                   UITableViewDataSource, UITableViewDelegate>
 
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *saveButton;
+
 @property (weak, nonatomic) IBOutlet UITextField *productCodeTextField;
 
 @property (weak, nonatomic) IBOutlet UIButton *nextButton;
@@ -29,9 +31,11 @@
 
 @property (weak, nonatomic) IBOutlet UITableView *billTableView;
 
-@property (strong, nonatomic) Bill *curruntBill;
-
 @property (strong, nonatomic) NSManagedObjectContext *context;
+
+@property (strong, nonatomic) NSManagedObjectModel *objectModel;
+
+@property (strong, nonatomic) Bill *currentBill;
 
 - (IBAction)revealLeftMenu:(UIBarButtonItem *)sender;
 

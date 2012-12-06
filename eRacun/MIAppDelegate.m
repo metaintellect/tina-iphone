@@ -8,6 +8,7 @@
 
 #import "MIAppDelegate.h"
 #import "MIMainViewController.h"
+#import "Product.h"
 
 @implementation MIAppDelegate
 
@@ -17,9 +18,17 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    UINavigationController *navController = (UINavigationController *)self.window.rootViewController;
-    MIMainViewController *mainController = (MIMainViewController *)[[navController viewControllers]objectAtIndex:0];
-    mainController.context = [self managedObjectContext];
+    //[self _createProductsDummyData];
+    
+//    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+//    UINavigationController *navController = (UINavigationController *)[storyboard instantiateViewControllerWithIdentifier:@"MainViewController"];
+//    MIMainViewController *mainController = (MIMainViewController *)[[navController viewControllers]objectAtIndex:0];
+//    
+//    mainController.context = [self managedObjectContext];
+//    mainController.objectModel = [self managedObjectModel];
+    
+    //[self _fetchAllProducts];
+    
     return YES;
 }
 
@@ -137,6 +146,45 @@
 - (NSURL *)applicationDocumentsDirectory
 {
     return [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
+}
+
+#pragma mark - Create Products dummy data
+
+-(void)_createProductsDummyData
+{
+    Product *kikiriki = (Product *)[NSEntityDescription insertNewObjectForEntityForName:@"Product"
+                                                                 inManagedObjectContext:[self managedObjectContext]];
+    [kikiriki setId:@1];
+    [kikiriki setName:@"Kikiriki"];
+    [kikiriki setPrice:23.3];
+    
+    Product *medica = (Product *)[NSEntityDescription insertNewObjectForEntityForName:@"Product"
+                                                                 inManagedObjectContext:[self managedObjectContext]];
+    [medica setId:@2];
+    [medica setName:@"Medica"];
+    [medica setPrice:66.66];
+    
+    NSError *error = nil;
+    
+    if (! [[self managedObjectContext] save:&error]) {
+        NSLog(@"Huston, we have a problem!\n%@", error);
+    }
+}
+
+-(void)_fetchAllProducts
+{
+    NSFetchRequest *request = [[self managedObjectModel] fetchRequestTemplateForName:@"GetAllProducts"];
+    
+    NSError *error = nil;
+    NSArray *fetchedObjects = [self.managedObjectContext executeFetchRequest:request error:&error];
+    
+    if (fetchedObjects == nil) {
+        NSLog(@"Huston, we have a problem!\n%@", error);
+    }
+    
+    for (Product *product in fetchedObjects) {
+        NSLog(@"Name: %@", [product name]);
+    }
 }
 
 @end

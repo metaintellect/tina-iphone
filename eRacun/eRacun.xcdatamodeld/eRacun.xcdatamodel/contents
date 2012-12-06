@@ -1,26 +1,27 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1811" systemVersion="12C60" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="Bill" representedClassName="Bill" syncable="YES">
-        <attribute name="totalPrice" optional="YES" attributeType="Decimal" defaultValueString="0" syncable="YES"/>
-        <relationship name="items" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="BillItem" inverseName="bill" inverseEntity="BillItem" syncable="YES"/>
+        <attribute name="totalPrice" optional="YES" attributeType="Double" defaultValueString="0" syncable="YES"/>
+        <relationship name="items" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="BillItem" inverseName="bill" inverseEntity="BillItem" syncable="YES"/>
     </entity>
     <entity name="BillItem" representedClassName="BillItem" syncable="YES">
         <attribute name="id" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="productId" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="productName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="quantity" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
-        <relationship name="bill" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Bill" inverseName="items" inverseEntity="Bill" syncable="YES"/>
+        <relationship name="bill" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Bill" inverseName="items" inverseEntity="Bill" syncable="YES"/>
     </entity>
     <entity name="Product" representedClassName="Product" syncable="YES">
         <attribute name="id" optional="YES" attributeType="Integer 32" defaultValueString="0" indexed="YES" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" indexed="YES" syncable="YES"/>
-        <attribute name="price" optional="YES" attributeType="Decimal" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="price" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
     </entity>
     <fetchRequest name="GetAllProducts" entity="Product" predicateString="TRUEPREDICATE"/>
     <fetchRequest name="GetProductById" entity="Product" predicateString="id == $PRODUCT_ID"/>
     <fetchRequest name="GetProductByName" entity="Product" predicateString="name LIKE[c] $SEARCH_NAME"/>
     <elements>
-        <element name="Product" positionX="160" positionY="192" width="128" height="88"/>
         <element name="Bill" positionX="-189" positionY="24" width="128" height="73"/>
-        <element name="BillItem" positionX="45" positionY="9" width="128" height="103"/>
+        <element name="BillItem" positionX="45" positionY="9" width="128" height="118"/>
+        <element name="Product" positionX="160" positionY="192" width="128" height="90"/>
     </elements>
 </model>
