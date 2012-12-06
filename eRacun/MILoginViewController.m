@@ -15,16 +15,27 @@
 @end
 
 @implementation MILoginViewController
+{
+}
+
+
+#pragma mark - View Controller base methods
 
 - (void)viewDidLoad
 {
     [[self usernameTextFileld] becomeFirstResponder];
 }
 
+
+#pragma mark - IBAction methods
+
 - (IBAction)login:(id)sender
 {
     [self _validateAndRedirect:sender];
 }
+
+
+#pragma mark - Text Field Delegate methods
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
@@ -66,11 +77,16 @@ replacementString:(NSString *)string
 }
 
 
+#pragma mark - UIResponder
+
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
     [self.view endEditing:YES];
     [super touchesBegan:touches withEvent:event];
     [self _animateLoginControlsOnYAxis:162 usernameTextField:168 passwordTextField:207 loginButton:254];
 }
+
+
+#pragma mark - Private methods
 
 - (void)_validateAndRedirect:(id)sender
 {
@@ -112,5 +128,4 @@ replacementString:(NSString *)string
         self.loginButton.frame = frame;
     }];
 }
-
 @end

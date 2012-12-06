@@ -19,9 +19,6 @@
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     self = [super initWithCenterViewController:[storyboard instantiateViewControllerWithIdentifier:@"MainViewController"]
                             leftViewController:[storyboard instantiateViewControllerWithIdentifier:@"LeftMenuViewController"]];
-    if (self) {
-        // Add any extra init code here
-    }
     return self;
 }
 

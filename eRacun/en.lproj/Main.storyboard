@@ -163,6 +163,9 @@
                                         <state key="highlighted">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="add:" destination="Kdx-y7-DET" eventType="touchUpInside" id="fIb-jA-fEt"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="TsS-dZ-032">
                                         <rect key="frame" x="237" y="9" width="71" height="31"/>
@@ -201,6 +204,10 @@
                                         <rect key="frame" x="0.0" y="40" width="320" height="379"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <connections>
+                                            <outlet property="dataSource" destination="Kdx-y7-DET" id="WBs-w9-7d4"/>
+                                            <outlet property="delegate" destination="Kdx-y7-DET" id="IgE-sj-5KP"/>
+                                        </connections>
                                     </tableView>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -214,7 +221,7 @@
                                 <action selector="revealLeftMenu:" destination="Kdx-y7-DET" id="NZe-9R-ead"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" tag="1" enabled="NO" title="Save" id="9MW-ns-eJ1">
+                        <barButtonItem key="rightBarButtonItem" tag="1" enabled="NO" systemItem="save" id="9MW-ns-eJ1">
                             <connections>
                                 <action selector="save:" destination="Kdx-y7-DET" id="97D-d2-CIi"/>
                             </connections>
@@ -238,7 +245,6 @@
         <!--Navigation Controller-->
         <scene sceneID="rpX-86-bYY">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dzW-OP-Baz" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController storyboardIdentifier="MainViewController" definesPresentationContext="YES" useStoryboardIdentifierAsRestorationIdentifier="YES" id="gk0-4v-TNU" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="p2B-Rv-4rl">
@@ -250,6 +256,7 @@
                         <segue destination="Kdx-y7-DET" kind="relationship" relationship="rootViewController" id="gCh-4B-qYU"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dzW-OP-Baz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-26" y="147"/>
         </scene>
@@ -289,40 +296,6 @@
         <image name="login_input_bg.png" width="438" height="133"/>
         <image name="total-background.png" width="2" height="40"/>
     </resources>
-    <classes>
-        <class className="IIViewDeckController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/IIViewDeckController.h"/>
-        </class>
-        <class className="MIInitialViewController" superclassName="IIViewDeckController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/MIInitialViewController.h"/>
-        </class>
-        <class className="MILoginViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/MILoginViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="login:"/>
-                <relationship kind="outlet" name="loginButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="loginInputImage" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="passwordTextField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="usernameTextFileld" candidateClass="UITextField"/>
-            </relationships>
-        </class>
-        <class className="MIMainViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/MIMainViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="next:"/>
-                <relationship kind="action" name="revealLeftMenu:" candidateClass="UIBarButtonItem"/>
-                <relationship kind="action" name="save:"/>
-                <relationship kind="outlet" name="addButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="billTableView" candidateClass="UITableView"/>
-                <relationship kind="outlet" name="bottomView" candidateClass="UIView"/>
-                <relationship kind="outlet" name="nextButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="productCodeTextField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="productLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="quantityTextField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="totalLabel" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

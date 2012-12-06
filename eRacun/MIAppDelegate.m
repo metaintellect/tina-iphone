@@ -7,6 +7,7 @@
 //
 
 #import "MIAppDelegate.h"
+#import "MIMainViewController.h"
 
 @implementation MIAppDelegate
 
@@ -16,6 +17,9 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    UINavigationController *navController = (UINavigationController *)self.window.rootViewController;
+    MIMainViewController *mainController = (MIMainViewController *)[[navController viewControllers]objectAtIndex:0];
+    mainController.context = [self managedObjectContext];
     return YES;
 }
 

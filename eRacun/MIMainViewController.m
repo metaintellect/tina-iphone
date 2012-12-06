@@ -14,14 +14,22 @@
 @end
 
 @implementation MIMainViewController
+{
+    NSArray *products;
+}
+
+
+#pragma mark - View Controller methods
 
 - (void)viewDidLoad
 {
-    [self.productCodeTextField becomeFirstResponder];
-    // Initial values 100, 109, 140
-    [self _animateBottomViewOnYAxis:46]; // totalLabel:59 billTableView:90];
+    //[self.productCodeTextField becomeFirstResponder];
+    [self _animateBottomViewOnYAxis:46];
     [super viewDidLoad];
 }
+
+
+#pragma mark - IBAction methods
 
 - (IBAction)revealLeftMenu:(UIBarButtonItem *)sender
 {
@@ -39,10 +47,16 @@
     [self.quantityTextField becomeFirstResponder];
 }
 
+- (IBAction)add:(id)sender
+{
+    //Bill *bill =
+}
+
 - (IBAction)save:(id)sender {
 }
 
 
+#pragma mark - Text Field Delegate methods
 
 - (BOOL)textFieldShouldClear:(UITextField *)textField
 {
@@ -50,26 +64,45 @@
     return YES;
 }
 
+
+#pragma mark - TableView Data Source Delegate methods
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return 0;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
+ 
+    NSLog(@"%d", [indexPath row]);
+    [[cell textLabel] setText:@"Kikiriki 5x"];
+    return cell;
+}
+
+
+#pragma mark - UIResponder
+
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
+    [self.view endEditing:YES];
+    [super touchesBegan:touches withEvent:event];
+}
+
+
+#pragma mark - Private methods
+
 - (void)_animateBottomViewOnYAxis:(CGFloat)yTotalImageValue
-//                            totalLabel:(CGFloat)yTotalLabelValue
-//                         billTableView:(CGFloat)yTableValue
-
-
 {
     [UIView animateWithDuration:0.2 animations:^{
         CGRect frame;
         
         frame = self.bottomView.frame;
         frame.origin.y = yTotalImageValue;
-        self.bottomView.frame = frame;
-        
-//        frame = self.totalLabel.frame;
-//        frame.origin.y = yTotalImageValue;
-//        self.totalLabel.frame = frame;
-        
-//        frame = self.billTableView.frame;
-//        frame.origin.y = yTotalImageValue;
-//        self.billTableView.frame = frame;
+        self.bottomView.frame = frame;        
     }];
 }
+
+
+#pragma mark - Core Data Queries private methods
 @end
