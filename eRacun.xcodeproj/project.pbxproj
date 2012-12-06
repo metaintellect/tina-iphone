@@ -37,6 +37,9 @@
 		D4AD234016708FEB00F21E96 /* cell_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = D4AD233E16708FEB00F21E96 /* cell_bg.png */; };
 		D4AD234116708FEB00F21E96 /* total_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = D4AD233F16708FEB00F21E96 /* total_bg.png */; };
 		D4AD234316709AA200F21E96 /* nav_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = D4AD234216709AA200F21E96 /* nav_bg.png */; };
+		D4AD234B1671004000F21E96 /* gear.png in Resources */ = {isa = PBXBuildFile; fileRef = D4AD23491671004000F21E96 /* gear.png */; };
+		D4AD234C1671004000F21E96 /* gear@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D4AD234A1671004000F21E96 /* gear@2x.png */; };
+		D4AD234F1671032000F21E96 /* MISettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D4AD234E1671032000F21E96 /* MISettingsViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -83,6 +86,10 @@
 		D4AD233E16708FEB00F21E96 /* cell_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cell_bg.png; sourceTree = "<group>"; };
 		D4AD233F16708FEB00F21E96 /* total_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = total_bg.png; sourceTree = "<group>"; };
 		D4AD234216709AA200F21E96 /* nav_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nav_bg.png; sourceTree = "<group>"; };
+		D4AD23491671004000F21E96 /* gear.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gear.png; sourceTree = "<group>"; };
+		D4AD234A1671004000F21E96 /* gear@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "gear@2x.png"; sourceTree = "<group>"; };
+		D4AD234D1671032000F21E96 /* MISettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MISettingsViewController.h; sourceTree = "<group>"; };
+		D4AD234E1671032000F21E96 /* MISettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MISettingsViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -189,6 +196,8 @@
 				D46D3AF3166D23B1000BB30B /* MIMainViewController.m */,
 				D46D3AFC166D2A3C000BB30B /* MIInitialViewController.h */,
 				D46D3AFD166D2A3C000BB30B /* MIInitialViewController.m */,
+				D4AD234D1671032000F21E96 /* MISettingsViewController.h */,
+				D4AD234E1671032000F21E96 /* MISettingsViewController.m */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -201,6 +210,8 @@
 				D46D3AF7166D24A4000BB30B /* ButtonMenu@2x.png */,
 				D4AD233E16708FEB00F21E96 /* cell_bg.png */,
 				D4AD234216709AA200F21E96 /* nav_bg.png */,
+				D4AD23491671004000F21E96 /* gear.png */,
+				D4AD234A1671004000F21E96 /* gear@2x.png */,
 				D4AD233F16708FEB00F21E96 /* total_bg.png */,
 				D46D3AEB166D1B7C000BB30B /* login_button.png */,
 				D46D3AEC166D1B7C000BB30B /* login_input_bg.png */,
@@ -276,6 +287,8 @@
 				D4AD234016708FEB00F21E96 /* cell_bg.png in Resources */,
 				D4AD234116708FEB00F21E96 /* total_bg.png in Resources */,
 				D4AD234316709AA200F21E96 /* nav_bg.png in Resources */,
+				D4AD234B1671004000F21E96 /* gear.png in Resources */,
+				D4AD234C1671004000F21E96 /* gear@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -312,6 +325,7 @@
 				D4AD232F1670653F00F21E96 /* Bill.m in Sources */,
 				D4AD23321670653F00F21E96 /* BillItem.m in Sources */,
 				D4AD23351670653F00F21E96 /* Product.m in Sources */,
+				D4AD234F1671032000F21E96 /* MISettingsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -20,7 +20,6 @@
 @implementation MIMainViewController {
     
     NSArray *products;
-    NSString *totalString;
     Product *currentProduct;
     #define allTrim( object ) [object stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet] ]
 }
@@ -30,16 +29,16 @@
 
 - (void)viewDidLoad {
     
+    [super viewDidLoad];
     MIAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
     self.context = appDelegate.managedObjectContext;
     self.objectModel = appDelegate.managedObjectModel;    
     [self.productCodeTextField becomeFirstResponder];
     [self _animateBottomViewOnYAxis:46];
-    products = [self _getAllProductsFetchRequest];
+    products = [self _getAllProducts];
     self.currentBill = (Bill *)[NSEntityDescription insertNewObjectForEntityForName:@"Bill"
                                                              inManagedObjectContext:[self context]];
-    [self _setTotalPriceLabel:0];
-    [super viewDidLoad];
+    [self _setTotalPriceLabel:0];    
 }
 
 
@@ -112,7 +111,6 @@
 
 - (IBAction)save:(id)sender {
 }
-
 
 #pragma mark - Text Field Delegate methods
 
@@ -192,14 +190,14 @@
 
 - (void)_setTotalPriceLabel:(double)totalPrice {
     
-    totalString = NSLocalizedString(@"Total", nil);
+    NSString *totalString = NSLocalizedString(@"Total", nil);
     [self.totalLabel setText:[NSString stringWithFormat:@"%@: %.2f", totalString, totalPrice]];
 }
 
 
 #pragma mark - Core Data Queries private methods
 
--(NSArray *)_getAllProductsFetchRequest {
+-(NSArray *)_getAllProducts {
     
     NSFetchRequest *request = [[self objectModel] fetchRequestTemplateForName:@"GetAllProducts"];
     
