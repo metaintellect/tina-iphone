@@ -16,6 +16,8 @@
 			<array>
 				<string>eRacun-57.png</string>
 				<string>eRacun-114.png</string>
+				<string>eRacun.png</string>
+				<string>eRacun@2x.png</string>
 			</array>
 			<key>UIPrerenderedIcon</key>
 			<true/>
@@ -37,10 +39,10 @@
 	<string>1.0</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>UIMainStoryboardFile</key>
+	<string>Main</string>
 	<key>UIPrerenderedIcon</key>
 	<true/>
-    <key>UIMainStoryboardFile</key>
-    <string>Main</string>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>

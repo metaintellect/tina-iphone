@@ -18,15 +18,8 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    //[self _createProductsDummyData];
-    
-//    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-//    UINavigationController *navController = (UINavigationController *)[storyboard instantiateViewControllerWithIdentifier:@"MainViewController"];
-//    MIMainViewController *mainController = (MIMainViewController *)[[navController viewControllers]objectAtIndex:0];
-//    
-//    mainController.context = [self managedObjectContext];
-//    mainController.objectModel = [self managedObjectModel];
-    
+    [self _setDarkGradientToNavigationBar];
+    //[self _createProductsDummyData];    
     //[self _fetchAllProducts];
     
     return YES;
@@ -146,6 +139,16 @@
 - (NSURL *)applicationDocumentsDirectory
 {
     return [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
+}
+
+# pragma mark - Custom Navigation appearance
+
+-(void)_setDarkGradientToNavigationBar {
+    
+    UIImage *backgroundImage = [UIImage imageNamed:@"nav_bg.png"];
+    [[UINavigationBar appearance] setBackgroundImage:backgroundImage forBarMetrics:UIBarMetricsDefault];
+    [[UIBarButtonItem appearance] setTintColor:[UIColor blackColor]];
+    
 }
 
 #pragma mark - Create Products dummy data

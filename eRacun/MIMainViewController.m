@@ -162,6 +162,12 @@
     return cell;
 }
 
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    // cell.backgroundColor = (indexPath.row%2)?[UIColor lightGrayColor]:[UIColor grayColor];
+    cell.backgroundColor = [UIColor colorWithPatternImage: [UIImage imageNamed: @"cell_bg.png"]];
+}
+
 
 #pragma mark - UIResponder
 
@@ -228,12 +234,4 @@
     
     return (Product *)result[0];
 }
-
-//NSString *searchName = @"Mr Squiggle";
-//NSDictionary *subs = [NSDictionary dictionaryWithObject:searchName forKey:@"SEARCH_NAME"];
-//NSManagedObjectModel *model = [self managedObjectModel];
-//NSFetchRequest *req = [model fetchRequestFromTemplateWithName:@"trainerByName" substitutionVariables:subs];
-//NSError *error = nil;
-//NSArray *results = [[self managedObjectContext] executeFetchRequest:req error:&error];
-//NSLog(@"Found %ld record.", [results count]);
 @end
