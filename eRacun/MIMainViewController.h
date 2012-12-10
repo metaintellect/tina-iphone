@@ -17,13 +17,9 @@
 
 @property (weak, nonatomic) IBOutlet UITextField *productCodeTextField;
 
-@property (weak, nonatomic) IBOutlet UIButton *nextButton;
-
 @property (weak, nonatomic) IBOutlet UILabel *productLabel;
 
 @property (weak, nonatomic) IBOutlet UITextField *quantityTextField;
-
-@property (weak, nonatomic) IBOutlet UIButton *addButton;
 
 @property (weak, nonatomic) IBOutlet UIView *bottomView;
 
@@ -38,10 +34,6 @@
 @property (strong, nonatomic) Bill *currentBill;
 
 - (IBAction)revealLeftMenu:(UIBarButtonItem *)sender;
-
-- (IBAction)next:(id)sender;
-
-- (IBAction)add:(id)sender;
 
 - (IBAction)save:(id)sender;
 @end

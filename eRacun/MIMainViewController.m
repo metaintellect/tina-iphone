@@ -21,6 +21,7 @@
     
     NSArray *products;
     Product *currentProduct;
+    UIToolbar* numberToolbar;
     #define allTrim( object ) [object stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet] ]
 }
 
@@ -34,15 +35,26 @@
     self.context = appDelegate.managedObjectContext;
     self.objectModel = appDelegate.managedObjectModel;    
     [self.productCodeTextField becomeFirstResponder];
-    [self _animateBottomViewOnYAxis:46];
+    [self _animateBottomViewOnYAxis:46];	
     products = [self _getAllProducts];
+
     self.currentBill = (Bill *)[NSEntityDescription insertNewObjectForEntityForName:@"Bill"
                                                              inManagedObjectContext:[self context]];
-    [self _setTotalPriceLabel:0];    
+    
+    [self _setTotalPriceLabel:0];
+    
+    numberToolbar = [[UIToolbar alloc]initWithFrame:CGRectMake(0, 0, 320, 50)];
+    numberToolbar.barStyle = UIBarStyleBlackTranslucent;
+    
+    [self _showAndFocusProductCode];
+    
+    [numberToolbar sizeToFit];
+    self.productCodeTextField.inputAccessoryView = numberToolbar;
+    self.quantityTextField.inputAccessoryView = numberToolbar;
 }
 
 
-#pragma mark - IBAction methods
+#pragma mark - Command methods
 
 - (IBAction)revealLeftMenu:(UIBarButtonItem *)sender {
     
@@ -50,7 +62,7 @@
     [self.viewDeckController toggleLeftViewAnimated:YES];
 }
 
-- (IBAction)next:(id)sender {
+- (void)nextNumberPad {
     
     NSNumber *productId = [NSNumber numberWithInt:[[self.productCodeTextField text] intValue]];
     
@@ -61,16 +73,21 @@
         if (nil != currentProduct) {
             
             [self.productLabel setText:[NSString stringWithFormat:@"%@ %.2f", [currentProduct name], [currentProduct price]]];
-            [self.nextButton setHidden:YES];
             [self.productCodeTextField setHidden:YES];
             [self.productLabel setHidden:NO];
             [self _animateBottomViewOnYAxis:85];
             [self.quantityTextField becomeFirstResponder];
+            
+            numberToolbar.items = [NSArray arrayWithObjects:
+                                   [[UIBarButtonItem alloc]initWithTitle:@"Cancel" style:UIBarButtonItemStyleBordered target:self action:@selector(cancelNumberPad)],
+                                   [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil],
+                                   [[UIBarButtonItem alloc]initWithTitle:@"Add" style:UIBarButtonItemStyleDone target:self action:@selector(addNumberPad)],
+                                   nil];
         }
     }
 }
 
-- (IBAction)add:(id)sender {
+- (void)addNumberPad {
     
     NSUInteger idFromItemsCount = [[self.currentBill items] count] + 1;
     NSNumber *quantity = [NSNumber numberWithInt:[[self.quantityTextField text] intValue]];
@@ -93,11 +110,7 @@
         [self.currentBill setTotalPrice: totalPrice];
         [self _setTotalPriceLabel:[self.currentBill totalPrice]];
         
-        [self.nextButton setHidden:NO];
-        [self.productCodeTextField setHidden:NO];
-        [self.productLabel setHidden:YES];
-        [self _animateBottomViewOnYAxis:46];
-        [self.productCodeTextField becomeFirstResponder];
+        [self _showAndFocusProductCode];
 
        // [self.billTableView numberOfRowsInSection:[self.currentBill.items count]];
         
@@ -109,14 +122,35 @@
     [self.billTableView reloadData];
 }
 
+- (void)cancelNumberPad {
+    
+    [self _showAndFocusProductCode];
+}
+
 - (IBAction)save:(id)sender {
+    
+    [self _clearAndSetBillItemInstance];
+    [self.billTableView reloadData];
+    [self.saveButton setEnabled:NO];
 }
 
 #pragma mark - Text Field Delegate methods
 
 - (BOOL)textFieldShouldClear:(UITextField *)textField {
     
-    [self.addButton setEnabled: NO];
+    return YES;
+}
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range
+replacementString:(NSString *)string {
+    
+    NSLog(@"tag: %@", [self.quantityTextField text]);
+    
+    if ([[self.quantityTextField text] length] != 0) {
+        
+        //[self.addButton setEnabled:YES];
+    }
+    
     return YES;
 }
 
@@ -194,6 +228,24 @@
     [self.totalLabel setText:[NSString stringWithFormat:@"%@: %.2f", totalString, totalPrice]];
 }
 
+- (void)_showAndFocusProductCode {
+    
+    [self.productCodeTextField setHidden:NO];
+    [self.productLabel setHidden:YES];
+    [self _animateBottomViewOnYAxis:46];
+    [self.productCodeTextField becomeFirstResponder];
+    
+    numberToolbar.items = [NSArray arrayWithObjects:
+                           [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil],
+                           [[UIBarButtonItem alloc]initWithTitle:@"Next" style:UIBarButtonItemStyleDone target:self action:@selector(nextNumberPad)],
+                           nil];
+}
+
+-(void)_clearAndSetBillItemInstance {
+    
+    [self.currentBill setTotalPrice:0];
+    [self.currentBill setItems:[[NSSet alloc] init]];
+}
 
 #pragma mark - Core Data Queries private methods
 

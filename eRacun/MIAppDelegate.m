@@ -19,7 +19,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     [self _setDarkGradientToNavigationBar];
-    //[self _createProductsDummyData];    
+    [self _createProductsDummyData];    
     //[self _fetchAllProducts];
     
     return YES;
@@ -158,7 +158,7 @@
     Product *kikiriki = (Product *)[NSEntityDescription insertNewObjectForEntityForName:@"Product"
                                                                  inManagedObjectContext:[self managedObjectContext]];
     [kikiriki setId:@1];
-    [kikiriki setName:@"Kikiriki"];
+    [kikiriki setName:@"Kikiriki kokice i zanimacije i svasta nosto"];
     [kikiriki setPrice:23.3];
     
     Product *medica = (Product *)[NSEntityDescription insertNewObjectForEntityForName:@"Product"

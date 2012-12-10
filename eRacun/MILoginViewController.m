@@ -56,7 +56,7 @@
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range
                                                        replacementString:(NSString *)string {
     
-    if (([textField tag] == 2 && [allTrim([self.usernameTextFileld text]) length] != 0)
+    if ( ([textField tag] == 2 && [allTrim([self.usernameTextFileld text]) length] != 0)
         || ( [textField tag] == 1 && [allTrim([self.passwordTextField text]) length] != 0)) {
         
         [self.loginButton setEnabled:YES];
@@ -91,8 +91,8 @@
 
 - (void)_validateAndRedirect:(id)sender {
     
-    if ([[self.usernameTextFileld text] isEqualToString:@"xajler"]
-        && [[self.passwordTextField text] isEqualToString:@"aeon"]) {
+    if ([[self.usernameTextFileld text] isEqualToString:@"a"]
+        && [[self.passwordTextField text] isEqualToString:@"a"]) {
         
         [self performSegueWithIdentifier:@"LoginSegue" sender:sender];
     
