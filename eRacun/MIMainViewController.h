@@ -33,7 +33,11 @@
 
 @property (strong, nonatomic) Bill *currentBill;
 
+@property (weak, nonatomic) IBOutlet UIButton *deleteBillButton;
+
 - (IBAction)revealLeftMenu:(UIBarButtonItem *)sender;
 
 - (IBAction)save:(id)sender;
+
+- (IBAction)deleteBill:(id)sender;
 @end

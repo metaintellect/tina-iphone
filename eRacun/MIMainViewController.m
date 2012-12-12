@@ -33,8 +33,7 @@
     [super viewDidLoad];
     MIAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
     self.context = appDelegate.managedObjectContext;
-    self.objectModel = appDelegate.managedObjectModel;    
-    [self.productCodeTextField becomeFirstResponder];
+    self.objectModel = appDelegate.managedObjectModel;
     [self _animateBottomViewOnYAxis:46];	
     products = [self _getAllProducts];
 
@@ -92,11 +91,13 @@
     NSUInteger idFromItemsCount = [[self.currentBill items] count] + 1;
     NSNumber *quantity = [NSNumber numberWithInt:[[self.quantityTextField text] intValue]];
     NSString *productName = allTrim([currentProduct name]);
+    double productPrice = [currentProduct price];
     
     if (idFromItemsCount > 0 && [quantity intValue] > 0
         && currentProduct != nil
         && [[currentProduct id] intValue] > 0
-        && [productName length] != 0) {
+        && [productName length] != 0
+        && productPrice > 0) {
         
         BillItem *item = (BillItem *)[NSEntityDescription insertNewObjectForEntityForName:@"BillItem"
                                                                    inManagedObjectContext:[self context]];
@@ -104,15 +105,14 @@
         [item setProductId:[currentProduct id]];
         [item setQuantity:quantity];
         [item setProductName:productName];
+        [item setProductPrice:productPrice];
         
         [self.currentBill addItemsObject:item];
         double totalPrice = [self.currentBill totalPrice] + ([currentProduct price] * [quantity intValue]);
         [self.currentBill setTotalPrice: totalPrice];
-        [self _setTotalPriceLabel:[self.currentBill totalPrice]];
+        [self _setTotalPriceLabel:[self.currentBill totalPrice]];        
         
         [self _showAndFocusProductCode];
-
-       // [self.billTableView numberOfRowsInSection:[self.currentBill.items count]];
         
     } else {
         
@@ -130,8 +130,12 @@
 - (IBAction)save:(id)sender {
     
     [self _clearAndSetBillItemInstance];
-    [self.billTableView reloadData];
-    [self.saveButton setEnabled:NO];
+}
+
+- (IBAction)deleteBill:(id)sender {
+    
+    [self _clearAndSetBillItemInstance];
+    [self _setTotalPriceLabel:0.0];
 }
 
 #pragma mark - Text Field Delegate methods
@@ -144,7 +148,7 @@
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range
 replacementString:(NSString *)string {
     
-    NSLog(@"tag: %@", [self.quantityTextField text]);
+    // NSLog(@"tag: %@", [self.quantityTextField text]);
     
     if ([[self.quantityTextField text] length] != 0) {
         
@@ -160,13 +164,16 @@ replacementString:(NSString *)string {
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
     NSInteger rows = [[self.currentBill items] count];
-    NSLog(@"No. of rows: %d", rows);
+    // NSLog(@"No. of rows: %d", rows);
     
-    if (0 == rows) { [self.saveButton setEnabled:NO];
-   
+    if (0 == rows) {
+        
+        [self _disableSaveAndDeleteButton];
+        
     } else {
     
         [self.saveButton setEnabled:YES];
+        [self.deleteBillButton setEnabled:YES];
     }
     
     return rows;
@@ -188,16 +195,49 @@ replacementString:(NSString *)string {
         
         label = (UILabel *)[cell viewWithTag:2];
         [label setText:[NSString stringWithFormat:@"%@x", [item quantity]]];
-        NSLog(@"Id: %@ :: ProductName: %@ :: Quantity: %@", [item id], [item productName], [item quantity]);
+        // NSLog(@"Id: %@ :: ProductName: %@ :: Quantity: %@", [item id], [item productName], [item quantity]);
     }
         
     return cell;
 }
 
-- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+    
     // cell.backgroundColor = (indexPath.row%2)?[UIColor lightGrayColor]:[UIColor grayColor];
     cell.backgroundColor = [UIColor colorWithPatternImage: [UIImage imageNamed: @"cell_bg.png"]];
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    [self.billTableView beginUpdates];
+    
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        [self.billTableView deleteRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath, nil] withRowAnimation:YES];
+  
+        NSMutableSet *items = [NSMutableSet setWithSet:[self.currentBill items]];
+                
+        NSArray *itemsArray = [[self.currentBill items] allObjects];
+        
+        BillItem *item = [itemsArray objectAtIndex:[indexPath row]];
+        
+        [items removeObject:item];        
+        
+        self.currentBill.items = items;
+        
+        if ([items count] == 0) {
+            
+            [self.currentBill setTotalPrice:0.00];
+            
+        } else {
+
+            double totalPrice = [self.currentBill totalPrice] - ([item productPrice] * [item.quantity intValue]);
+            [self.currentBill setTotalPrice:totalPrice];
+        }
+        
+        [self _setTotalPriceLabel:self.currentBill.totalPrice];
+    }
+    
+    [self.billTableView endUpdates];
+    [self.billTableView reloadData];
 }
 
 
@@ -245,6 +285,14 @@ replacementString:(NSString *)string {
     
     [self.currentBill setTotalPrice:0];
     [self.currentBill setItems:[[NSSet alloc] init]];
+    [self.billTableView reloadData];
+    [self _disableSaveAndDeleteButton];
+}
+
+-(void)_disableSaveAndDeleteButton {
+    
+    [self.saveButton setEnabled:NO];
+    [self.deleteBillButton setEnabled:NO];
 }
 
 #pragma mark - Core Data Queries private methods

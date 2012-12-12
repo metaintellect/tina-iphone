@@ -64,12 +64,12 @@
                         <outlet property="loginInputImage" destination="d5Q-lZ-YaF" id="8JE-d6-yf6"/>
                         <outlet property="passwordTextField" destination="P20-Eh-8m8" id="OQO-QF-kI3"/>
                         <outlet property="usernameTextFileld" destination="U2j-6n-Hpm" id="Jso-V1-Ng6"/>
-                        <segue destination="SzU-GM-nvT" kind="modal" identifier="LoginSegue" id="cBk-dX-3jA"/>
+                        <segue destination="gk0-4v-TNU" kind="modal" identifier="LoginSegue" id="0uP-9i-g2q"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CFk-PG-lzw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-477" y="177"/>
+            <point key="canvasLocation" x="-479" y="147"/>
         </scene>
         <!--Main View Controller - New bill-->
         <scene sceneID="leg-ZQ-LFr">
@@ -162,6 +162,21 @@
                                             <outlet property="delegate" destination="Kdx-y7-DET" id="IgE-sj-5KP"/>
                                         </connections>
                                     </tableView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="usv-Kv-Bk6">
+                                        <rect key="frame" x="282" y="2" width="35" height="38"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" size="button"/>
+                                        <state key="normal" image="delete.png">
+                                            <color key="titleColor" red="0.19607843137254902" green="0.30980392156862746" blue="0.52156862745098043" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <state key="highlighted">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="deleteBill:" destination="Kdx-y7-DET" eventType="touchUpInside" id="BtS-iM-bj2"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                             </view>
@@ -185,6 +200,7 @@
                     <connections>
                         <outlet property="billTableView" destination="4Rc-vP-Ik7" id="ccm-zF-qqp"/>
                         <outlet property="bottomView" destination="Knh-k3-PcR" id="lfk-TX-lbY"/>
+                        <outlet property="deleteBillButton" destination="usv-Kv-Bk6" id="ZW4-aY-uNv"/>
                         <outlet property="productCodeTextField" destination="iOM-p9-9Q3" id="eaX-G8-9yM"/>
                         <outlet property="productLabel" destination="Thk-xL-JmW" id="Zzp-og-7mC"/>
                         <outlet property="quantityTextField" destination="BFA-3i-zPR" id="Uiv-Zp-910"/>
@@ -194,7 +210,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1eG-GH-HWh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="374" y="147"/>
+            <point key="canvasLocation" x="369" y="147"/>
         </scene>
         <!--Settings View Controller-->
         <scene sceneID="zGv-5Q-jNf">
@@ -252,7 +268,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aSV-2Z-1t3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="762" y="146"/>
+            <point key="canvasLocation" x="775" y="147"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="rpX-86-bYY">
@@ -270,7 +286,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dzW-OP-Baz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-26" y="147"/>
+            <point key="canvasLocation" x="-50" y="147"/>
         </scene>
         <!--Initial View Controller-->
         <scene sceneID="W34-tb-ugH">
@@ -303,6 +319,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="delete.png" width="16" height="16"/>
         <image name="gear.png" width="20" height="20"/>
         <image name="login_button.png" width="346" height="52"/>
         <image name="login_input_bg.png" width="438" height="133"/>

@@ -29,6 +29,7 @@
 		D46D3AF6166D2498000BB30B /* ButtonMenu.png in Resources */ = {isa = PBXBuildFile; fileRef = D46D3AF5166D2498000BB30B /* ButtonMenu.png */; };
 		D46D3AF8166D24A4000BB30B /* ButtonMenu@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D46D3AF7166D24A4000BB30B /* ButtonMenu@2x.png */; };
 		D46D3AFE166D2A3C000BB30B /* MIInitialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D46D3AFD166D2A3C000BB30B /* MIInitialViewController.m */; };
+		D47A37BF1678904C003743E1 /* delete.png in Resources */ = {isa = PBXBuildFile; fileRef = D47A37BE1678904C003743E1 /* delete.png */; };
 		D4AD232F1670653F00F21E96 /* Bill.m in Sources */ = {isa = PBXBuildFile; fileRef = D4AD232E1670653F00F21E96 /* Bill.m */; };
 		D4AD23321670653F00F21E96 /* BillItem.m in Sources */ = {isa = PBXBuildFile; fileRef = D4AD23311670653F00F21E96 /* BillItem.m */; };
 		D4AD23351670653F00F21E96 /* Product.m in Sources */ = {isa = PBXBuildFile; fileRef = D4AD23341670653F00F21E96 /* Product.m */; };
@@ -73,6 +74,7 @@
 		D46D3AF7166D24A4000BB30B /* ButtonMenu@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ButtonMenu@2x.png"; sourceTree = "<group>"; };
 		D46D3AFC166D2A3C000BB30B /* MIInitialViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MIInitialViewController.h; sourceTree = "<group>"; };
 		D46D3AFD166D2A3C000BB30B /* MIInitialViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MIInitialViewController.m; sourceTree = "<group>"; };
+		D47A37BE1678904C003743E1 /* delete.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = delete.png; sourceTree = "<group>"; };
 		D4AD232D1670653F00F21E96 /* Bill.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Bill.h; sourceTree = "<group>"; };
 		D4AD232E1670653F00F21E96 /* Bill.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Bill.m; sourceTree = "<group>"; };
 		D4AD23301670653F00F21E96 /* BillItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BillItem.h; sourceTree = "<group>"; };
@@ -211,6 +213,7 @@
 				D4AD233E16708FEB00F21E96 /* cell_bg.png */,
 				D4AD234216709AA200F21E96 /* nav_bg.png */,
 				D4AD23491671004000F21E96 /* gear.png */,
+				D47A37BE1678904C003743E1 /* delete.png */,
 				D4AD234A1671004000F21E96 /* gear@2x.png */,
 				D4AD233F16708FEB00F21E96 /* total_bg.png */,
 				D46D3AEB166D1B7C000BB30B /* login_button.png */,
@@ -289,6 +292,7 @@
 				D4AD234316709AA200F21E96 /* nav_bg.png in Resources */,
 				D4AD234B1671004000F21E96 /* gear.png in Resources */,
 				D4AD234C1671004000F21E96 /* gear@2x.png in Resources */,
+				D47A37BF1678904C003743E1 /* delete.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

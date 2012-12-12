@@ -8,6 +8,7 @@
         <attribute name="id" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="productId" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="productName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="productPrice" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
         <attribute name="quantity" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <relationship name="bill" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Bill" inverseName="items" inverseEntity="Bill" syncable="YES"/>
     </entity>
@@ -20,8 +21,8 @@
     <fetchRequest name="GetProductById" entity="Product" predicateString="id == $PRODUCT_ID"/>
     <fetchRequest name="GetProductByName" entity="Product" predicateString="name LIKE[c] $SEARCH_NAME"/>
     <elements>
-        <element name="Bill" positionX="-189" positionY="24" width="128" height="73"/>
-        <element name="BillItem" positionX="45" positionY="9" width="128" height="118"/>
-        <element name="Product" positionX="160" positionY="192" width="128" height="90"/>
+        <element name="Bill" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="BillItem" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="Product" positionX="0" positionY="0" width="0" height="0"/>
     </elements>
 </model>
