@@ -14,14 +14,14 @@
 @interface Bill : NSManagedObject
 
 @property (nonatomic) double totalPrice;
-@property (nonatomic, retain) NSSet *items;
+@property (nonatomic, retain) NSMutableSet *items;
 @end
 
 @interface Bill (CoreDataGeneratedAccessors)
 
 - (void)addItemsObject:(BillItem *)value;
 - (void)removeItemsObject:(BillItem *)value;
-- (void)addItems:(NSSet *)values;
-- (void)removeItems:(NSSet *)values;
+- (void)addItems:(NSMutableSet *)values;
+- (void)removeItems:(NSMutableSet *)values;
 
 @end

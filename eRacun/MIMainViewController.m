@@ -7,7 +7,6 @@
 //
 
 #import "MIMainViewController.h"
-#import <ViewDeck/IIViewDeckController.h>
 #import "MIAppDelegate.h"
 #import "Product.h"
 #import "Bill.h"
@@ -21,7 +20,8 @@
     
     NSArray *products;
     Product *currentProduct;
-    UIToolbar* numberToolbar;
+    UIToolbar *numberToolbar;
+    NSMutableArray *billItems;
     #define allTrim( object ) [object stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet] ]
 }
 
@@ -30,7 +30,7 @@
 
 - (void)viewDidLoad {
     
-    [super viewDidLoad];
+    [super viewDidLoad];    
     MIAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
     self.context = appDelegate.managedObjectContext;
     self.objectModel = appDelegate.managedObjectModel;
@@ -39,6 +39,8 @@
 
     self.currentBill = (Bill *)[NSEntityDescription insertNewObjectForEntityForName:@"Bill"
                                                              inManagedObjectContext:[self context]];
+    
+    billItems = [NSMutableArray arrayWithArray:[[self.currentBill items] allObjects]];
     
     [self _setTotalPriceLabel:0];
     
@@ -54,12 +56,6 @@
 
 
 #pragma mark - Command methods
-
-- (IBAction)revealLeftMenu:(UIBarButtonItem *)sender {
-    
-    self.viewDeckController.leftLedge = 50.0;
-    [self.viewDeckController toggleLeftViewAnimated:YES];
-}
 
 - (void)nextNumberPad {
     
@@ -114,12 +110,14 @@
         
         [self _showAndFocusProductCode];
         
+        [self _cleanAndReloadBillItemsForTableView:[self.currentBill items]];
+                       
+        [self.billTableView reloadData];
+        
     } else {
         
         // TODO: alert message
-    }
-    
-    [self.billTableView reloadData];
+    }        
 }
 
 - (void)cancelNumberPad {
@@ -163,7 +161,7 @@ replacementString:(NSString *)string {
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    NSInteger rows = [[self.currentBill items] count];
+    NSInteger rows = [billItems count];
     // NSLog(@"No. of rows: %d", rows);
     
     if (0 == rows) {
@@ -183,7 +181,7 @@ replacementString:(NSString *)string {
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"BillItemCell"];    
         
-    NSArray *items = [[self.currentBill items] allObjects];
+    NSMutableArray *items = billItems;
     
     if (items != nil && [items count] > 0) {
 
@@ -212,18 +210,15 @@ replacementString:(NSString *)string {
     
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         [self.billTableView deleteRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath, nil] withRowAnimation:YES];
-  
-        NSMutableSet *items = [NSMutableSet setWithSet:[self.currentBill items]];
-                
-        NSArray *itemsArray = [[self.currentBill items] allObjects];
+         
+        BillItem *item = [billItems objectAtIndex:[indexPath row]];
         
-        BillItem *item = [itemsArray objectAtIndex:[indexPath row]];
+        [[self.currentBill items] removeObject:item];
         
-        [items removeObject:item];        
+        [billItems removeObjectAtIndex:[indexPath row]];
+       
         
-        self.currentBill.items = items;
-        
-        if ([items count] == 0) {
+        if ([[self.currentBill items] count] == 0) {
             
             [self.currentBill setTotalPrice:0.00];
             
@@ -239,7 +234,6 @@ replacementString:(NSString *)string {
     [self.billTableView endUpdates];
     [self.billTableView reloadData];
 }
-
 
 #pragma mark - UIResponder
 
@@ -281,10 +275,17 @@ replacementString:(NSString *)string {
                            nil];
 }
 
+-(void)_cleanAndReloadBillItemsForTableView:(NSSet *)items {
+    
+    NSArray *sortDescriptors = [NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"id" ascending:NO]];
+    NSArray *sorteditems = [[[self.currentBill items] allObjects] sortedArrayUsingDescriptors:sortDescriptors];
+    billItems = [NSMutableArray arrayWithArray:sorteditems];
+}
+
 -(void)_clearAndSetBillItemInstance {
     
     [self.currentBill setTotalPrice:0];
-    [self.currentBill setItems:[[NSSet alloc] init]];
+    [self.currentBill setItems:[[NSMutableSet alloc] init]];
     [self.billTableView reloadData];
     [self _disableSaveAndDeleteButton];
 }

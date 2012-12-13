@@ -19,7 +19,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     [self _setDarkGradientToNavigationBar];
-    //[self _createProductsDummyData];
+    [self _createProductsDummyData];
     //[self _fetchAllProducts];
     
     return YES;
