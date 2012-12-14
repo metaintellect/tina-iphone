@@ -17,7 +17,7 @@
 @property (nonatomic, retain) NSNumber * productId;
 @property (nonatomic, retain) NSNumber * quantity;
 @property (nonatomic, retain) NSString * productName;
-@property (nonatomic) double productPrice;
+@property (nonatomic, retain) NSNumber * productPrice;
 @property (nonatomic, retain) Bill *bill;
 
 @end

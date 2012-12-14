@@ -159,13 +159,13 @@
                                                                  inManagedObjectContext:[self managedObjectContext]];
     [kikiriki setId:@1];
     [kikiriki setName:@"Kikiriki kokice i zanimacije i svasta nosto"];
-    [kikiriki setPrice:23.3];
+    [kikiriki setPrice:@23.3];
     
     Product *medica = (Product *)[NSEntityDescription insertNewObjectForEntityForName:@"Product"
                                                                  inManagedObjectContext:[self managedObjectContext]];
     [medica setId:@2];
     [medica setName:@"Medica"];
-    [medica setPrice:66.66];
+    [medica setPrice:@66.66];
     
     NSError *error = nil;
     

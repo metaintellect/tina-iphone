@@ -42,7 +42,7 @@
     
     billItems = [NSMutableArray arrayWithArray:[[self.currentBill items] allObjects]];
     
-    [self _setTotalPriceLabel:0];
+    [self _setTotalPriceLabel:@0.00];
     
     numberToolbar = [[UIToolbar alloc]initWithFrame:CGRectMake(0, 0, 320, 50)];
     numberToolbar.barStyle = UIBarStyleBlackTranslucent;
@@ -67,7 +67,7 @@
         
         if (nil != currentProduct) {
             
-            [self.productLabel setText:[NSString stringWithFormat:@"%@ %.2f", [currentProduct name], [currentProduct price]]];
+            [self.productLabel setText:[NSString stringWithFormat:@"%@ %@", [currentProduct name], [self _formatPriceNumber:[currentProduct price]]]];
             [self.productCodeTextField setHidden:YES];
             [self.productLabel setHidden:NO];
             [self _animateBottomViewOnYAxis:85];
@@ -87,7 +87,7 @@
     NSUInteger idFromItemsCount = [[self.currentBill items] count] + 1;
     NSNumber *quantity = [NSNumber numberWithInt:[[self.quantityTextField text] intValue]];
     NSString *productName = allTrim([currentProduct name]);
-    double productPrice = [currentProduct price];
+    NSNumber *productPrice = [currentProduct price];
     
     if (idFromItemsCount > 0 && [quantity intValue] > 0
         && currentProduct != nil
@@ -104,7 +104,7 @@
         [item setProductPrice:productPrice];
         
         [self.currentBill addItemsObject:item];
-        double totalPrice = [self.currentBill totalPrice] + ([currentProduct price] * [quantity intValue]);
+        NSNumber *totalPrice = [[NSNumber alloc] initWithDouble:[[self.currentBill totalPrice] doubleValue] + ([[currentProduct price] doubleValue] * [quantity intValue])];
         [self.currentBill setTotalPrice: totalPrice];
         [self _setTotalPriceLabel:[self.currentBill totalPrice]];        
         
@@ -133,7 +133,7 @@
 - (IBAction)deleteBill:(id)sender {
     
     [self _clearAndSetBillItemInstance];
-    [self _setTotalPriceLabel:0.0];
+    [self _setTotalPriceLabel:@0.00];
 }
 
 #pragma mark - Text Field Delegate methods
@@ -220,11 +220,11 @@ replacementString:(NSString *)string {
         
         if ([[self.currentBill items] count] == 0) {
             
-            [self.currentBill setTotalPrice:0.00];
+            [self.currentBill setTotalPrice:@0];
             
         } else {
 
-            double totalPrice = [self.currentBill totalPrice] - ([item productPrice] * [item.quantity intValue]);
+            NSNumber *totalPrice = [[NSNumber alloc] initWithDouble:[[self.currentBill totalPrice] doubleValue] - ([[item productPrice] doubleValue] * [item.quantity intValue])];
             [self.currentBill setTotalPrice:totalPrice];
         }
         
@@ -256,10 +256,19 @@ replacementString:(NSString *)string {
     }];
 }
 
-- (void)_setTotalPriceLabel:(double)totalPrice {
-    
+- (void)_setTotalPriceLabel:(NSNumber*)totalPrice {
+     
     NSString *totalString = NSLocalizedString(@"Total", nil);
-    [self.totalLabel setText:[NSString stringWithFormat:@"%@: %.2f", totalString, totalPrice]];
+    [self.totalLabel setText:[NSString stringWithFormat:@"%@: %@", totalString, [self _formatPriceNumber:totalPrice]]];
+}
+
+-(NSString *)_formatPriceNumber:(NSNumber*)price {
+    
+    NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
+    [numberFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
+    [numberFormatter setMaximumFractionDigits:2];
+    [numberFormatter setMinimumFractionDigits:2];
+    return [numberFormatter stringFromNumber:price];
 }
 
 - (void)_showAndFocusProductCode {
@@ -284,8 +293,9 @@ replacementString:(NSString *)string {
 
 -(void)_clearAndSetBillItemInstance {
     
-    [self.currentBill setTotalPrice:0];
+    [self.currentBill setTotalPrice:@0.00];
     [self.currentBill setItems:[[NSMutableSet alloc] init]];
+    [billItems removeAllObjects];
     [self.billTableView reloadData];
     [self _disableSaveAndDeleteButton];
 }
