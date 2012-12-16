@@ -72,10 +72,6 @@
     
     NSArray *result = @[syncProductsString, logoutString];
     
-    for (NSString *text in result) {
-        NSLog(@"%@", text);
-    }
-    
     return result;
 }
 

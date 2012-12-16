@@ -20,6 +20,7 @@
     
     NSArray *products;
     Product *currentProduct;
+    BillItem *selectedItem;
     UIToolbar *numberToolbar;
     NSMutableArray *billItems;
     #define allTrim( object ) [object stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet] ]
@@ -66,24 +67,14 @@
         currentProduct = [self _getProductById:productId];
         
         if (nil != currentProduct) {
-            
-            [self.productLabel setText:[NSString stringWithFormat:@"%@ %@", [currentProduct name], [self _formatPriceNumber:[currentProduct price]]]];
-            [self.productCodeTextField setHidden:YES];
-            [self.productLabel setHidden:NO];
-            [self _animateBottomViewOnYAxis:85];
-            [self.quantityTextField becomeFirstResponder];
-            
-            numberToolbar.items = [NSArray arrayWithObjects:
-                                   [[UIBarButtonItem alloc]initWithTitle:NSLocalizedString(@"Cancel", nil) style:UIBarButtonItemStyleBordered target:self action:@selector(cancelNumberPad)],
-                                   [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil],
-                                   [[UIBarButtonItem alloc]initWithTitle:NSLocalizedString(@"Add", nil) style:UIBarButtonItemStyleDone target:self action:@selector(addNumberPad)],
-                                   nil];
+            [self _setProductLabelAndShowQuantityWithName:[currentProduct name] andPrice:[currentProduct price] isNewItem:YES];
         }
     }
 }
 
 - (void)addNumberPad {
     
+    BOOL isNewItem = NO;
     NSUInteger idFromItemsCount = [[self.currentBill items] count] + 1;
     NSNumber *quantity = [NSNumber numberWithInt:[[self.quantityTextField text] intValue]];
     NSString *productName = allTrim([currentProduct name]);
@@ -95,15 +86,23 @@
         && [productName length] != 0
         && productPrice > 0) {
         
-        BillItem *item = (BillItem *)[NSEntityDescription insertNewObjectForEntityForName:@"BillItem"
+        if (nil == selectedItem) {
+            
+            isNewItem = YES;
+            selectedItem = (BillItem *)[NSEntityDescription insertNewObjectForEntityForName:@"BillItem"
                                                                    inManagedObjectContext:[self context]];
-        [item setId:[NSNumber numberWithInt:idFromItemsCount]];
-        [item setProductId:[currentProduct id]];
-        [item setQuantity:quantity];
-        [item setProductName:productName];
-        [item setProductPrice:productPrice];
+        }
         
-        [self.currentBill addItemsObject:item];
+        [selectedItem setId:[NSNumber numberWithInt:idFromItemsCount]];
+        [selectedItem setProductId:[currentProduct id]];
+        [selectedItem setQuantity:quantity];
+        [selectedItem setProductName:productName];
+        [selectedItem setProductPrice:productPrice];
+        
+        if (isNewItem) {
+            [self.currentBill addItemsObject:selectedItem];
+        }
+
         NSNumber *totalPrice = [[NSNumber alloc] initWithDouble:[[self.currentBill totalPrice] doubleValue] + ([[currentProduct price] doubleValue] * [quantity intValue])];
         [self.currentBill setTotalPrice: totalPrice];
         [self _setTotalPriceLabel:[self.currentBill totalPrice]];        
@@ -113,6 +112,8 @@
         [self _cleanAndReloadBillItemsForTableView:[self.currentBill items]];
                        
         [self.billTableView reloadData];
+        
+        selectedItem = nil;
         
     } else {
         
@@ -192,7 +193,8 @@ replacementString:(NSString *)string {
         [label setText:[item productName]];
         
         label = (UILabel *)[cell viewWithTag:2];
-        [label setText:[NSString stringWithFormat:@"%@x", [item quantity]]];
+        [label setText:[NSString stringWithFormat:@"%@", [item quantity]]];
+        
         // NSLog(@"Id: %@ :: ProductName: %@ :: Quantity: %@", [item id], [item productName], [item quantity]);
     }
         
@@ -234,6 +236,17 @@ replacementString:(NSString *)string {
     [self.billTableView endUpdates];
     [self.billTableView reloadData];
 }
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    selectedItem = [billItems objectAtIndex:[indexPath row]];
+    
+    if (nil != selectedItem) {
+        
+        [self _setProductLabelAndShowQuantityWithName:[selectedItem productName] andPrice:[selectedItem productPrice] isNewItem:NO];
+    }
+}
+
 
 #pragma mark - UIResponder
 
@@ -306,6 +319,31 @@ replacementString:(NSString *)string {
     [self.deleteBillButton setEnabled:NO];
 }
 
+-(void)_setProductLabelAndShowQuantityWithName:(NSString *)name
+                                      andPrice:(NSNumber *)price
+                                     isNewItem:(BOOL)isNewItem {
+    
+    [self.productLabel setText:[NSString stringWithFormat:@"%@ %@", name, [self _formatPriceNumber:price]]];
+    [self.productCodeTextField setHidden:YES];
+    [self.productLabel setHidden:NO];
+    [self _animateBottomViewOnYAxis:85];
+    [self.quantityTextField becomeFirstResponder];
+                                          
+    NSString *saveText;
+                                          
+    if (isNewItem) {
+        saveText = NSLocalizedString(@"Add", nil);
+    } else {
+        saveText = NSLocalizedString(@"Change", nil);
+    }
+    
+    numberToolbar.items = [NSArray arrayWithObjects:
+                           [[UIBarButtonItem alloc]initWithTitle:NSLocalizedString(@"Cancel", nil) style:UIBarButtonItemStyleBordered target:self action:@selector(cancelNumberPad)],
+                           [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil],
+                           [[UIBarButtonItem alloc]initWithTitle:saveText style:UIBarButtonItemStyleDone target:self action:@selector(addNumberPad)],
+                           nil];
+}
+
 #pragma mark - Core Data Queries private methods
 
 -(NSArray *)_getAllProducts {
@@ -326,7 +364,6 @@ replacementString:(NSString *)string {
 
 -(Product *)_getProductById:(NSNumber *)productId {
     
-    NSLog(@"Product Id: %@", productId);
     NSDictionary *var = [NSDictionary dictionaryWithObject:productId forKey:@"PRODUCT_ID"];
     NSFetchRequest *request = [[self objectModel] fetchRequestFromTemplateWithName:@"GetProductById" substitutionVariables:var];
     
