@@ -16,12 +16,17 @@
 
 @implementation MISettingsViewController
 
+
+#pragma mark - View Controller base methods
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 
     self.settingsItems = [self _createSettingItems];
 }
+
+#pragma mark - Action methods
 
 - (IBAction)close:(id)sender {
     

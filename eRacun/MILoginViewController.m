@@ -39,7 +39,7 @@
 }
 
 
-#pragma mark - IBAction methods
+#pragma mark - Action methods
 
 - (IBAction)login:(id)sender {
     
@@ -123,10 +123,7 @@
                                                NSError *error) {
                                NSLog(@"%@", [[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding]);
                 [self _callLoginApiAndPersistAccountForData:data error:error];
-       }];
-    
-    
-    [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+       }];            
 }
 
 
@@ -148,6 +145,8 @@
         account.token = (NSString *)[json objectForKey:@"token"];
         
         [MIHelper setAuthToken:account.token];
+        
+        [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
         
         if ([self.query saveedAccountFromJSON:json]) {
                         
@@ -171,7 +170,6 @@
 {
     [self performSegueWithIdentifier:@"LoginSegue" sender:self];
 }
-
 
 - (void)_animateLoginControlsOnYAxis:(CGFloat)yLogo
                       inputImageView:(CGFloat)yInputImageValue

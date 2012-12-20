@@ -13,13 +13,20 @@
 
 @end
 
-@implementation MILoginSettiingsViewController
+@implementation MILoginSettiingsViewController {
+    
+}
+
+
+#pragma mark - View Controller base methods
 
 - (void)viewDidLoad {
     
     [super viewDidLoad];
 	[self _bindCustomDomainURLTextFiled];
 }
+
+#pragma mark - Action methods
 
 - (IBAction)Save:(id)sender {
     
@@ -39,7 +46,7 @@
     }
 }
 
-#pragma match "Private methods"
+#pragma mark - Private methods
 
 - (void)_bindCustomDomainURLTextFiled {
     

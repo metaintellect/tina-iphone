@@ -6,8 +6,6 @@
 //  Copyright (c) 2012 Metaintellect. All rights reserved.
 //
 
-#define allTrim( object ) [object stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet] ]
-
 #import "MIMainViewController.h"
 #import "MIHelper.h"
 #import "MIRestJSON.h"
@@ -29,7 +27,7 @@
 }
 
 
-#pragma mark - View Controller methods
+#pragma mark - View Controller base methods
 
 - (void)viewDidLoad {
     
@@ -63,7 +61,7 @@
 }
 
 
-#pragma mark - Command methods
+#pragma mark - Action methods
 
 - (void)nextNumberPad {
     

@@ -14,6 +14,9 @@
     NSError * __autoreleasing *error;
 }
 
+
+#pragma mark - Init
+
 - (id)init {
     
     if (self = [super init]) {
@@ -25,6 +28,9 @@
     
     return self;
 }
+
+
+#pragma mark - Command methods
 
 - (BOOL)saveedAccountFromJSON:(NSDictionary*)json {
     
@@ -43,6 +49,9 @@
     
     return [[self context] save:error] ?  YES : NO;
 }
+
+
+#pragma mark - Query methods
 
 - (NSArray *)getAllProducts {
     

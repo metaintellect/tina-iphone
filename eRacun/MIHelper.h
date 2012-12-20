@@ -16,10 +16,6 @@
 
 #define kCustomDomainURL @"customDomainURL"
 
-+ (void) showAlerMessageWithTitle:(NSString*)title
-                      withMessage:(NSString*)message
-            withCancelButtonTitle:(NSString*)cancelButtonTitle;
-
 + (NSString*)getAuthToken;
 
 + (void)setAuthToken:(NSString*)token;
@@ -27,6 +23,10 @@
 + (NSString*)getCustomDomainURL;
 
 + (void)setCustomDomainURL:(NSString*)customDomainURL;
+
++ (void) showAlerMessageWithTitle:(NSString*)title
+                      withMessage:(NSString*)message
+            withCancelButtonTitle:(NSString*)cancelButtonTitle;
 
 + (BOOL)validUrl:(NSString *)candidate;
 

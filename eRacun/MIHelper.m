@@ -12,18 +12,7 @@
     
 }
 
-+ (void)showAlerMessageWithTitle:(NSString*)title
-                     withMessage:(NSString*)messageTitle
-           withCancelButtonTitle:(NSString*)cancelButtonTitle {
-    
-    
-    UIAlertView *message = [[UIAlertView alloc] initWithTitle:title
-                                                      message:messageTitle
-                                                     delegate:nil
-                                            cancelButtonTitle:cancelButtonTitle
-                                            otherButtonTitles:nil];
-    [message show];       
-}
+#pragma mark - NSUserDefaults handling methods
 
 + (NSString*)getAuthToken {
     
@@ -46,6 +35,21 @@
 + (void)setCustomDomainURL:(NSString*)customDomainURL {
     
     [[NSUserDefaults standardUserDefaults] setObject:customDomainURL forKey:kCustomDomainURL];
+}
+
+#pragma mark - Misc. methods
+
++ (void)showAlerMessageWithTitle:(NSString*)title
+                     withMessage:(NSString*)messageTitle
+           withCancelButtonTitle:(NSString*)cancelButtonTitle {
+    
+    
+    UIAlertView *message = [[UIAlertView alloc] initWithTitle:title
+                                                      message:messageTitle
+                                                     delegate:nil
+                                            cancelButtonTitle:cancelButtonTitle
+                                            otherButtonTitles:nil];
+    [message show];
 }
 
 + (BOOL)validUrl:(NSString *)candidate {
