@@ -7,6 +7,7 @@
 //
 
 #import "MISettingsViewController.h"
+#import "MIHelper.h"
 #import "MILoginViewController.h"
 
 @interface MISettingsViewController ()
@@ -29,13 +30,13 @@
 
 #pragma mark - Table view data source
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    
     return [self.settingsItems count];
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SettingsCellItem"];
     
     NSString *labelText = [self.settingsItems objectAtIndex:[indexPath row]];
@@ -65,7 +66,7 @@
 
 #pragma mark - Private methods
 
--(NSArray *)_createSettingItems {
+- (NSArray *)_createSettingItems {
     
     NSString *syncProductsString = NSLocalizedString(@"Sync Products", nil);
     NSString *logoutString = NSLocalizedString(@"Log Out", nil);
@@ -75,12 +76,16 @@
     return result;
 }
 
--(void)_syncProductsFromServer {
+- (void)_syncProductsFromServer {
     
     NSLog(@"Doing syncing");
 }
 
--(void)_logOutFromApplication {
+- (void)_logOutFromApplication {
+    
+    [MIHelper setAuthToken:nil];
+    
+    //[MIHelper getAuthToken];
     MILoginViewController *loginController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil]
                                        instantiateViewControllerWithIdentifier:@"LoginViewController"];
     

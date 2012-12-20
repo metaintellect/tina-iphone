@@ -7,14 +7,21 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MIQuery.h"
 
 @interface MILoginViewController : UIViewController <UITextFieldDelegate>
 
 @property (weak, nonatomic) IBOutlet UITextField *usernameTextFileld;
+
 @property (weak, nonatomic) IBOutlet UITextField *passwordTextField;
+
 @property (weak, nonatomic) IBOutlet UIButton *loginButton;
-// @property (weak, nonatomic) IBOutlet UIImageView *backgroundImageView;
+
 @property (weak, nonatomic) IBOutlet UIImageView *loginInputImage;
+
+@property (weak, nonatomic) IBOutlet UIImageView *logoImage;
+
+@property (strong, nonatomic) MIQuery *query;
 
 - (IBAction)login:(id)sender;
 

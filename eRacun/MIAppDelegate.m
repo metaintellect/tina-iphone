@@ -9,6 +9,7 @@
 #import "MIAppDelegate.h"
 #import "MIMainViewController.h"
 #import "Product.h"
+#import "Account.h"
 
 @implementation MIAppDelegate
 
@@ -19,7 +20,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     [self _setDarkGradientToNavigationBar];
-    [self _createProductsDummyData];
+    // [self _createProductsDummyData];
     //[self _fetchAllProducts];
     
     return YES;
@@ -45,6 +46,26 @@
 {
     [self saveContext];
 }
+
+//-(void)_authenticateAccountIfItExists {
+//    
+//    NSFetchRequest *request = [[self managedObjectModel] fetchRequestTemplateForName:@"GetAllAccounts"];
+//    
+//    NSError *error = nil;
+//    NSArray *result = [[self managedObjectContext] executeFetchRequest:request error:&error];
+//    
+//    if (nil != result && [result count] == 1) {
+//        
+//       [self performSegueWithIdentifier:@"LoginSegue" sender:self];
+//        
+//    } else if ([result count] > 1) {
+//        
+//        for (Account *account in result) {
+//            
+//            [self.managedObjectContext deleteObject:account];
+//        }
+//    }
+//}
 
 - (void)saveContext
 {
@@ -153,7 +174,7 @@
 
 #pragma mark - Create Products dummy data
 
--(void)_createProductsDummyData
+- (void)_createProductsDummyData
 {
     Product *kikiriki = (Product *)[NSEntityDescription insertNewObjectForEntityForName:@"Product"
                                                                  inManagedObjectContext:[self managedObjectContext]];
@@ -174,7 +195,7 @@
     }
 }
 
--(void)_fetchAllProducts
+- (void)_fetchAllProducts
 {
     NSFetchRequest *request = [[self managedObjectModel] fetchRequestTemplateForName:@"GetAllProducts"];
     

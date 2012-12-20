@@ -7,10 +7,13 @@
 //
 
 #import "MILoginViewController.h"
+#import "MIAppDelegate.h"
+#import "MIHelper.h"
+#import "Account.h"
+#import "MIQuery.h"
+#import "MIRestJSON.h"
 
 @interface MILoginViewController ()
-
-#define allTrim( object ) [object stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet] ]
 
 @end
 
@@ -18,12 +21,21 @@
     
 }
 
-
 #pragma mark - View Controller base methods
 
 - (void)viewDidLoad {
     
+    [super viewDidLoad];
+    self.query = [[MIQuery alloc] init];
     [self.usernameTextFileld becomeFirstResponder];
+    NSString *url = [MIHelper getCustomDomainURL];
+    
+    if (![MIHelper validUrl:url]) {
+                
+        [MIHelper showAlerMessageWithTitle:NSLocalizedString(@"Custom Domain URL missing!", nil)
+                               withMessage:NSLocalizedString(@"Please use info button to set Custom Domain URL.", nil)
+                     withCancelButtonTitle:NSLocalizedString(@"OK", nil)];        
+    }
 }
 
 
@@ -65,9 +77,9 @@
     return YES;
 }
 
--(void) textFieldDidBeginEditing:(UITextField *)textField {
+- (void) textFieldDidBeginEditing:(UITextField *)textField {
     
-    [self _animateLoginControlsOnYAxis:102 usernameTextField:108 passwordTextField:147 loginButton:194];
+    [self _animateLoginControlsOnYAxis:35 inputImageView:102 usernameTextField:108 passwordTextField:147 loginButton:194];
 }
 
 - (BOOL)textFieldShouldClear:(UITextField *)textField {
@@ -83,7 +95,7 @@
     
     [self.view endEditing:YES];
     [super touchesBegan:touches withEvent:event];
-    [self _animateLoginControlsOnYAxis:162 usernameTextField:168 passwordTextField:207 loginButton:254];
+    [self _animateLoginControlsOnYAxis:95 inputImageView:162 usernameTextField:168 passwordTextField:207 loginButton:254];
 }
 
 
@@ -91,25 +103,88 @@
 
 - (void)_validateAndRedirect:(id)sender {
     
-    if ([[self.usernameTextFileld text] isEqualToString:@"a"]
-        && [[self.passwordTextField text] isEqualToString:@"a"]) {
-        
-        [self performSegueWithIdentifier:@"LoginSegue" sender:sender];
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     
-    } else {
+    NSError *error;
     
-        [self.passwordTextField setText:@""];
-        [self.passwordTextField becomeFirstResponder];
-    }
+    NSDictionary *jsonValues = @{
+        @"username" : [self.usernameTextFileld text],
+        @"password" : [self.passwordTextField text]
+    };
+    
+    NSMutableURLRequest *request = [MIRestJSON constructRequestForApiAction:@"login" withJSONValues:jsonValues error:error];
+    
+    NSOperationQueue *queue = [[NSOperationQueue alloc] init];
+    
+    [NSURLConnection sendAsynchronousRequest:request
+                                       queue:queue
+                           completionHandler:^(NSURLResponse *response,
+                                               NSData *data,
+                                               NSError *error) {
+                               NSLog(@"%@", [[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding]);
+                [self _callLoginApiAndPersistAccountForData:data error:error];
+       }];
+    
+    
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
 }
 
-- (void)_animateLoginControlsOnYAxis:(CGFloat)yInputImageValue
+
+- (void)_callLoginApiAndPersistAccountForData:(NSData*)data error:(NSError*)error {
+    
+    NSLog(@"%@", [[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding]);
+    
+    if ([data length] > 0 && error == nil) {
+        
+        Account *account = (Account *)[NSEntityDescription insertNewObjectForEntityForName:@"Account"
+                                                                    inManagedObjectContext:[self.query context]];
+        
+        NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
+        
+        account.id = [NSNumber numberWithInt:[(NSString *)[json objectForKey:@"userId"] intValue]];
+        account.fullName = (NSString *)[json objectForKey:@"fullName"];
+        account.cashRegister = (NSString *)[json objectForKey:@"cashRegister"];
+        account.cashRegisterId = [NSNumber numberWithInt:[(NSString *)[json objectForKey:@"cashRegisterId"] intValue]];
+        account.token = (NSString *)[json objectForKey:@"token"];
+        
+        [MIHelper setAuthToken:account.token];
+        
+        if ([self.query saveedAccountFromJSON:json]) {
+                        
+            [self performSelectorOnMainThread:@selector(_performAuthenticatedLoginSegue)
+                                   withObject:nil
+                                waitUntilDone:YES];
+            
+        } else {
+            
+            [MIHelper showAlerMessageWithTitle:NSLocalizedString(@"Error", nil)
+                                   withMessage:NSLocalizedString(@"Username and/or password are incorrect", nil)
+                         withCancelButtonTitle:NSLocalizedString(@"OK", nil)];
+            
+            [self.passwordTextField setText:@""];
+            [self.passwordTextField becomeFirstResponder];
+        }
+    }    
+}
+
+- (void)_performAuthenticatedLoginSegue
+{
+    [self performSegueWithIdentifier:@"LoginSegue" sender:self];
+}
+
+
+- (void)_animateLoginControlsOnYAxis:(CGFloat)yLogo
+                      inputImageView:(CGFloat)yInputImageValue
                    usernameTextField:(CGFloat)yUsernameValue
                    passwordTextField:(CGFloat)yPasswordValue
                          loginButton:(CGFloat)yButtonValue {
     
     [UIView animateWithDuration:0.2 animations:^{
         CGRect frame;
+        
+        frame = self.logoImage.frame;
+        frame.origin.y = yLogo;
+        self.logoImage.frame = frame;
         
         frame = self.loginInputImage.frame;
         frame.origin.y = yInputImageValue;

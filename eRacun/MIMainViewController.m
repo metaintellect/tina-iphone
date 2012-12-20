@@ -6,8 +6,11 @@
 //  Copyright (c) 2012 Metaintellect. All rights reserved.
 //
 
+#define allTrim( object ) [object stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet] ]
+
 #import "MIMainViewController.h"
-#import "MIAppDelegate.h"
+#import "MIHelper.h"
+#import "MIRestJSON.h"
 #import "Product.h"
 #import "Bill.h"
 #import "BillItem.h"
@@ -18,12 +21,11 @@
 
 @implementation MIMainViewController {
     
-    NSArray *products;
-    Product *currentProduct;
-    BillItem *selectedItem;
-    UIToolbar *numberToolbar;
-    NSMutableArray *billItems;
-    #define allTrim( object ) [object stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet] ]
+    NSArray * _products;
+    Product * _currentProduct;
+    BillItem * _selectedItem;
+    UIToolbar * _numberToolbar;
+    NSMutableArray * _billItems;
 }
 
 
@@ -31,28 +33,33 @@
 
 - (void)viewDidLoad {
     
-    [super viewDidLoad];    
-    MIAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
-    self.context = appDelegate.managedObjectContext;
-    self.objectModel = appDelegate.managedObjectModel;
+    [super viewDidLoad];
+    
+    if (nil == [MIHelper getAuthToken]) {
+        
+        [self performSegueWithIdentifier:@"AuthSegue" sender:self];
+        [super viewWillAppear:NO];
+    }
+    
+    self.query = [[MIQuery alloc] init];
     [self _animateBottomViewOnYAxis:46];	
-    products = [self _getAllProducts];
+    _products = [self.query getAllProducts];
 
     self.currentBill = (Bill *)[NSEntityDescription insertNewObjectForEntityForName:@"Bill"
-                                                             inManagedObjectContext:[self context]];
+                                                             inManagedObjectContext:[self.query context]];
     
-    billItems = [NSMutableArray arrayWithArray:[[self.currentBill items] allObjects]];
+    _billItems = [NSMutableArray arrayWithArray:[[self.currentBill items] allObjects]];
     
     [self _setTotalPriceLabel:@0.00];
     
-    numberToolbar = [[UIToolbar alloc]initWithFrame:CGRectMake(0, 0, 320, 50)];
-    numberToolbar.barStyle = UIBarStyleBlackTranslucent;
+    _numberToolbar = [[UIToolbar alloc]initWithFrame:CGRectMake(0, 0, 320, 50)];
+    _numberToolbar.barStyle = UIBarStyleBlackTranslucent;
     
     [self _showAndFocusProductCode];
     
-    [numberToolbar sizeToFit];
-    self.productCodeTextField.inputAccessoryView = numberToolbar;
-    self.quantityTextField.inputAccessoryView = numberToolbar;
+    [_numberToolbar sizeToFit];
+    self.productCodeTextField.inputAccessoryView = _numberToolbar;
+    self.quantityTextField.inputAccessoryView = _numberToolbar;
 }
 
 
@@ -64,10 +71,10 @@
     
     if ([productId intValue] > 0) {
         
-        currentProduct = [self _getProductById:productId];
+        _currentProduct = [self.query getProductById:productId];
         
-        if (nil != currentProduct) {
-            [self _setProductLabelAndShowQuantityWithName:[currentProduct name] andPrice:[currentProduct price] isNewItem:YES];
+        if (nil != _currentProduct) {
+            [self _setProductLabelAndShowQuantityWithName:[_currentProduct name] andPrice:[_currentProduct price] isNewItem:YES];
         }
     }
 }
@@ -77,33 +84,33 @@
     BOOL isNewItem = NO;
     NSUInteger idFromItemsCount = [[self.currentBill items] count] + 1;
     NSNumber *quantity = [NSNumber numberWithInt:[[self.quantityTextField text] intValue]];
-    NSString *productName = allTrim([currentProduct name]);
-    NSNumber *productPrice = [currentProduct price];
+    NSString *productName = allTrim([_currentProduct name]);
+    NSNumber *productPrice = [_currentProduct price];
     
     if (idFromItemsCount > 0 && [quantity intValue] > 0
-        && currentProduct != nil
-        && [[currentProduct id] intValue] > 0
+        && _currentProduct != nil
+        && [[_currentProduct id] intValue] > 0
         && [productName length] != 0
         && productPrice > 0) {
         
-        if (nil == selectedItem) {
+        if (nil == _selectedItem) {
             
             isNewItem = YES;
-            selectedItem = (BillItem *)[NSEntityDescription insertNewObjectForEntityForName:@"BillItem"
-                                                                   inManagedObjectContext:[self context]];
+            _selectedItem = (BillItem *)[NSEntityDescription insertNewObjectForEntityForName:@"BillItem"
+                                                                   inManagedObjectContext:[self.query context]];
         }
         
-        [selectedItem setId:[NSNumber numberWithInt:idFromItemsCount]];
-        [selectedItem setProductId:[currentProduct id]];
-        [selectedItem setQuantity:quantity];
-        [selectedItem setProductName:productName];
-        [selectedItem setProductPrice:productPrice];
+        [_selectedItem setId:[NSNumber numberWithInt:idFromItemsCount]];
+        [_selectedItem setProductId:[_currentProduct id]];
+        [_selectedItem setQuantity:quantity];
+        [_selectedItem setProductName:productName];
+        [_selectedItem setProductPrice:productPrice];
         
         if (isNewItem) {
-            [self.currentBill addItemsObject:selectedItem];
+            [self.currentBill addItemsObject:_selectedItem];
         }
 
-        NSNumber *totalPrice = [[NSNumber alloc] initWithDouble:[[self.currentBill totalPrice] doubleValue] + ([[currentProduct price] doubleValue] * [quantity intValue])];
+        NSNumber *totalPrice = [[NSNumber alloc] initWithDouble:[[self.currentBill totalPrice] doubleValue] + ([[_currentProduct price] doubleValue] * [quantity intValue])];
         [self.currentBill setTotalPrice: totalPrice];
         [self _setTotalPriceLabel:[self.currentBill totalPrice]];        
         
@@ -113,7 +120,7 @@
                        
         [self.billTableView reloadData];
         
-        selectedItem = nil;
+        _selectedItem = nil;
         
     } else {
         
@@ -162,7 +169,7 @@ replacementString:(NSString *)string {
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    NSInteger rows = [billItems count];
+    NSInteger rows = [_billItems count];
     // NSLog(@"No. of rows: %d", rows);
     
     if (0 == rows) {
@@ -182,7 +189,7 @@ replacementString:(NSString *)string {
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"BillItemCell"];    
         
-    NSMutableArray *items = billItems;
+    NSMutableArray *items = _billItems;
     
     if (items != nil && [items count] > 0) {
 
@@ -213,11 +220,11 @@ replacementString:(NSString *)string {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         [self.billTableView deleteRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath, nil] withRowAnimation:YES];
          
-        BillItem *item = [billItems objectAtIndex:[indexPath row]];
+        BillItem *item = [_billItems objectAtIndex:[indexPath row]];
         
         [[self.currentBill items] removeObject:item];
         
-        [billItems removeObjectAtIndex:[indexPath row]];
+        [_billItems removeObjectAtIndex:[indexPath row]];
        
         
         if ([[self.currentBill items] count] == 0) {
@@ -239,11 +246,11 @@ replacementString:(NSString *)string {
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    selectedItem = [billItems objectAtIndex:[indexPath row]];
+    _selectedItem = [_billItems objectAtIndex:[indexPath row]];
     
-    if (nil != selectedItem) {
+    if (nil != _selectedItem) {
         
-        [self _setProductLabelAndShowQuantityWithName:[selectedItem productName] andPrice:[selectedItem productPrice] isNewItem:NO];
+        [self _setProductLabelAndShowQuantityWithName:[_selectedItem productName] andPrice:[_selectedItem productPrice] isNewItem:NO];
     }
 }
 
@@ -291,35 +298,35 @@ replacementString:(NSString *)string {
     [self _animateBottomViewOnYAxis:46];
     [self.productCodeTextField becomeFirstResponder];
     
-    numberToolbar.items = [NSArray arrayWithObjects:
+    _numberToolbar.items = [NSArray arrayWithObjects:
                            [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil],
                            [[UIBarButtonItem alloc]initWithTitle:NSLocalizedString(@"Next", nil) style:UIBarButtonItemStyleDone target:self action:@selector(nextNumberPad)],
                            nil];
 }
 
--(void)_cleanAndReloadBillItemsForTableView:(NSSet *)items {
+- (void)_cleanAndReloadBillItemsForTableView:(NSSet *)items {
     
     NSArray *sortDescriptors = [NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"id" ascending:NO]];
     NSArray *sorteditems = [[[self.currentBill items] allObjects] sortedArrayUsingDescriptors:sortDescriptors];
-    billItems = [NSMutableArray arrayWithArray:sorteditems];
+    _billItems = [NSMutableArray arrayWithArray:sorteditems];
 }
 
--(void)_clearAndSetBillItemInstance {
+- (void)_clearAndSetBillItemInstance {
     
     [self.currentBill setTotalPrice:@0.00];
     [self.currentBill setItems:[[NSMutableSet alloc] init]];
-    [billItems removeAllObjects];
+    [_billItems removeAllObjects];
     [self.billTableView reloadData];
     [self _disableSaveAndDeleteButton];
 }
 
--(void)_disableSaveAndDeleteButton {
+- (void)_disableSaveAndDeleteButton {
     
     [self.saveButton setEnabled:NO];
     [self.deleteBillButton setEnabled:NO];
 }
 
--(void)_setProductLabelAndShowQuantityWithName:(NSString *)name
+- (void)_setProductLabelAndShowQuantityWithName:(NSString *)name
                                       andPrice:(NSNumber *)price
                                      isNewItem:(BOOL)isNewItem {
     
@@ -332,52 +339,19 @@ replacementString:(NSString *)string {
     NSString *saveText;
                                           
     if (isNewItem) {
+        
         saveText = NSLocalizedString(@"Add", nil);
+    
     } else {
+      
         saveText = NSLocalizedString(@"Change", nil);
     }
     
-    numberToolbar.items = [NSArray arrayWithObjects:
+    _numberToolbar.items = [NSArray arrayWithObjects:
                            [[UIBarButtonItem alloc]initWithTitle:NSLocalizedString(@"Cancel", nil) style:UIBarButtonItemStyleBordered target:self action:@selector(cancelNumberPad)],
                            [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil],
                            [[UIBarButtonItem alloc]initWithTitle:saveText style:UIBarButtonItemStyleDone target:self action:@selector(addNumberPad)],
                            nil];
 }
 
-#pragma mark - Core Data Queries private methods
-
--(NSArray *)_getAllProducts {
-    
-    NSFetchRequest *request = [[self objectModel] fetchRequestTemplateForName:@"GetAllProducts"];
-    
-    NSError *error = nil;
-    NSArray *result = [[self context] executeFetchRequest:request error:&error];
-    
-    if (nil == result) {
-        NSLog(@"Huston, we have a problem!\n%@", error);
-        
-        // TODO: Should add message alert of some kind!
-    }
-    
-    return result;
-}
-
--(Product *)_getProductById:(NSNumber *)productId {
-    
-    NSDictionary *var = [NSDictionary dictionaryWithObject:productId forKey:@"PRODUCT_ID"];
-    NSFetchRequest *request = [[self objectModel] fetchRequestFromTemplateWithName:@"GetProductById" substitutionVariables:var];
-    
-    NSError *error = nil;
-    NSArray *result = [[self context] executeFetchRequest:request error:&error];
-    
-    if (nil == result) {
-        NSLog(@"Huston, we have a problem!\n%@", error);
-        
-        // TODO: Should add message alert of some kind!
-    }
-    
-    if (0 == [result count]) { return nil; }
-    
-    return (Product *)result[0];
-}
 @end

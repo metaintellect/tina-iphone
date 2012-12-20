@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MIQuery.h"
 #import "Bill.h"
 
 
@@ -27,13 +28,11 @@
 
 @property (weak, nonatomic) IBOutlet UITableView *billTableView;
 
-@property (strong, nonatomic) NSManagedObjectContext *context;
-
-@property (strong, nonatomic) NSManagedObjectModel *objectModel;
+@property (weak, nonatomic) IBOutlet UIButton *deleteBillButton;
 
 @property (strong, nonatomic) Bill *currentBill;
 
-@property (weak, nonatomic) IBOutlet UIButton *deleteBillButton;
+@property (strong, nonatomic) MIQuery *query;
 
 - (IBAction)save:(id)sender;
 
