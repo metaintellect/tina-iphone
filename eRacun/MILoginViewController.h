@@ -25,4 +25,6 @@
 
 - (IBAction)login:(id)sender;
 
+- (IBAction)openInfoPage:(id)sender;
+
 @end

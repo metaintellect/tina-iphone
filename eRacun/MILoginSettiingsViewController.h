@@ -14,4 +14,6 @@
 
 - (IBAction)Save:(id)sender;
 
+- (IBAction)close:(id)sender;
+
 @end

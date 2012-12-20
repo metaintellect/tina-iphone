@@ -35,7 +35,7 @@
     if ([MIHelper validUrl:customDomainURL]) {
        
         [MIHelper setCustomDomainURL:customDomainURL];
-        [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+        [self _dismissView];
     }
     else
     {
@@ -44,6 +44,11 @@
                      withCancelButtonTitle:NSLocalizedString(@"OK", nil)];
         [self _resetCustomDomainURLTextFiled];
     }
+}
+
+- (IBAction)close:(id)sender {
+    
+    [self _dismissView];
 }
 
 #pragma mark - Private methods
@@ -66,5 +71,10 @@
         
     [self.customDomainURLTextField becomeFirstResponder];
     [self.customDomainURLTextField setText:@"http://"];
+}
+
+- (void)_dismissView {
+    
+    [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
 }
 @end

@@ -16,6 +16,8 @@
 
 #define kCustomDomainURL @"customDomainURL"
 
+#define kMoreInfoPage @"http://mali-zeleni.hr"
+
 + (NSString*)getAuthToken;
 
 + (void)setAuthToken:(NSString*)token;

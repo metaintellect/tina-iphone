@@ -28,16 +28,14 @@
     [super viewDidLoad];
     self.query = [[MIQuery alloc] init];
     [self.usernameTextFileld becomeFirstResponder];
-    NSString *url = [MIHelper getCustomDomainURL];
     
-    if (![MIHelper validUrl:url]) {
+    if (![MIHelper validUrl:[MIHelper getCustomDomainURL]]) {
                 
         [MIHelper showAlerMessageWithTitle:NSLocalizedString(@"Custom Domain URL missing!", nil)
                                withMessage:NSLocalizedString(@"Please use info button to set Custom Domain URL.", nil)
-                     withCancelButtonTitle:NSLocalizedString(@"OK", nil)];        
-    }
+                     withCancelButtonTitle:NSLocalizedString(@"OK", nil)];
+    }        
 }
-
 
 #pragma mark - Action methods
 
@@ -45,6 +43,19 @@
     
     [self _validateAndRedirect:sender];
 }
+
+- (IBAction)openInfoPage:(id)sender {
+    
+    NSURL *url = [NSURL URLWithString:kMoreInfoPage];
+    [[UIApplication sharedApplication] openURL:url];
+}
+
+
+//- (IBAction)createAccount:(id)sender {
+//    
+//    NSString *phoneNumber = [@"tel:" stringByAppendingString:@"0959108324"];
+//    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:phoneNumber]];
+//}
 
 
 #pragma mark - Text Field Delegate methods
