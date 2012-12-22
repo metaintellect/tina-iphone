@@ -14,4 +14,10 @@
                                        withJSONValues:(NSDictionary *)jsonValues
                                                 error:(NSError *)error;
 
++ (NSMutableURLRequest *)constructRequestForApiAction:(NSString *)apiActionURL
+                                                error:(NSError *)error;
+
++ (BOOL)callLoginApiAndPersistedAccountForData:(NSData*)data error:(NSError*)error;
+
++ (BOOL)callProductsApiAndSetProductsArrayForData:(NSData *)data error:(NSError *)error;
 @end

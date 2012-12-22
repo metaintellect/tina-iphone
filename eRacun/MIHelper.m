@@ -16,13 +16,13 @@
 
 + (NSString*)getAuthToken {
     
-    NSLog(@"GET || Key: %@ :: Token: %@", kAuthToken, [[NSUserDefaults standardUserDefaults] stringForKey:kAuthToken]);
+    // NSLog(@"GET || Key: %@ :: Token: %@", kAuthToken, [[NSUserDefaults standardUserDefaults] stringForKey:kAuthToken]);
     return [[NSUserDefaults standardUserDefaults] objectForKey:kAuthToken];
 }
 
 + (void)setAuthToken:(NSString*)token {
     
-    NSLog(@"SET || Key: %@ :: Token: %@", kAuthToken, token);
+    // NSLog(@"SET || Key: %@ :: Token: %@", kAuthToken, token);
     [[NSUserDefaults standardUserDefaults] setObject:token forKey:kAuthToken];
 }
 

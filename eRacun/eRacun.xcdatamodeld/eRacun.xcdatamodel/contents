@@ -24,7 +24,8 @@
         <attribute name="name" optional="YES" attributeType="String" indexed="YES" syncable="YES"/>
         <attribute name="price" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
     </entity>
-    <fetchRequest name="GetAccountByToken" entity="Account" predicateString="token == $TOKEN"/>
+    <fetchRequest name="GetAccountByToken" entity="Account" predicateString="token == $AUTH_TOKEN"/>
+    <fetchRequest name="GetAccountsByUserId" entity="Account" predicateString="token == $USER_ID"/>
     <fetchRequest name="GetAllAccounts" entity="Account"/>
     <fetchRequest name="GetAllProducts" entity="Product" predicateString="TRUEPREDICATE"/>
     <fetchRequest name="GetProductById" entity="Product" predicateString="id == $PRODUCT_ID"/>

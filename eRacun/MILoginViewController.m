@@ -132,50 +132,26 @@
                            completionHandler:^(NSURLResponse *response,
                                                NSData *data,
                                                NSError *error) {
-                               NSLog(@"%@", [[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding]);
-                [self _callLoginApiAndPersistAccountForData:data error:error];
+                               
+                if ([MIRestJSON callLoginApiAndPersistedAccountForData:data error:error]) {
+                                   
+                    [self performSelectorOnMainThread:@selector(_performAuthenticatedLoginSegue)
+                                           withObject:nil
+                                        waitUntilDone:YES];
+                } else {
+                    
+                    [MIHelper showAlerMessageWithTitle:NSLocalizedString(@"Error", nil)
+                                           withMessage:NSLocalizedString(@"Username and/or password are incorrect", nil)
+                                 withCancelButtonTitle:NSLocalizedString(@"OK", nil)];
+                    
+                    [self.passwordTextField setText:@""];
+                    [self.passwordTextField becomeFirstResponder];
+                }
+                               
+                [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
        }];            
 }
 
-
-- (void)_callLoginApiAndPersistAccountForData:(NSData*)data error:(NSError*)error {
-    
-    NSLog(@"%@", [[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding]);
-    
-    if ([data length] > 0 && error == nil) {
-        
-        Account *account = (Account *)[NSEntityDescription insertNewObjectForEntityForName:@"Account"
-                                                                    inManagedObjectContext:[self.query context]];
-        
-        NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
-        
-        account.id = [NSNumber numberWithInt:[(NSString *)[json objectForKey:@"userId"] intValue]];
-        account.fullName = (NSString *)[json objectForKey:@"fullName"];
-        account.cashRegister = (NSString *)[json objectForKey:@"cashRegister"];
-        account.cashRegisterId = [NSNumber numberWithInt:[(NSString *)[json objectForKey:@"cashRegisterId"] intValue]];
-        account.token = (NSString *)[json objectForKey:@"token"];
-        
-        [MIHelper setAuthToken:account.token];
-        
-        [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
-        
-        if ([self.query saveedAccountFromJSON:json]) {
-                        
-            [self performSelectorOnMainThread:@selector(_performAuthenticatedLoginSegue)
-                                   withObject:nil
-                                waitUntilDone:YES];
-            
-        } else {
-            
-            [MIHelper showAlerMessageWithTitle:NSLocalizedString(@"Error", nil)
-                                   withMessage:NSLocalizedString(@"Username and/or password are incorrect", nil)
-                         withCancelButtonTitle:NSLocalizedString(@"OK", nil)];
-            
-            [self.passwordTextField setText:@""];
-            [self.passwordTextField becomeFirstResponder];
-        }
-    }    
-}
 
 - (void)_performAuthenticatedLoginSegue
 {

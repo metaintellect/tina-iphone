@@ -18,11 +18,11 @@
 
 #define kMoreInfoPage @"http://mali-zeleni.hr"
 
-+ (NSString*)getAuthToken;
++ (NSString *)getAuthToken;
 
-+ (void)setAuthToken:(NSString*)token;
++ (void)setAuthToken:(NSString *)token;
 
-+ (NSString*)getCustomDomainURL;
++ (NSString *)getCustomDomainURL;
 
 + (void)setCustomDomainURL:(NSString*)customDomainURL;
 

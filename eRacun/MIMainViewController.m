@@ -24,6 +24,7 @@
     BillItem * _selectedItem;
     UIToolbar * _numberToolbar;
     NSMutableArray * _billItems;
+    NSString *_authToken;
 }
 
 
@@ -32,16 +33,21 @@
 - (void)viewDidLoad {
     
     [super viewDidLoad];
+    _authToken = [MIHelper getAuthToken];
     
-    if (nil == [MIHelper getAuthToken]) {
+    self.query = [[MIQuery alloc] init];
+    
+    if (nil == _authToken) {
         
         [self performSegueWithIdentifier:@"AuthSegue" sender:self];
         [super viewWillAppear:NO];
+    
+    } else {
+        
+        [self _checkIfAnyProductsAndGetFromServer];
     }
     
-    self.query = [[MIQuery alloc] init];
-    [self _animateBottomViewOnYAxis:46];	
-    _products = [self.query getAllProducts];
+    [self _animateBottomViewOnYAxis:46];	    
 
     self.currentBill = (Bill *)[NSEntityDescription insertNewObjectForEntityForName:@"Bill"
                                                              inManagedObjectContext:[self.query context]];
@@ -60,6 +66,51 @@
     self.quantityTextField.inputAccessoryView = _numberToolbar;
 }
 
+- (void)_checkIfAnyProductsAndGetFromServer {
+    
+    _products = [self.query getAllProducts];
+    
+    if (nil == _products) {
+        
+        [MIHelper showAlerMessageWithTitle:@"No Products"
+                               withMessage:@"There are no products. Proucts will be syced with server!"
+                     withCancelButtonTitle:@"OK"];
+        
+        [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+        
+        NSError *error;
+        
+        Account *account = [self.query getAccountByToken:_authToken];
+        
+        NSString *url = [NSString stringWithFormat:@"products/%@/%@", account.id, _authToken];
+    
+        NSMutableURLRequest *request = [MIRestJSON constructRequestForApiAction:url error:error];
+        
+        NSOperationQueue *queue = [[NSOperationQueue alloc] init];
+        
+        [NSURLConnection sendAsynchronousRequest:request
+                                           queue:queue
+                               completionHandler:^(NSURLResponse *response,
+                                                   NSData *data,
+                                                   NSError *error) {
+                                   
+               if ([MIRestJSON callProductsApiAndSetProductsArrayForData:data error:error]) {
+                   
+                   [MIHelper showAlerMessageWithTitle:NSLocalizedString(@"Products Synced", nil)
+                                          withMessage:NSLocalizedString(@"Products are synced with server!", nil)
+                                withCancelButtonTitle:NSLocalizedString(@"OK", nil)];
+               } else {
+                   
+                   [MIHelper showAlerMessageWithTitle:NSLocalizedString(@"Error", nil)
+                                          withMessage:NSLocalizedString(@"Problem syncing Products from the server!", nil)
+                                withCancelButtonTitle:NSLocalizedString(@"OK", nil)];                                                                           
+               }
+               
+               [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+           }];
+    }
+}
+
 
 #pragma mark - Action methods
 
@@ -72,20 +123,21 @@
         _currentProduct = [self.query getProductById:productId];
         
         if (nil != _currentProduct) {
-            [self _setProductLabelAndShowQuantityWithName:[_currentProduct name] andPrice:[_currentProduct price] isNewItem:YES];
+            [self _setProductLabelAndShowQuantityWithName:[_currentProduct name]
+                                                 andPrice:[_currentProduct price] isNewItem:YES];
         }
     }
 }
 
-- (void)addNumberPad {
+- (void)addOrChangeNumberPad {
     
-    BOOL isNewItem = NO;
     NSUInteger idFromItemsCount = [[self.currentBill items] count] + 1;
     NSNumber *quantity = [NSNumber numberWithInt:[[self.quantityTextField text] intValue]];
     NSString *productName = allTrim([_currentProduct name]);
     NSNumber *productPrice = [_currentProduct price];
     
-    if (idFromItemsCount > 0 && [quantity intValue] > 0
+    if (idFromItemsCount > 0
+        && [quantity intValue] > 0
         && _currentProduct != nil
         && [[_currentProduct id] intValue] > 0
         && [productName length] != 0
@@ -93,23 +145,24 @@
         
         if (nil == _selectedItem) {
             
-            isNewItem = YES;
             _selectedItem = (BillItem *)[NSEntityDescription insertNewObjectForEntityForName:@"BillItem"
-                                                                   inManagedObjectContext:[self.query context]];
-        }
-        
-        [_selectedItem setId:[NSNumber numberWithInt:idFromItemsCount]];
-        [_selectedItem setProductId:[_currentProduct id]];
-        [_selectedItem setQuantity:quantity];
-        [_selectedItem setProductName:productName];
-        [_selectedItem setProductPrice:productPrice];
-        
-        if (isNewItem) {
+                                                                      inManagedObjectContext:[self.query context]];
+            
+            [_selectedItem setId:[NSNumber numberWithInt:idFromItemsCount]];
+            [_selectedItem setProductId:[_currentProduct id]];
+            [_selectedItem setProductName:productName];
+            [_selectedItem setProductPrice:productPrice];
+            [_selectedItem setQuantity:quantity];
+            
             [self.currentBill addItemsObject:_selectedItem];
+            
+        } else {
+            
+            [_selectedItem setQuantity:quantity];
         }
+                
 
-        NSNumber *totalPrice = [[NSNumber alloc] initWithDouble:[[self.currentBill totalPrice] doubleValue] + ([[_currentProduct price] doubleValue] * [quantity intValue])];
-        [self.currentBill setTotalPrice: totalPrice];
+        [self.currentBill setTotalPrice: [self _recalculateTotalPrice]];
         [self _setTotalPriceLabel:[self.currentBill totalPrice]];        
         
         [self _showAndFocusProductCode];
@@ -145,19 +198,6 @@
 #pragma mark - Text Field Delegate methods
 
 - (BOOL)textFieldShouldClear:(UITextField *)textField {
-    
-    return YES;
-}
-
-- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range
-replacementString:(NSString *)string {
-    
-    // NSLog(@"tag: %@", [self.quantityTextField text]);
-    
-    if ([[self.quantityTextField text] length] != 0) {
-        
-        //[self.addButton setEnabled:YES];
-    }
     
     return YES;
 }
@@ -231,8 +271,7 @@ replacementString:(NSString *)string {
             
         } else {
 
-            NSNumber *totalPrice = [[NSNumber alloc] initWithDouble:[[self.currentBill totalPrice] doubleValue] - ([[item productPrice] doubleValue] * [item.quantity intValue])];
-            [self.currentBill setTotalPrice:totalPrice];
+            [self.currentBill setTotalPrice:[self _recalculateTotalPrice]];
         }
         
         [self _setTotalPriceLabel:self.currentBill.totalPrice];
@@ -248,7 +287,9 @@ replacementString:(NSString *)string {
     
     if (nil != _selectedItem) {
         
-        [self _setProductLabelAndShowQuantityWithName:[_selectedItem productName] andPrice:[_selectedItem productPrice] isNewItem:NO];
+        [self _setProductLabelAndShowQuantityWithName:[_selectedItem productName]
+                                             andPrice:[_selectedItem productPrice]
+                                            isNewItem:NO];
     }
 }
 
@@ -278,6 +319,24 @@ replacementString:(NSString *)string {
      
     NSString *totalString = NSLocalizedString(@"Total", nil);
     [self.totalLabel setText:[NSString stringWithFormat:@"%@: %@", totalString, [self _formatPriceNumber:totalPrice]]];
+}
+
+- (NSNumber *)_recalculateTotalPrice {
+    
+    double totalPrice = 0.0;
+    [self.currentBill setTotalPrice:@0.0];
+    
+    for (BillItem *item in [self.currentBill items]) {
+               
+//        NSLog(@"Result before: %.2lf", totalPrice);
+//         NSLog(@"Product: %@ :: Price: %@ :: Quantity: %@", item.productName, item.productPrice, item.quantity);
+        totalPrice += ([[item productPrice] doubleValue] * [[item quantity] intValue]);
+    }    
+    
+    NSNumber *result = [NSNumber numberWithDouble:totalPrice];
+    
+    [self.currentBill setTotalPrice:result];
+    return result;
 }
 
 -(NSString *)_formatPriceNumber:(NSNumber*)price {
@@ -328,6 +387,8 @@ replacementString:(NSString *)string {
                                       andPrice:(NSNumber *)price
                                      isNewItem:(BOOL)isNewItem {
     
+    name = [name substringToIndex: MIN(20, [name length])];
+    
     [self.productLabel setText:[NSString stringWithFormat:@"%@ %@", name, [self _formatPriceNumber:price]]];
     [self.productCodeTextField setHidden:YES];
     [self.productLabel setHidden:NO];
@@ -348,7 +409,7 @@ replacementString:(NSString *)string {
     _numberToolbar.items = [NSArray arrayWithObjects:
                            [[UIBarButtonItem alloc]initWithTitle:NSLocalizedString(@"Cancel", nil) style:UIBarButtonItemStyleBordered target:self action:@selector(cancelNumberPad)],
                            [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil],
-                           [[UIBarButtonItem alloc]initWithTitle:saveText style:UIBarButtonItemStyleDone target:self action:@selector(addNumberPad)],
+                           [[UIBarButtonItem alloc]initWithTitle:saveText style:UIBarButtonItemStyleDone target:self action:@selector(addOrChangeNumberPad)],
                            nil];
 }
 

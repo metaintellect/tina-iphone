@@ -17,10 +17,14 @@
 @property (strong, nonatomic) NSManagedObjectModel *objectModel;
 
 
-- (BOOL)saveedAccountFromJSON:(NSDictionary*)json;
+- (BOOL)savedAccountFromJSON:(NSDictionary*)json;
 
 - (NSArray *)getAllProducts;
 
 - (Product *)getProductById:(NSNumber *)productId;
+
+- (NSArray *)getAccountByUserId:(NSNumber *)userId;
+
+- (Account *)getAccountByToken:(NSString *)authToken;
 
 @end

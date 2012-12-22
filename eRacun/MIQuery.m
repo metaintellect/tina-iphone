@@ -32,7 +32,7 @@
 
 #pragma mark - Command methods
 
-- (BOOL)saveedAccountFromJSON:(NSDictionary*)json {
+- (BOOL)savedAccountFromJSON:(NSDictionary*)json {
     
     if (nil == json) { return NO; }
     
@@ -44,10 +44,10 @@
     account.cashRegister = (NSString *)[json objectForKey:@"cashRegister"];
     account.cashRegisterId = [NSNumber numberWithInt:[(NSString *)[json objectForKey:@"cashRegisterId"] intValue]];
     account.token = (NSString *)[json objectForKey:@"token"];
-    
+            
     [MIHelper setAuthToken:account.token];
     
-    return [[self context] save:error] ?  YES : NO;
+    return [self.context save:error] ?  YES : NO;
 }
 
 
@@ -55,14 +55,9 @@
 
 - (NSArray *)getAllProducts {
     
-    NSFetchRequest *request = [[self objectModel] fetchRequestTemplateForName:@"GetAllProducts"];
+    NSFetchRequest *request = [self.objectModel fetchRequestTemplateForName:@"GetAllProducts"];
     
-    NSArray *result = [[self context] executeFetchRequest:request error:error];
-    
-    if (nil == result) {
-        
-        // TODO: Should add message alert of some kind!
-    }
+    NSArray *result = [self.context executeFetchRequest:request error:error];    
     
     return result;
 }
@@ -70,9 +65,10 @@
 - (Product *)getProductById:(NSNumber *)productId {
     
     NSDictionary *var = [NSDictionary dictionaryWithObject:productId forKey:@"PRODUCT_ID"];
-    NSFetchRequest *request = [[self objectModel] fetchRequestFromTemplateWithName:@"GetProductById" substitutionVariables:var];
+    NSFetchRequest *request = [self.objectModel fetchRequestFromTemplateWithName:@"GetProductById"
+                                                           substitutionVariables:var];
     
-    NSArray *result = [[self context] executeFetchRequest:request error:error];
+    NSArray *result = [self.context executeFetchRequest:request error:error];
     
     if (nil == result) {
         
@@ -82,6 +78,50 @@
     if (0 == [result count]) { return nil; }
     
     return (Product *)result[0];
+}
+
+- (NSArray *)getAccountByUserId:(NSNumber *)userId {
+    
+    NSDictionary *var = [NSDictionary dictionaryWithObject:userId forKey:@"USER_ID"];
+    NSFetchRequest *request = [self.objectModel fetchRequestFromTemplateWithName:@"GetAccountsByUserId"
+                                                           substitutionVariables:var];
+    
+    NSArray *result = [self.context executeFetchRequest:request error:error];
+    
+    if (nil == result) {
+        
+        // TODO: Should add message alert of some kind!
+    }
+    
+    if (0 == [result count]) { return nil; }
+    
+    return result;
+}
+
+- (Account *)getAccountByToken:(NSString *)authToken {
+    
+    NSDictionary *var = [NSDictionary dictionaryWithObject:authToken forKey:@"AUTH_TOKEN"];
+    NSFetchRequest *request = [self.objectModel fetchRequestFromTemplateWithName:@"GetAccountByToken"
+                                                           substitutionVariables:var];
+    
+    NSArray *result = [self.context executeFetchRequest:request error:error];
+    
+    if (nil == result) {
+        
+        // TODO: Should add message alert of some kind!
+    }
+    
+    if (0 == [result count]) { return nil; }
+    
+    return (Account *)result[0];
+}
+
+- (void)_removeAllExistingAccountsForUser:(NSArray *)userAccounts {
+        
+    for (Account *account in userAccounts) {
+        
+        [self.context deleteObject:account];
+    }
 }
 
 @end
