@@ -75,7 +75,7 @@
         if ([managedObjectContext hasChanges] && ![managedObjectContext save:&error]) {
              // Replace this implementation with code to handle the error appropriately.
              // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development. 
-            NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+            // NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
             abort();
         } 
     }
@@ -147,7 +147,7 @@
          Lightweight migration will only work for a limited set of schema changes; consult "Core Data Model Versioning and Data Migration Programming Guide" for details.
          
          */
-        NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+        // NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
         abort();
     }    
     
@@ -174,41 +174,41 @@
 
 #pragma mark - Create Products dummy data
 
-- (void)_createProductsDummyData
-{
-    Product *kikiriki = (Product *)[NSEntityDescription insertNewObjectForEntityForName:@"Product"
-                                                                 inManagedObjectContext:[self managedObjectContext]];
-    [kikiriki setId:@1];
-    [kikiriki setName:@"Kikiriki kokice i zanimacije i svasta nosto"];
-    [kikiriki setPrice:@23.3];
-    
-    Product *medica = (Product *)[NSEntityDescription insertNewObjectForEntityForName:@"Product"
-                                                                 inManagedObjectContext:[self managedObjectContext]];
-    [medica setId:@2];
-    [medica setName:@"Medica"];
-    [medica setPrice:@66.66];
-    
-    NSError *error = nil;
-    
-    if (! [[self managedObjectContext] save:&error]) {
-        NSLog(@"Huston, we have a problem!\n%@", error);
-    }
-}
+//- (void)_createProductsDummyData
+//{
+//    Product *kikiriki = (Product *)[NSEntityDescription insertNewObjectForEntityForName:@"Product"
+//                                                                 inManagedObjectContext:[self managedObjectContext]];
+//    [kikiriki setId:@1];
+//    [kikiriki setName:@"Kikiriki kokice i zanimacije i svasta nosto"];
+//    [kikiriki setPrice:@23.3];
+//    
+//    Product *medica = (Product *)[NSEntityDescription insertNewObjectForEntityForName:@"Product"
+//                                                                 inManagedObjectContext:[self managedObjectContext]];
+//    [medica setId:@2];
+//    [medica setName:@"Medica"];
+//    [medica setPrice:@66.66];
+//    
+//    NSError *error = nil;
+//    
+//    if (! [[self managedObjectContext] save:&error]) {
+//        NSLog(@"Huston, we have a problem!\n%@", error);
+//    }
+//}
 
-- (void)_fetchAllProducts
-{
-    NSFetchRequest *request = [[self managedObjectModel] fetchRequestTemplateForName:@"GetAllProducts"];
-    
-    NSError *error = nil;
-    NSArray *fetchedObjects = [self.managedObjectContext executeFetchRequest:request error:&error];
-    
-    if (fetchedObjects == nil) {
-        NSLog(@"Huston, we have a problem!\n%@", error);
-    }
-    
-    for (Product *product in fetchedObjects) {
-        NSLog(@"Name: %@", [product name]);
-    }
-}
+//- (void)_fetchAllProducts
+//{
+//    NSFetchRequest *request = [[self managedObjectModel] fetchRequestTemplateForName:@"GetAllProducts"];
+//    
+//    NSError *error = nil;
+//    NSArray *fetchedObjects = [self.managedObjectContext executeFetchRequest:request error:&error];
+//    
+//    if (fetchedObjects == nil) {
+//        NSLog(@"Huston, we have a problem!\n%@", error);
+//    }
+//    
+//    for (Product *product in fetchedObjects) {
+//        NSLog(@"Name: %@", [product name]);
+//    }
+//}
 
 @end

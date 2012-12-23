@@ -9,12 +9,17 @@
 #import "MISettingsViewController.h"
 #import "MIHelper.h"
 #import "MILoginViewController.h"
+#import "MIRestJSON.h"
+
 
 @interface MISettingsViewController ()
 
 @end
 
-@implementation MISettingsViewController
+@implementation MISettingsViewController {
+    
+    MIQuery *query;
+}
 
 
 #pragma mark - View Controller base methods
@@ -22,7 +27,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
+    query = [[MIQuery alloc] init];
     self.settingsItems = [self _createSettingItems];
 }
 
@@ -83,12 +88,17 @@
 
 - (void)_syncProductsFromServer {
     
-    NSLog(@"Doing syncing");
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+    
+    [query removeAllProducts];
+
+    
+    [MIRestJSON callProductsApiAndSetProductsArrayForToken:[MIHelper getAuthToken]];
 }
 
 - (void)_logOutFromApplication {
     
-    [MIHelper setAuthToken:nil];
+  //  [MIHelper setAuthToken:nil AndUserId:nil AndCashRegisterId:nil];
     
     //[MIHelper getAuthToken];
     MILoginViewController *loginController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil]

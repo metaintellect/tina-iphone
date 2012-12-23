@@ -32,7 +32,7 @@
     [request setValue:[NSString stringWithFormat:@"%d", [data length]] forHTTPHeaderField:@"Content-Length"];
     [request setHTTPBody: data];
        
-    NSLog(@"JSON data: %@", [[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding]);
+     NSLog(@"JSON data: %@", [[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding]);
     
     return request;
 }
@@ -51,22 +51,11 @@
     
     // NSLog(@"%@", [[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding]);
     
-    if ([data length] > 0 && error == nil) {
-        
-        Account *account = (Account *)[NSEntityDescription insertNewObjectForEntityForName:@"Account"
-                                                                    inManagedObjectContext:[query context]];
-        
-        NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
-        
-        account.id = [NSNumber numberWithInt:[(NSString *)[json objectForKey:@"userId"] intValue]];
-        account.fullName = (NSString *)[json objectForKey:@"fullName"];
-        account.cashRegister = (NSString *)[json objectForKey:@"cashRegister"];
-        account.cashRegisterId = [NSNumber numberWithInt:[(NSString *)[json objectForKey:@"cashRegisterId"] intValue]];
-        account.token = (NSString *)[json objectForKey:@"token"];
-        
-        [MIHelper setAuthToken:account.token];
+    if ((nil != data || [data length] > 0)
+        && error == nil) {
                 
-        
+        NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
+                                
         if ([query savedAccountFromJSON:json]) {
             
             return YES;
@@ -80,35 +69,102 @@
     return NO;
 }
 
-+ (BOOL)callProductsApiAndSetProductsArrayForData:(NSData *)data error:(NSError *)error {
++ (void)callProductsApiAndSetProductsArrayForToken:(NSString *)authToken {
     
-    // NSLog(@"%@", [[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding]);
-    
+    NSError *error = nil;
     MIQuery *query = [[MIQuery alloc] init];
-    NSArray *json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
     
-    if ([data length] > 0 && error == nil) {
-        
-        NSMutableArray *result;
-        
-        for (NSDictionary *item in json) {
-            
-            Product *product = (Product *)[NSEntityDescription insertNewObjectForEntityForName:@"Product"
-                                                                        inManagedObjectContext:[query context]];
-            
-            // NSLog(@"%@", item);
-            
-            product.id = [NSNumber numberWithInt:[(NSString *)[item objectForKey:@"id"] intValue]];
-            product.name = (NSString *)[item objectForKey:@"name"];
-            product.price = [NSNumber numberWithInt:[(NSString *)[item objectForKey:@"price"] intValue]];
-            
-            [result addObject:product];
-        }
-        
-        return [[query context] save:&error] ?  YES : NO;
-    }
+    NSString *url = [NSString stringWithFormat:@"products/%@/%@", [MIHelper getCurrentUserid], [MIHelper getAuthToken]];
+    
+    NSMutableURLRequest *request = [MIRestJSON constructRequestForApiAction:url error:error];
+    
+    NSOperationQueue *queue = [[NSOperationQueue alloc] init];
+    
+    [NSURLConnection sendAsynchronousRequest:request
+                                       queue:queue
+                           completionHandler:^(NSURLResponse *response,
+                                               NSData *data,
+                                               NSError *error) {
+                               
+           if ((nil != data || [data length] > 0)
+               && error == nil) {
+               
+               NSArray *json = [NSJSONSerialization JSONObjectWithData:data
+                                                               options:kNilOptions
+                                                                 error:&error];
+               
+               NSMutableArray *result;
+               
+               for (NSDictionary *item in json) {
+                   
+                   Product *product = (Product *)[NSEntityDescription insertNewObjectForEntityForName:@"Product"
+                                                                               inManagedObjectContext:[query context]];
+                   
+                   // NSLog(@"%@", item);
+                   
+                   product.id = [NSNumber numberWithInt:[(NSString *)[item objectForKey:@"id"] intValue]];
+                   product.name = (NSString *)[item objectForKey:@"name"];
+                   product.price = [NSNumber numberWithInt:[(NSString *)[item objectForKey:@"price"] intValue]];
+                   
+                   [result addObject:product];
+               }
+               
+               if ([[query context] save:&error]) {
+                   
+                   [self performSelectorOnMainThread:@selector(_showProductsSyncedAlertMessage)
+                                          withObject:nil
+                                       waitUntilDone:YES];
+               } else {
+                   
+                   [self performSelectorOnMainThread:@selector(_showProductsNotSyncedAlertMessage)
+                                          withObject:nil
+                                       waitUntilDone:YES];
+               }                                   
+           }
+           
+           [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+       }];
+    
+}
 
-    return NO;
++ (void)callInvoicesApiWithJSONData:(NSDictionary *)json forToken:(NSString *)authToken {
+    
+    NSError *error = nil;
+    
+    NSString *url = [NSString stringWithFormat:@"invoices/%@/%@/%@", [MIHelper getCurrentUserid],
+                     [MIHelper getCurrentUserCashRegisterId], [MIHelper getAuthToken]];
+    
+    NSMutableURLRequest *request = [MIRestJSON constructRequestForApiAction:url
+                                                             withJSONValues:json
+                                                                      error:error];
+    
+    NSOperationQueue *queue = [[NSOperationQueue alloc] init];
+    
+    [NSURLConnection sendAsynchronousRequest:request
+                                       queue:queue
+                           completionHandler:^(NSURLResponse *response,
+                                               NSData *data,
+                                               NSError *error) {
+                               
+                               NSLog(@"%@", [[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding]);
+                               
+                               if ((nil != data || [data length] > 0)
+                                   && error == nil) {
+                                   
+                                   [self performSelectorOnMainThread:@selector(_showBillSavedAlertMessage)
+                                                          withObject:nil
+                                                       waitUntilDone:YES];
+    
+                               } else {
+                                
+                                   [self performSelectorOnMainThread:@selector(_showBillNotSavedAlertMessage)
+                                                          withObject:nil
+                                                       waitUntilDone:YES];
+                               }
+                               
+                               [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+                           }];
+    
 }
 
 + (NSMutableURLRequest *)_createRequestForApiURL:(NSString *)apiActionURL {
@@ -128,5 +184,31 @@
     return request;
 }
 
-// + (Product *)_createProduct
++ (void)_showProductsSyncedAlertMessage {
+    
+    [MIHelper showAlerMessageWithTitle:NSLocalizedString(@"Products Synced", nil)
+                           withMessage:NSLocalizedString(@"Products are synced with server!", nil)
+                 withCancelButtonTitle:NSLocalizedString(@"OK", nil)];
+}
+
++ (void)_showProductsNotSyncedAlertMessage {
+    
+    [MIHelper showAlerMessageWithTitle:NSLocalizedString(@"Error", nil)
+                           withMessage:NSLocalizedString(@"Problem syncing Products from the server!", nil)
+                 withCancelButtonTitle:NSLocalizedString(@"OK", nil)];
+}
+
++ (void)_showBillSavedAlertMessage {
+    
+    [MIHelper showAlerMessageWithTitle:NSLocalizedString(@"Bill saved", nil)
+                           withMessage:NSLocalizedString(@"The bill is saved!", nil)
+                 withCancelButtonTitle:NSLocalizedString(@"OK", nil)];
+}
+
++ (void)_showBillNotSavedAlertMessage {
+    
+    [MIHelper showAlerMessageWithTitle:NSLocalizedString(@"Bill not saved", nil)
+                           withMessage:NSLocalizedString(@"The bill is not saved!", nil)
+                 withCancelButtonTitle:NSLocalizedString(@"OK", nil)];
+}
 @end

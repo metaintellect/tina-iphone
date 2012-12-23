@@ -14,13 +14,23 @@
 
 #define kAuthToken @"authToken"
 
+#define kCurrentUserId @"userid"
+
+#define kCurrentCashRegisterId @"cashRegisterId"
+
 #define kCustomDomainURL @"customDomainURL"
 
 #define kMoreInfoPage @"http://mali-zeleni.hr"
 
 + (NSString *)getAuthToken;
 
-+ (void)setAuthToken:(NSString *)token;
++ (NSNumber *)getCurrentUserid;
+
++ (NSNumber *)getCurrentUserCashRegisterId;
+
++ (void)setAuthToken:(NSString *)token
+           AndUserId:(NSNumber *)userid
+   AndCashRegisterId:(NSNumber *)cashRegisterId;
 
 + (NSString *)getCustomDomainURL;
 
@@ -31,5 +41,7 @@
             withCancelButtonTitle:(NSString*)cancelButtonTitle;
 
 + (BOOL)validUrl:(NSString *)candidate;
+
++ (NSString *)truncateString:(NSString *)candidate toNumberOfCharsWithThreeDots:(NSUInteger)truncateLength;
 
 @end

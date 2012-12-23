@@ -19,5 +19,8 @@
 
 + (BOOL)callLoginApiAndPersistedAccountForData:(NSData*)data error:(NSError*)error;
 
-+ (BOOL)callProductsApiAndSetProductsArrayForData:(NSData *)data error:(NSError *)error;
++ (void)callProductsApiAndSetProductsArrayForToken:(NSString *)authToken;
+
++ (void)callInvoicesApiWithJSONData:(NSDictionary *)json forToken:(NSString *)authToken;
+
 @end

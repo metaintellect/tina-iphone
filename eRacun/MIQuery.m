@@ -45,7 +45,17 @@
     account.cashRegisterId = [NSNumber numberWithInt:[(NSString *)[json objectForKey:@"cashRegisterId"] intValue]];
     account.token = (NSString *)[json objectForKey:@"token"];
             
-    [MIHelper setAuthToken:account.token];
+    [MIHelper setAuthToken:[account token] AndUserId:[account id] AndCashRegisterId:[account cashRegisterId]];
+    
+    return [self.context save:error] ?  YES : NO;
+}
+
+- (BOOL)removeAllProducts {
+        
+    for (Product *product in [self getAllProducts]) {
+        
+        [self.context deleteObject:product];
+    }
     
     return [self.context save:error] ?  YES : NO;
 }
@@ -53,11 +63,25 @@
 
 #pragma mark - Query methods
 
+- (NSUInteger)getProductsCount {
+    
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    [request setEntity:[NSEntityDescription entityForName:@"Product" inManagedObjectContext:self.context]];
+    
+    NSUInteger result = [self.context countForFetchRequest:request error:error];
+    
+    if (result == NSNotFound) {
+        // Handle error
+    }
+    
+    return result;
+}
+
 - (NSArray *)getAllProducts {
     
     NSFetchRequest *request = [self.objectModel fetchRequestTemplateForName:@"GetAllProducts"];
     
-    NSArray *result = [self.context executeFetchRequest:request error:error];    
+    NSArray *result = [self.context executeFetchRequest:request error:error];
     
     return result;
 }

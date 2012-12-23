@@ -19,7 +19,7 @@
 
 @implementation MIMainViewController {
     
-    NSArray * _products;
+    //NSArray * _products;
     Product * _currentProduct;
     BillItem * _selectedItem;
     UIToolbar * _numberToolbar;
@@ -40,7 +40,7 @@
     if (nil == _authToken) {
         
         [self performSegueWithIdentifier:@"AuthSegue" sender:self];
-        [super viewWillAppear:NO];
+        [super viewWillAppear:NO];   
     
     } else {
         
@@ -66,49 +66,9 @@
     self.quantityTextField.inputAccessoryView = _numberToolbar;
 }
 
-- (void)_checkIfAnyProductsAndGetFromServer {
+- (void)viewDidAppear:(BOOL)animated {
     
-    _products = [self.query getAllProducts];
-    
-    if (nil == _products) {
-        
-        [MIHelper showAlerMessageWithTitle:@"No Products"
-                               withMessage:@"There are no products. Proucts will be syced with server!"
-                     withCancelButtonTitle:@"OK"];
-        
-        [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
-        
-        NSError *error;
-        
-        Account *account = [self.query getAccountByToken:_authToken];
-        
-        NSString *url = [NSString stringWithFormat:@"products/%@/%@", account.id, _authToken];
-    
-        NSMutableURLRequest *request = [MIRestJSON constructRequestForApiAction:url error:error];
-        
-        NSOperationQueue *queue = [[NSOperationQueue alloc] init];
-        
-        [NSURLConnection sendAsynchronousRequest:request
-                                           queue:queue
-                               completionHandler:^(NSURLResponse *response,
-                                                   NSData *data,
-                                                   NSError *error) {
-                                   
-               if ([MIRestJSON callProductsApiAndSetProductsArrayForData:data error:error]) {
-                   
-                   [MIHelper showAlerMessageWithTitle:NSLocalizedString(@"Products Synced", nil)
-                                          withMessage:NSLocalizedString(@"Products are synced with server!", nil)
-                                withCancelButtonTitle:NSLocalizedString(@"OK", nil)];
-               } else {
-                   
-                   [MIHelper showAlerMessageWithTitle:NSLocalizedString(@"Error", nil)
-                                          withMessage:NSLocalizedString(@"Problem syncing Products from the server!", nil)
-                                withCancelButtonTitle:NSLocalizedString(@"OK", nil)];                                                                           
-               }
-               
-               [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
-           }];
-    }
+   
 }
 
 
@@ -361,6 +321,20 @@
                            nil];
 }
 
+- (void)_checkIfAnyProductsAndGetFromServer {
+    
+    if ([self.query getProductsCount] == 0) {
+        
+        [MIHelper showAlerMessageWithTitle:@"No Products"
+                               withMessage:@"There are no products. Proucts will be syced with server!"
+                     withCancelButtonTitle:@"OK"];
+        
+        [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+        
+        [MIRestJSON callProductsApiAndSetProductsArrayForToken:_authToken];
+    }
+}
+
 - (void)_cleanAndReloadBillItemsForTableView:(NSSet *)items {
     
     NSArray *sortDescriptors = [NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"id" ascending:NO]];
@@ -370,11 +344,53 @@
 
 - (void)_clearAndSetBillItemInstance {
     
+    [self _createJSONDataFromCurrentBill];
+    
     [self.currentBill setTotalPrice:@0.00];
     [self.currentBill setItems:[[NSMutableSet alloc] init]];
     [_billItems removeAllObjects];
     [self.billTableView reloadData];
     [self _disableSaveAndDeleteButton];
+}
+
+- (void)_createJSONDataFromCurrentBill {
+    
+    NSArray *items = [self _createBillItemsJSON];
+    
+    NSDictionary *jsonValues = @{
+        @"totalPrice" : [self.currentBill totalPrice],
+        @"items" : items
+    };
+    NSError *error = nil;
+    
+    NSData *data = [NSJSONSerialization dataWithJSONObject:jsonValues options:kNilOptions error:&error];
+    NSLog(@"%@", [[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding]);
+    
+    [MIRestJSON callInvoicesApiWithJSONData:jsonValues forToken:_authToken];
+}
+
+- (NSArray *)_createBillItemsJSON {
+    
+    NSMutableArray *result = [[NSMutableArray alloc] init];
+    
+    if (nil == [self.currentBill items]
+        || [[self.currentBill items] count] == 0) {
+        
+        return nil;
+    }
+    
+    for (BillItem *item in [self.currentBill items]) {
+        
+        [result addObject: @{
+            // @"id" : item.id,
+             @"productId" : item.productId,
+             @"quantity" : item.quantity
+         }];
+        
+        NSLog(@"item: %@", result[0]);
+    }
+    
+    return result;
 }
 
 - (void)_disableSaveAndDeleteButton {
@@ -385,9 +401,9 @@
 
 - (void)_setProductLabelAndShowQuantityWithName:(NSString *)name
                                       andPrice:(NSNumber *)price
-                                     isNewItem:(BOOL)isNewItem {
+                                     isNewItem:(BOOL)isNewItem {    
     
-    name = [name substringToIndex: MIN(20, [name length])];
+    name = [MIHelper truncateString:name toNumberOfCharsWithThreeDots:17];
     
     [self.productLabel setText:[NSString stringWithFormat:@"%@ %@", name, [self _formatPriceNumber:price]]];
     [self.productCodeTextField setHidden:YES];

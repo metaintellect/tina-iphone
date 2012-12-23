@@ -19,6 +19,10 @@
 
 - (BOOL)savedAccountFromJSON:(NSDictionary*)json;
 
+- (BOOL)removeAllProducts;
+
+- (NSUInteger)getProductsCount;
+
 - (NSArray *)getAllProducts;
 
 - (Product *)getProductById:(NSNumber *)productId;
