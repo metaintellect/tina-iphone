@@ -30,10 +30,10 @@
 		D46E41EC168206A0005614D1 /* MIHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = D46E41EB168206A0005614D1 /* MIHelper.m */; };
 		D47A37BF1678904C003743E1 /* delete.png in Resources */ = {isa = PBXBuildFile; fileRef = D47A37BE1678904C003743E1 /* delete.png */; };
 		D47A37C71678B9A5003743E1 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D47A37C51678B9A5003743E1 /* Localizable.strings */; };
-		D4846AE01679629F0038C085 /* eRacun.png in Resources */ = {isa = PBXBuildFile; fileRef = D4AD233A16708FBA00F21E96 /* eRacun.png */; };
+		D4846AE01679629F0038C085 /* Tina.png in Resources */ = {isa = PBXBuildFile; fileRef = D4AD233A16708FBA00F21E96 /* Tina.png */; };
 		D4846AE61679639B0038C085 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = D4846AE51679639B0038C085 /* Default.png */; };
 		D4846AE8167963AA0038C085 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D4846AE7167963AA0038C085 /* Default-568h@2x.png */; };
-		D4846AE9167963F40038C085 /* eRacun@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D4AD233C16708FC400F21E96 /* eRacun@2x.png */; };
+		D4846AE9167963F40038C085 /* Tina@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D4AD233C16708FC400F21E96 /* Tina@2x.png */; };
 		D4846AEF167967C50038C085 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D4846AEE167967C50038C085 /* Default@2x.png */; };
 		D489FA1516795B8A00A5E8D1 /* delete@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D489FA1416795B8A00A5E8D1 /* delete@2x.png */; };
 		D489FA1816795D8200A5E8D1 /* login_input_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D489FA1716795D8200A5E8D1 /* login_input_bg@2x.png */; };
@@ -56,15 +56,15 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		D46D3A9D166CF606000BB30B /* tina.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = tina.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		D46D3A9D166CF606000BB30B /* Tina.temp_caseinsensitive_rename.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tina.temp_caseinsensitive_rename.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D46D3AA1166CF606000BB30B /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		D46D3AA3166CF606000BB30B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		D46D3AA5166CF606000BB30B /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		D46D3AA7166CF606000BB30B /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
-		D46D3AAB166CF606000BB30B /* tina-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "tina-Info.plist"; sourceTree = "<group>"; };
+		D46D3AAB166CF606000BB30B /* Tina.temp_caseinsensitive_rename-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Tina.temp_caseinsensitive_rename-Info.plist"; sourceTree = "<group>"; };
 		D46D3AAD166CF606000BB30B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		D46D3AAF166CF606000BB30B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		D46D3AB1166CF606000BB30B /* tina-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "tina-Prefix.pch"; sourceTree = "<group>"; };
+		D46D3AB1166CF606000BB30B /* Tina.temp_caseinsensitive_rename-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Tina.temp_caseinsensitive_rename-Prefix.pch"; sourceTree = "<group>"; };
 		D46D3AB2166CF606000BB30B /* MIAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MIAppDelegate.h; sourceTree = "<group>"; };
 		D46D3AB3166CF606000BB30B /* MIAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MIAppDelegate.m; sourceTree = "<group>"; };
 		D46D3ABC166CF606000BB30B /* eRacun.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = eRacun.xcdatamodel; sourceTree = "<group>"; };
@@ -108,8 +108,8 @@
 		D4AD23311670653F00F21E96 /* InvoiceItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InvoiceItem.m; sourceTree = "<group>"; };
 		D4AD23331670653F00F21E96 /* Product.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Product.h; sourceTree = "<group>"; };
 		D4AD23341670653F00F21E96 /* Product.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Product.m; sourceTree = "<group>"; };
-		D4AD233A16708FBA00F21E96 /* eRacun.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = eRacun.png; sourceTree = "<group>"; };
-		D4AD233C16708FC400F21E96 /* eRacun@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "eRacun@2x.png"; sourceTree = "<group>"; };
+		D4AD233A16708FBA00F21E96 /* Tina.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Tina.png; sourceTree = "<group>"; };
+		D4AD233C16708FC400F21E96 /* Tina@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Tina@2x.png"; sourceTree = "<group>"; };
 		D4AD233E16708FEB00F21E96 /* cell_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cell_bg.png; sourceTree = "<group>"; };
 		D4AD233F16708FEB00F21E96 /* total_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = total_bg.png; sourceTree = "<group>"; };
 		D4AD234216709AA200F21E96 /* nav_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nav_bg.png; sourceTree = "<group>"; };
@@ -145,9 +145,9 @@
 				D4846AEE167967C50038C085 /* Default@2x.png */,
 				D4846AE7167963AA0038C085 /* Default-568h@2x.png */,
 				D4846AE51679639B0038C085 /* Default.png */,
-				D4AD233C16708FC400F21E96 /* eRacun@2x.png */,
-				D4AD233A16708FBA00F21E96 /* eRacun.png */,
-				D46D3AA9166CF606000BB30B /* tina */,
+				D4AD233C16708FC400F21E96 /* Tina@2x.png */,
+				D4AD233A16708FBA00F21E96 /* Tina.png */,
+				D46D3AA9166CF606000BB30B /* Tina */,
 				D46D3AA0166CF606000BB30B /* Frameworks */,
 				D46D3A9E166CF606000BB30B /* Products */,
 			);
@@ -157,7 +157,7 @@
 		D46D3A9E166CF606000BB30B /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				D46D3A9D166CF606000BB30B /* tina.app */,
+				D46D3A9D166CF606000BB30B /* Tina.temp_caseinsensitive_rename.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -174,7 +174,7 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		D46D3AA9166CF606000BB30B /* tina */ = {
+		D46D3AA9166CF606000BB30B /* Tina */ = {
 			isa = PBXGroup;
 			children = (
 				D4FCA885168291D100D3751D /* Foundation */,
@@ -186,7 +186,7 @@
 				D4FCA8791682708600D3751D /* MIStoryboardSegueNoAnim.h */,
 				D4FCA87A1682708600D3751D /* MIStoryboardSegueNoAnim.m */,
 			);
-			name = tina;
+			name = Tina;
 			path = eRacun;
 			sourceTree = "<group>";
 		};
@@ -195,11 +195,11 @@
 			children = (
 				D46D3AE7166D1ABC000BB30B /* Main.storyboard */,
 				D46D3AEA166D1B43000BB30B /* images */,
-				D46D3AAB166CF606000BB30B /* tina-Info.plist */,
+				D46D3AAB166CF606000BB30B /* Tina.temp_caseinsensitive_rename-Info.plist */,
 				D47A37C51678B9A5003743E1 /* Localizable.strings */,
 				D46D3AAC166CF606000BB30B /* InfoPlist.strings */,
 				D46D3AAF166CF606000BB30B /* main.m */,
-				D46D3AB1166CF606000BB30B /* tina-Prefix.pch */,
+				D46D3AB1166CF606000BB30B /* Tina.temp_caseinsensitive_rename-Prefix.pch */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -276,9 +276,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		D46D3A9C166CF606000BB30B /* tina */ = {
+		D46D3A9C166CF606000BB30B /* Tina.temp_caseinsensitive_rename */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = D46D3AC0166CF606000BB30B /* Build configuration list for PBXNativeTarget "tina" */;
+			buildConfigurationList = D46D3AC0166CF606000BB30B /* Build configuration list for PBXNativeTarget "Tina.temp_caseinsensitive_rename" */;
 			buildPhases = (
 				D46D3A99166CF606000BB30B /* Sources */,
 				D46D3A9A166CF606000BB30B /* Frameworks */,
@@ -288,9 +288,9 @@
 			);
 			dependencies = (
 			);
-			name = tina;
+			name = Tina.temp_caseinsensitive_rename;
 			productName = eRacun;
-			productReference = D46D3A9D166CF606000BB30B /* tina.app */;
+			productReference = D46D3A9D166CF606000BB30B /* Tina.temp_caseinsensitive_rename.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -303,7 +303,7 @@
 				LastUpgradeCheck = 0450;
 				ORGANIZATIONNAME = Metaintellect;
 			};
-			buildConfigurationList = D46D3A97166CF606000BB30B /* Build configuration list for PBXProject "tina" */;
+			buildConfigurationList = D46D3A97166CF606000BB30B /* Build configuration list for PBXProject "Tina" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -317,7 +317,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				D46D3A9C166CF606000BB30B /* tina */,
+				D46D3A9C166CF606000BB30B /* Tina.temp_caseinsensitive_rename */,
 			);
 		};
 /* End PBXProject section */
@@ -346,10 +346,10 @@
 				D489FA1C16795E4000A5E8D1 /* nav_bg@2x.png in Resources */,
 				D489FA1E16795EB400A5E8D1 /* total_bg@2x.png in Resources */,
 				D489FA2016795F4100A5E8D1 /* cell_bg@2x.png in Resources */,
-				D4846AE01679629F0038C085 /* eRacun.png in Resources */,
+				D4846AE01679629F0038C085 /* Tina.png in Resources */,
 				D4846AE61679639B0038C085 /* Default.png in Resources */,
 				D4846AE8167963AA0038C085 /* Default-568h@2x.png in Resources */,
-				D4846AE9167963F40038C085 /* eRacun@2x.png in Resources */,
+				D4846AE9167963F40038C085 /* Tina@2x.png in Resources */,
 				D4846AEF167967C50038C085 /* Default@2x.png in Resources */,
 				D46E41E11681C40F005614D1 /* logo.png in Resources */,
 				D46E41E21681C40F005614D1 /* logo@2x.png in Resources */,
@@ -468,9 +468,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "eRacun/tina-Prefix.pch";
-				INFOPLIST_FILE = "eRacun/tina-Info.plist";
-				PRODUCT_NAME = tina;
+				GCC_PREFIX_HEADER = "eRacun/Tina.temp_caseinsensitive_rename-Prefix.pch";
+				INFOPLIST_FILE = "eRacun/Tina.temp_caseinsensitive_rename-Info.plist";
+				PRODUCT_NAME = Tina.temp_caseinsensitive_rename;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -479,9 +479,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "eRacun/tina-Prefix.pch";
-				INFOPLIST_FILE = "eRacun/tina-Info.plist";
-				PRODUCT_NAME = tina;
+				GCC_PREFIX_HEADER = "eRacun/Tina.temp_caseinsensitive_rename-Prefix.pch";
+				INFOPLIST_FILE = "eRacun/Tina.temp_caseinsensitive_rename-Info.plist";
+				PRODUCT_NAME = Tina.temp_caseinsensitive_rename;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -489,7 +489,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		D46D3A97166CF606000BB30B /* Build configuration list for PBXProject "tina" */ = {
+		D46D3A97166CF606000BB30B /* Build configuration list for PBXProject "Tina" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D46D3ABE166CF606000BB30B /* Debug */,
@@ -498,7 +498,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		D46D3AC0166CF606000BB30B /* Build configuration list for PBXNativeTarget "tina" */ = {
+		D46D3AC0166CF606000BB30B /* Build configuration list for PBXNativeTarget "Tina.temp_caseinsensitive_rename" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D46D3AC1166CF606000BB30B /* Debug */,
