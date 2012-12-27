@@ -9,18 +9,18 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-@class BillItem;
+@class InvoiceItem;
 
-@interface Bill : NSManagedObject
+@interface Invoice : NSManagedObject
 
 @property (nonatomic, retain) NSNumber * totalPrice;
 @property (nonatomic, retain) NSMutableSet * items;
 @end
 
-@interface Bill (CoreDataGeneratedAccessors)
+@interface Invoice (CoreDataGeneratedAccessors)
 
-- (void)addItemsObject:(BillItem *)value;
-- (void)removeItemsObject:(BillItem *)value;
+- (void)addItemsObject:(InvoiceItem *)value;
+- (void)removeItemsObject:(InvoiceItem *)value;
 - (void)addItems:(NSMutableSet *)values;
 - (void)removeItems:(NSMutableSet *)values;
 

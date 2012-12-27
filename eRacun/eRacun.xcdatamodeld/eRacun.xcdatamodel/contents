@@ -7,17 +7,17 @@
         <attribute name="id" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="token" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
-    <entity name="Bill" representedClassName="Bill" syncable="YES">
+    <entity name="Invoice" representedClassName="Invoice" syncable="YES">
         <attribute name="totalPrice" optional="YES" attributeType="Double" defaultValueString="0" syncable="YES"/>
-        <relationship name="items" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="BillItem" inverseName="bill" inverseEntity="BillItem" syncable="YES"/>
+        <relationship name="items" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="InvoiceItem" inverseName="bill" inverseEntity="InvoiceItem" syncable="YES"/>
     </entity>
-    <entity name="BillItem" representedClassName="BillItem" syncable="YES">
+    <entity name="InvoiceItem" representedClassName="InvoiceItem" syncable="YES">
         <attribute name="id" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="productId" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="productName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="productPrice" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
         <attribute name="quantity" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
-        <relationship name="bill" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Bill" inverseName="items" inverseEntity="Bill" syncable="YES"/>
+        <relationship name="bill" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Invoice" inverseName="items" inverseEntity="Invoice" syncable="YES"/>
     </entity>
     <entity name="Product" representedClassName="Product" syncable="YES">
         <attribute name="id" optional="YES" attributeType="Integer 32" defaultValueString="0" indexed="YES" syncable="YES"/>
@@ -31,9 +31,9 @@
     <fetchRequest name="GetProductById" entity="Product" predicateString="id == $PRODUCT_ID"/>
     <fetchRequest name="GetProductByName" entity="Product" predicateString="name LIKE[c] $SEARCH_NAME"/>
     <elements>
-        <element name="Account" positionX="160" positionY="192" width="128" height="120"/>
-        <element name="Bill" positionX="0" positionY="0" width="128" height="75"/>
-        <element name="BillItem" positionX="0" positionY="0" width="128" height="135"/>
-        <element name="Product" positionX="0" positionY="0" width="128" height="90"/>
+        <element name="Account" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="Invoice" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="InvoiceItem" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="Product" positionX="0" positionY="0" width="0" height="0"/>
     </elements>
 </model>

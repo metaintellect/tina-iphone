@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "MIQuery.h"
-#import "Bill.h"
+#import "Invoice.h"
 
 
 @interface MIMainViewController : UIViewController <UITextFieldDelegate,
@@ -26,15 +26,15 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *totalLabel;
 
-@property (weak, nonatomic) IBOutlet UITableView *billTableView;
+@property (weak, nonatomic) IBOutlet UITableView *invoiceTableView;
 
-@property (weak, nonatomic) IBOutlet UIButton *deleteBillButton;
+@property (weak, nonatomic) IBOutlet UIButton *deleteInvoiceButton;
 
-@property (strong, nonatomic) Bill *currentBill;
+@property (strong, nonatomic) Invoice *currentInvoice;
 
 @property (strong, nonatomic) MIQuery *query;
 
 - (IBAction)save:(id)sender;
 
-- (IBAction)deleteBill:(id)sender;
+- (IBAction)deleteInvoice:(id)sender;
 @end

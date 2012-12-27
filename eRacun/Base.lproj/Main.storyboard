@@ -214,7 +214,7 @@
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
-                                            <action selector="deleteBill:" destination="Kdx-y7-DET" eventType="touchUpInside" id="BtS-iM-bj2"/>
+                                            <action selector="deleteInvoice:" destination="Kdx-y7-DET" eventType="touchUpInside" id="RPu-z0-FKf"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -238,9 +238,9 @@
                     </navigationItem>
                     <nil key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <outlet property="billTableView" destination="4Rc-vP-Ik7" id="ccm-zF-qqp"/>
                         <outlet property="bottomView" destination="Knh-k3-PcR" id="lfk-TX-lbY"/>
-                        <outlet property="deleteBillButton" destination="usv-Kv-Bk6" id="ZW4-aY-uNv"/>
+                        <outlet property="deleteInvoiceButton" destination="usv-Kv-Bk6" id="HxG-iZ-OPq"/>
+                        <outlet property="invoiceTableView" destination="4Rc-vP-Ik7" id="3d6-D6-Tok"/>
                         <outlet property="productCodeTextField" destination="iOM-p9-9Q3" id="eaX-G8-9yM"/>
                         <outlet property="productLabel" destination="Thk-xL-JmW" id="Zzp-og-7mC"/>
                         <outlet property="quantityTextField" destination="BFA-3i-zPR" id="Uiv-Zp-910"/>
@@ -388,6 +388,49 @@
         <image name="logo.png" width="272" height="82"/>
         <image name="total_bg.png" width="2" height="40"/>
     </resources>
+    <classes>
+        <class className="MILoginSettiingsViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MILoginSettiingsViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="Save:"/>
+                <relationship kind="action" name="close:"/>
+                <relationship kind="outlet" name="customDomainURLTextField" candidateClass="UITextField"/>
+            </relationships>
+        </class>
+        <class className="MILoginViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MILoginViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="login:"/>
+                <relationship kind="action" name="openInfoPage:"/>
+                <relationship kind="outlet" name="loginButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="loginInputImage" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="logoImage" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="passwordTextField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="usernameTextFileld" candidateClass="UITextField"/>
+            </relationships>
+        </class>
+        <class className="MIMainViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MIMainViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="deleteBill:"/>
+                <relationship kind="action" name="save:"/>
+                <relationship kind="outlet" name="billTableView" candidateClass="UITableView"/>
+                <relationship kind="outlet" name="bottomView" candidateClass="UIView"/>
+                <relationship kind="outlet" name="deleteBillButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="productCodeTextField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="productLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="quantityTextField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="saveButton" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="totalLabel" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+        <class className="MISettingsViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MISettingsViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="close:"/>
+            </relationships>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

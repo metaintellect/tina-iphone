@@ -6,11 +6,11 @@
 //  Copyright (c) 2012 Metaintellect. All rights reserved.
 //
 
-#import "BillItem.h"
-#import "Bill.h"
+#import "InvoiceItem.h"
+#import "Invoice.h"
 
 
-@implementation BillItem
+@implementation InvoiceItem
 
 @dynamic id;
 @dynamic productId;

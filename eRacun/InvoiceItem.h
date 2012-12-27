@@ -9,15 +9,15 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-@class Bill;
+@class Invoice;
 
-@interface BillItem : NSManagedObject
+@interface InvoiceItem : NSManagedObject
 
 @property (nonatomic, retain) NSNumber * id;
 @property (nonatomic, retain) NSNumber * productId;
 @property (nonatomic, retain) NSNumber * quantity;
 @property (nonatomic, retain) NSString * productName;
 @property (nonatomic, retain) NSNumber * productPrice;
-@property (nonatomic, retain) Bill *bill;
+@property (nonatomic, retain) Invoice *bill;
 
 @end

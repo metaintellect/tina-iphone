@@ -42,8 +42,8 @@
 		D489FA1E16795EB400A5E8D1 /* total_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D489FA1D16795EB400A5E8D1 /* total_bg@2x.png */; };
 		D489FA2016795F4100A5E8D1 /* cell_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D489FA1F16795F4100A5E8D1 /* cell_bg@2x.png */; };
 		D4937E8A168216A200AA41B1 /* MIRestJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = D4937E89168216A200AA41B1 /* MIRestJSON.m */; };
-		D4AD232F1670653F00F21E96 /* Bill.m in Sources */ = {isa = PBXBuildFile; fileRef = D4AD232E1670653F00F21E96 /* Bill.m */; };
-		D4AD23321670653F00F21E96 /* BillItem.m in Sources */ = {isa = PBXBuildFile; fileRef = D4AD23311670653F00F21E96 /* BillItem.m */; };
+		D4AD232F1670653F00F21E96 /* Invoice.m in Sources */ = {isa = PBXBuildFile; fileRef = D4AD232E1670653F00F21E96 /* Invoice.m */; };
+		D4AD23321670653F00F21E96 /* InvoiceItem.m in Sources */ = {isa = PBXBuildFile; fileRef = D4AD23311670653F00F21E96 /* InvoiceItem.m */; };
 		D4AD23351670653F00F21E96 /* Product.m in Sources */ = {isa = PBXBuildFile; fileRef = D4AD23341670653F00F21E96 /* Product.m */; };
 		D4AD234016708FEB00F21E96 /* cell_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = D4AD233E16708FEB00F21E96 /* cell_bg.png */; };
 		D4AD234116708FEB00F21E96 /* total_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = D4AD233F16708FEB00F21E96 /* total_bg.png */; };
@@ -102,10 +102,10 @@
 		D489FA1F16795F4100A5E8D1 /* cell_bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cell_bg@2x.png"; sourceTree = "<group>"; };
 		D4937E88168216A200AA41B1 /* MIRestJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MIRestJSON.h; sourceTree = "<group>"; };
 		D4937E89168216A200AA41B1 /* MIRestJSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MIRestJSON.m; sourceTree = "<group>"; };
-		D4AD232D1670653F00F21E96 /* Bill.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Bill.h; sourceTree = "<group>"; };
-		D4AD232E1670653F00F21E96 /* Bill.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Bill.m; sourceTree = "<group>"; };
-		D4AD23301670653F00F21E96 /* BillItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BillItem.h; sourceTree = "<group>"; };
-		D4AD23311670653F00F21E96 /* BillItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BillItem.m; sourceTree = "<group>"; };
+		D4AD232D1670653F00F21E96 /* Invoice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Invoice.h; sourceTree = "<group>"; };
+		D4AD232E1670653F00F21E96 /* Invoice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Invoice.m; sourceTree = "<group>"; };
+		D4AD23301670653F00F21E96 /* InvoiceItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InvoiceItem.h; sourceTree = "<group>"; };
+		D4AD23311670653F00F21E96 /* InvoiceItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InvoiceItem.m; sourceTree = "<group>"; };
 		D4AD23331670653F00F21E96 /* Product.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Product.h; sourceTree = "<group>"; };
 		D4AD23341670653F00F21E96 /* Product.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Product.m; sourceTree = "<group>"; };
 		D4AD233A16708FBA00F21E96 /* eRacun.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = eRacun.png; sourceTree = "<group>"; };
@@ -211,10 +211,10 @@
 				D46E41E81681F4AE005614D1 /* Account.m */,
 				D4AD23331670653F00F21E96 /* Product.h */,
 				D4AD23341670653F00F21E96 /* Product.m */,
-				D4AD23301670653F00F21E96 /* BillItem.h */,
-				D4AD23311670653F00F21E96 /* BillItem.m */,
-				D4AD232D1670653F00F21E96 /* Bill.h */,
-				D4AD232E1670653F00F21E96 /* Bill.m */,
+				D4AD23301670653F00F21E96 /* InvoiceItem.h */,
+				D4AD23311670653F00F21E96 /* InvoiceItem.m */,
+				D4AD232D1670653F00F21E96 /* Invoice.h */,
+				D4AD232E1670653F00F21E96 /* Invoice.m */,
 			);
 			name = "Core Data";
 			sourceTree = "<group>";
@@ -367,8 +367,8 @@
 				D46D3ABD166CF606000BB30B /* eRacun.xcdatamodeld in Sources */,
 				D46D3AF1166D1C4D000BB30B /* MILoginViewController.m in Sources */,
 				D46D3AF4166D23B1000BB30B /* MIMainViewController.m in Sources */,
-				D4AD232F1670653F00F21E96 /* Bill.m in Sources */,
-				D4AD23321670653F00F21E96 /* BillItem.m in Sources */,
+				D4AD232F1670653F00F21E96 /* Invoice.m in Sources */,
+				D4AD23321670653F00F21E96 /* InvoiceItem.m in Sources */,
 				D4AD23351670653F00F21E96 /* Product.m in Sources */,
 				D4AD234F1671032000F21E96 /* MISettingsViewController.m in Sources */,
 				D46E41E61681CE2C005614D1 /* MILoginSettiingsViewController.m in Sources */,

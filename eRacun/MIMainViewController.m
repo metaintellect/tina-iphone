@@ -10,8 +10,8 @@
 #import "MIHelper.h"
 #import "MIRestJSON.h"
 #import "Product.h"
-#import "Bill.h"
-#import "BillItem.h"
+#import "Invoice.h"
+#import "InvoiceItem.h"
 
 @interface MIMainViewController ()
 
@@ -21,9 +21,9 @@
     
     //NSArray * _products;
     Product * _currentProduct;
-    BillItem * _selectedItem;
+    InvoiceItem * _selectedItem;
     UIToolbar * _numberToolbar;
-    NSMutableArray * _billItems;
+    NSMutableArray * _invoiceItems;
     NSString *_authToken;
 }
 
@@ -49,10 +49,10 @@
     
     [self _animateBottomViewOnYAxis:46];	    
 
-    self.currentBill = (Bill *)[NSEntityDescription insertNewObjectForEntityForName:@"Bill"
+    self.currentInvoice = (Invoice *)[NSEntityDescription insertNewObjectForEntityForName:@"Invoice"
                                                              inManagedObjectContext:[self.query context]];
     
-    _billItems = [NSMutableArray arrayWithArray:[[self.currentBill items] allObjects]];
+    _invoiceItems = [NSMutableArray arrayWithArray:[[self.currentInvoice items] allObjects]];
     
     [self _setTotalPriceLabel:@0.00];
     
@@ -91,7 +91,7 @@
 
 - (void)addOrChangeNumberPad {
     
-    NSUInteger idFromItemsCount = [[self.currentBill items] count] + 1;
+    NSUInteger idFromItemsCount = [[self.currentInvoice items] count] + 1;
     NSNumber *quantity = [NSNumber numberWithInt:[[self.quantityTextField text] intValue]];
     NSString *productName = allTrim([_currentProduct name]);
     NSNumber *productPrice = [_currentProduct price];
@@ -105,7 +105,7 @@
         
         if (nil == _selectedItem) {
             
-            _selectedItem = (BillItem *)[NSEntityDescription insertNewObjectForEntityForName:@"BillItem"
+            _selectedItem = (InvoiceItem *)[NSEntityDescription insertNewObjectForEntityForName:@"InvoiceItem"
                                                                       inManagedObjectContext:[self.query context]];
             
             [_selectedItem setId:[NSNumber numberWithInt:idFromItemsCount]];
@@ -114,7 +114,7 @@
             [_selectedItem setProductPrice:productPrice];
             [_selectedItem setQuantity:quantity];
             
-            [self.currentBill addItemsObject:_selectedItem];
+            [self.currentInvoice addItemsObject:_selectedItem];
             
         } else {
             
@@ -122,14 +122,14 @@
         }
                 
 
-        [self.currentBill setTotalPrice: [self _recalculateTotalPrice]];
-        [self _setTotalPriceLabel:[self.currentBill totalPrice]];        
+        [self.currentInvoice setTotalPrice: [self _recalculateTotalPrice]];
+        [self _setTotalPriceLabel:[self.currentInvoice totalPrice]];        
         
         [self _showAndFocusProductCode];
         
-        [self _cleanAndReloadBillItemsForTableView:[self.currentBill items]];
+        [self _cleanAndReloadInvoiceItemsForTableView:[self.currentInvoice items]];
                        
-        [self.billTableView reloadData];
+        [self.invoiceTableView reloadData];
         
         _selectedItem = nil;
         
@@ -146,12 +146,12 @@
 
 - (IBAction)save:(id)sender {
     
-    [self _clearAndSetBillItemInstance];
+    [self _clearAndSetInvoiceItemInstance];
 }
 
-- (IBAction)deleteBill:(id)sender {
+- (IBAction)deleteInvoice:(id)sender {
     
-    [self _clearAndSetBillItemInstance];
+    [self _clearAndSetInvoiceItemInstance];
     [self _setTotalPriceLabel:@0.00];
 }
 
@@ -167,7 +167,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    NSInteger rows = [_billItems count];
+    NSInteger rows = [_invoiceItems count];
     // NSLog(@"No. of rows: %d", rows);
     
     if (0 == rows) {
@@ -177,7 +177,7 @@
     } else {
     
         [self.saveButton setEnabled:YES];
-        [self.deleteBillButton setEnabled:YES];
+        [self.deleteInvoiceButton setEnabled:YES];
     }
     
     return rows;
@@ -185,14 +185,14 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"BillItemCell"];    
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"InvoiceItemCell"];
         
-    NSMutableArray *items = _billItems;
+    NSMutableArray *items = _invoiceItems;
     
     if (items != nil && [items count] > 0) {
 
         UILabel *label;
-        BillItem *item = [items objectAtIndex:[indexPath row]];
+        InvoiceItem *item = [items objectAtIndex:[indexPath row]];
         
         label = (UILabel *)[cell viewWithTag:1];
         [label setText:[item productName]];
@@ -213,37 +213,37 @@
 }
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    [self.billTableView beginUpdates];
+    [self.invoiceTableView beginUpdates];
     
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-        [self.billTableView deleteRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath, nil] withRowAnimation:YES];
+        [self.invoiceTableView deleteRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath, nil] withRowAnimation:YES];
          
-        BillItem *item = [_billItems objectAtIndex:[indexPath row]];
+        InvoiceItem *item = [_invoiceItems objectAtIndex:[indexPath row]];
         
-        [[self.currentBill items] removeObject:item];
+        [[self.currentInvoice items] removeObject:item];
         
-        [_billItems removeObjectAtIndex:[indexPath row]];
+        [_invoiceItems removeObjectAtIndex:[indexPath row]];
        
         
-        if ([[self.currentBill items] count] == 0) {
+        if ([[self.currentInvoice items] count] == 0) {
             
-            [self.currentBill setTotalPrice:@0];
+            [self.currentInvoice setTotalPrice:@0];
             
         } else {
 
-            [self.currentBill setTotalPrice:[self _recalculateTotalPrice]];
+            [self.currentInvoice setTotalPrice:[self _recalculateTotalPrice]];
         }
         
-        [self _setTotalPriceLabel:self.currentBill.totalPrice];
+        [self _setTotalPriceLabel:self.currentInvoice.totalPrice];
     }
     
-    [self.billTableView endUpdates];
-    [self.billTableView reloadData];
+    [self.invoiceTableView endUpdates];
+    [self.invoiceTableView reloadData];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    _selectedItem = [_billItems objectAtIndex:[indexPath row]];
+    _selectedItem = [_invoiceItems objectAtIndex:[indexPath row]];
     
     if (nil != _selectedItem) {
         
@@ -284,9 +284,9 @@
 - (NSNumber *)_recalculateTotalPrice {
     
     double totalPrice = 0.0;
-    [self.currentBill setTotalPrice:@0.0];
+    [self.currentInvoice setTotalPrice:@0.0];
     
-    for (BillItem *item in [self.currentBill items]) {
+    for (InvoiceItem *item in [self.currentInvoice items]) {
                
 //        NSLog(@"Result before: %.2lf", totalPrice);
 //         NSLog(@"Product: %@ :: Price: %@ :: Quantity: %@", item.productName, item.productPrice, item.quantity);
@@ -295,7 +295,7 @@
     
     NSNumber *result = [NSNumber numberWithDouble:totalPrice];
     
-    [self.currentBill setTotalPrice:result];
+    [self.currentInvoice setTotalPrice:result];
     return result;
 }
 
@@ -335,30 +335,30 @@
     }
 }
 
-- (void)_cleanAndReloadBillItemsForTableView:(NSSet *)items {
+- (void)_cleanAndReloadInvoiceItemsForTableView:(NSSet *)items {
     
     NSArray *sortDescriptors = [NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"id" ascending:NO]];
-    NSArray *sorteditems = [[[self.currentBill items] allObjects] sortedArrayUsingDescriptors:sortDescriptors];
-    _billItems = [NSMutableArray arrayWithArray:sorteditems];
+    NSArray *sorteditems = [[[self.currentInvoice items] allObjects] sortedArrayUsingDescriptors:sortDescriptors];
+    _invoiceItems = [NSMutableArray arrayWithArray:sorteditems];
 }
 
-- (void)_clearAndSetBillItemInstance {
+- (void)_clearAndSetInvoiceItemInstance {
     
-    [self _createJSONDataFromCurrentBill];
+    [self _createJSONDataFromCurrentInvoice];
     
-    [self.currentBill setTotalPrice:@0.00];
-    [self.currentBill setItems:[[NSMutableSet alloc] init]];
-    [_billItems removeAllObjects];
-    [self.billTableView reloadData];
+    [self.currentInvoice setTotalPrice:@0.00];
+    [self.currentInvoice setItems:[[NSMutableSet alloc] init]];
+    [_invoiceItems removeAllObjects];
+    [self.invoiceTableView reloadData];
     [self _disableSaveAndDeleteButton];
 }
 
-- (void)_createJSONDataFromCurrentBill {
+- (void)_createJSONDataFromCurrentInvoice {
     
-    NSArray *items = [self _createBillItemsJSON];
+    NSArray *items = [self _createInvoiceItemsJSON];
     
     NSDictionary *jsonValues = @{
-        @"totalPrice" : [self.currentBill totalPrice],
+        @"totalPrice" : [self.currentInvoice totalPrice],
         @"items" : items
     };
     NSError *error = nil;
@@ -369,17 +369,17 @@
     [MIRestJSON callInvoicesApiWithJSONData:jsonValues forToken:_authToken];
 }
 
-- (NSArray *)_createBillItemsJSON {
+- (NSArray *)_createInvoiceItemsJSON {
     
     NSMutableArray *result = [[NSMutableArray alloc] init];
     
-    if (nil == [self.currentBill items]
-        || [[self.currentBill items] count] == 0) {
+    if (nil == [self.currentInvoice items]
+        || [[self.currentInvoice items] count] == 0) {
         
         return nil;
     }
     
-    for (BillItem *item in [self.currentBill items]) {
+    for (InvoiceItem *item in [self.currentInvoice items]) {
         
         [result addObject: @{
             // @"id" : item.id,
@@ -396,7 +396,7 @@
 - (void)_disableSaveAndDeleteButton {
     
     [self.saveButton setEnabled:NO];
-    [self.deleteBillButton setEnabled:NO];
+    [self.deleteInvoiceButton setEnabled:NO];
 }
 
 - (void)_setProductLabelAndShowQuantityWithName:(NSString *)name
