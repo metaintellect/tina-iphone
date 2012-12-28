@@ -151,13 +151,13 @@
                                if ((nil != data || [data length] > 0)
                                    && error == nil) {
                                    
-                                   [self performSelectorOnMainThread:@selector(_showBillSavedAlertMessage)
+                                   [self performSelectorOnMainThread:@selector(_showInvoiceSavedAlertMessage)
                                                           withObject:nil
                                                        waitUntilDone:YES];
     
                                } else {
                                 
-                                   [self performSelectorOnMainThread:@selector(_showBillNotSavedAlertMessage)
+                                   [self performSelectorOnMainThread:@selector(_showInvoiceNotSavedAlertMessage)
                                                           withObject:nil
                                                        waitUntilDone:YES];
                                }
@@ -198,17 +198,17 @@
                  withCancelButtonTitle:NSLocalizedString(@"OK", nil)];
 }
 
-+ (void)_showBillSavedAlertMessage {
++ (void)_showInvoiceSavedAlertMessage {
     
-    [MIHelper showAlerMessageWithTitle:NSLocalizedString(@"Bill saved", nil)
-                           withMessage:NSLocalizedString(@"The bill is saved!", nil)
+    [MIHelper showAlerMessageWithTitle:NSLocalizedString(@"Invoice saved", nil)
+                           withMessage:NSLocalizedString(@"The Invoice is saved!", nil)
                  withCancelButtonTitle:NSLocalizedString(@"OK", nil)];
 }
 
-+ (void)_showBillNotSavedAlertMessage {
++ (void)_showInvoiceNotSavedAlertMessage {
     
-    [MIHelper showAlerMessageWithTitle:NSLocalizedString(@"Bill not saved", nil)
-                           withMessage:NSLocalizedString(@"The bill is not saved!", nil)
+    [MIHelper showAlerMessageWithTitle:NSLocalizedString(@"Invoice not saved", nil)
+                           withMessage:NSLocalizedString(@"The Invoice is not saved!", nil)
                  withCancelButtonTitle:NSLocalizedString(@"OK", nil)];
 }
 @end

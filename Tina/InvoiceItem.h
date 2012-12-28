@@ -1,5 +1,5 @@
 //
-//  BillItem.h
+//  InvoiceItem.h
 //  eRacun
 //
 //  Created by Kornelije Sajler on 6.12.2012.
@@ -18,6 +18,6 @@
 @property (nonatomic, retain) NSNumber * quantity;
 @property (nonatomic, retain) NSString * productName;
 @property (nonatomic, retain) NSNumber * productPrice;
-@property (nonatomic, retain) Invoice *bill;
+@property (nonatomic, retain) Invoice *invoice;
 
 @end

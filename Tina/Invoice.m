@@ -1,5 +1,5 @@
 //
-//  Bill.m
+//  Invoice.m
 //  eRacun
 //
 //  Created by Kornelije Sajler on 6.12.2012.
