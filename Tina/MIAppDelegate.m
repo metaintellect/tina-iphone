@@ -47,25 +47,6 @@
     [self saveContext];
 }
 
-//-(void)_authenticateAccountIfItExists {
-//    
-//    NSFetchRequest *request = [[self managedObjectModel] fetchRequestTemplateForName:@"GetAllAccounts"];
-//    
-//    NSError *error = nil;
-//    NSArray *result = [[self managedObjectContext] executeFetchRequest:request error:&error];
-//    
-//    if (nil != result && [result count] == 1) {
-//        
-//       [self performSegueWithIdentifier:@"LoginSegue" sender:self];
-//        
-//    } else if ([result count] > 1) {
-//        
-//        for (Account *account in result) {
-//            
-//            [self.managedObjectContext deleteObject:account];
-//        }
-//    }
-//}
 
 - (void)saveContext
 {
@@ -106,7 +87,7 @@
     if (_managedObjectModel != nil) {
         return _managedObjectModel;
     }
-    NSURL *modelURL = [[NSBundle mainBundle] URLForResource:@"eRacun" withExtension:@"momd"];
+    NSURL *modelURL = [[NSBundle mainBundle] URLForResource:@"Tina" withExtension:@"momd"];
     _managedObjectModel = [[NSManagedObjectModel alloc] initWithContentsOfURL:modelURL];
     return _managedObjectModel;
 }

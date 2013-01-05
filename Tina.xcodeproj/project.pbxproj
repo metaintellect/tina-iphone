@@ -14,7 +14,6 @@
 		D46D3AAE166CF606000BB30B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D46D3AAC166CF606000BB30B /* InfoPlist.strings */; };
 		D46D3AB0166CF606000BB30B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D46D3AAF166CF606000BB30B /* main.m */; };
 		D46D3AB4166CF606000BB30B /* MIAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D46D3AB3166CF606000BB30B /* MIAppDelegate.m */; };
-		D46D3ABD166CF606000BB30B /* Tina.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D46D3ABB166CF606000BB30B /* Tina.xcdatamodeld */; };
 		D46D3ACF166CFD90000BB30B /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D46D3ACE166CFD90000BB30B /* QuartzCore.framework */; };
 		D46D3AE9166D1ABC000BB30B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D46D3AE7166D1ABC000BB30B /* Main.storyboard */; };
 		D46D3AED166D1B7C000BB30B /* login_button.png in Resources */ = {isa = PBXBuildFile; fileRef = D46D3AEB166D1B7C000BB30B /* login_button.png */; };
@@ -51,6 +50,7 @@
 		D4AD234B1671004000F21E96 /* gear.png in Resources */ = {isa = PBXBuildFile; fileRef = D4AD23491671004000F21E96 /* gear.png */; };
 		D4AD234C1671004000F21E96 /* gear@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D4AD234A1671004000F21E96 /* gear@2x.png */; };
 		D4AD234F1671032000F21E96 /* MISettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D4AD234E1671032000F21E96 /* MISettingsViewController.m */; };
+		D4EE97511697B19E00CB8E0D /* Tina.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D4EE974F1697B19E00CB8E0D /* Tina.xcdatamodeld */; };
 		D4FCA87B1682708600D3751D /* MIStoryboardSegueNoAnim.m in Sources */ = {isa = PBXBuildFile; fileRef = D4FCA87A1682708600D3751D /* MIStoryboardSegueNoAnim.m */; };
 		D4FCA883168291B200D3751D /* MIQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = D4FCA882168291B200D3751D /* MIQuery.m */; };
 /* End PBXBuildFile section */
@@ -67,7 +67,6 @@
 		D46D3AB1166CF606000BB30B /* Tina-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Tina-Prefix.pch"; sourceTree = "<group>"; };
 		D46D3AB2166CF606000BB30B /* MIAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MIAppDelegate.h; sourceTree = "<group>"; };
 		D46D3AB3166CF606000BB30B /* MIAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MIAppDelegate.m; sourceTree = "<group>"; };
-		D46D3ABC166CF606000BB30B /* Tina.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Tina.xcdatamodel; sourceTree = "<group>"; };
 		D46D3ACE166CFD90000BB30B /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		D46D3AEB166D1B7C000BB30B /* login_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = login_button.png; sourceTree = "<group>"; };
 		D46D3AEC166D1B7C000BB30B /* login_input_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = login_input_bg.png; sourceTree = "<group>"; };
@@ -117,6 +116,7 @@
 		D4AD234A1671004000F21E96 /* gear@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "gear@2x.png"; sourceTree = "<group>"; };
 		D4AD234D1671032000F21E96 /* MISettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MISettingsViewController.h; sourceTree = "<group>"; };
 		D4AD234E1671032000F21E96 /* MISettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MISettingsViewController.m; sourceTree = "<group>"; };
+		D4EE97501697B19E00CB8E0D /* eRacun.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = eRacun.xcdatamodel; sourceTree = "<group>"; };
 		D4FCA8791682708600D3751D /* MIStoryboardSegueNoAnim.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MIStoryboardSegueNoAnim.h; sourceTree = "<group>"; };
 		D4FCA87A1682708600D3751D /* MIStoryboardSegueNoAnim.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MIStoryboardSegueNoAnim.m; sourceTree = "<group>"; };
 		D4FCA881168291B200D3751D /* MIQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MIQuery.h; sourceTree = "<group>"; };
@@ -186,7 +186,6 @@
 				D4FCA8791682708600D3751D /* MIStoryboardSegueNoAnim.h */,
 				D4FCA87A1682708600D3751D /* MIStoryboardSegueNoAnim.m */,
 			);
-			name = Tina;
 			path = Tina;
 			sourceTree = "<group>";
 		};
@@ -207,7 +206,7 @@
 		D46D3AD9166CFE93000BB30B /* Core Data */ = {
 			isa = PBXGroup;
 			children = (
-				D46D3ABB166CF606000BB30B /* Tina.xcdatamodeld */,
+				D4EE974F1697B19E00CB8E0D /* Tina.xcdatamodeld */,
 				D46E41E71681F4AE005614D1 /* Account.h */,
 				D46E41E81681F4AE005614D1 /* Account.m */,
 				D4AD23331670653F00F21E96 /* Product.h */,
@@ -365,7 +364,6 @@
 			files = (
 				D46D3AB0166CF606000BB30B /* main.m in Sources */,
 				D46D3AB4166CF606000BB30B /* MIAppDelegate.m in Sources */,
-				D46D3ABD166CF606000BB30B /* Tina.xcdatamodeld in Sources */,
 				D46D3AF1166D1C4D000BB30B /* MILoginViewController.m in Sources */,
 				D46D3AF4166D23B1000BB30B /* MIMainViewController.m in Sources */,
 				D4AD232F1670653F00F21E96 /* Invoice.m in Sources */,
@@ -378,6 +376,7 @@
 				D4937E8A168216A200AA41B1 /* MIRestJSON.m in Sources */,
 				D4FCA87B1682708600D3751D /* MIStoryboardSegueNoAnim.m in Sources */,
 				D4FCA883168291B200D3751D /* MIQuery.m in Sources */,
+				D4EE97511697B19E00CB8E0D /* Tina.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -510,12 +509,12 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		D46D3ABB166CF606000BB30B /* Tina.xcdatamodeld */ = {
+		D4EE974F1697B19E00CB8E0D /* Tina.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				D46D3ABC166CF606000BB30B /* Tina.xcdatamodel */,
+				D4EE97501697B19E00CB8E0D /* eRacun.xcdatamodel */,
 			);
-			currentVersion = D46D3ABC166CF606000BB30B /* Tina.xcdatamodel */;
+			currentVersion = D4EE97501697B19E00CB8E0D /* eRacun.xcdatamodel */;
 			path = Tina.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
