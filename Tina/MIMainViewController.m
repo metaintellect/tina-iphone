@@ -146,12 +146,12 @@
 
 - (IBAction)save:(id)sender {
     
-    [self _clearAndSetInvoiceItemInstance];
+    [self _clearAndSetInvoiceItemInstance:TRUE];
 }
 
 - (IBAction)deleteInvoice:(id)sender {
     
-    [self _clearAndSetInvoiceItemInstance];
+    [self _clearAndSetInvoiceItemInstance:FALSE];
     [self _setTotalPriceLabel:@0.00];
 }
 
@@ -342,9 +342,12 @@
     _invoiceItems = [NSMutableArray arrayWithArray:sorteditems];
 }
 
-- (void)_clearAndSetInvoiceItemInstance {
+- (void)_clearAndSetInvoiceItemInstance:(BOOL)setInvoice {
     
-    [self _createJSONDataFromCurrentInvoice];
+    if (setInvoice == TRUE)
+    {
+        [self _createJSONDataFromCurrentInvoice];
+    }
     
     [self.currentInvoice setTotalPrice:@0.00];
     [self.currentInvoice setItems:[[NSMutableSet alloc] init]];

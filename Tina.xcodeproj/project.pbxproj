@@ -40,6 +40,7 @@
 		D489FA1C16795E4000A5E8D1 /* nav_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D489FA1B16795E4000A5E8D1 /* nav_bg@2x.png */; };
 		D489FA1E16795EB400A5E8D1 /* total_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D489FA1D16795EB400A5E8D1 /* total_bg@2x.png */; };
 		D489FA2016795F4100A5E8D1 /* cell_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D489FA1F16795F4100A5E8D1 /* cell_bg@2x.png */; };
+		D491B2A016985652009A1C31 /* MIConnectionDetector.m in Sources */ = {isa = PBXBuildFile; fileRef = D491B29F16985652009A1C31 /* MIConnectionDetector.m */; };
 		D4937E8A168216A200AA41B1 /* MIRestJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = D4937E89168216A200AA41B1 /* MIRestJSON.m */; };
 		D4AD232F1670653F00F21E96 /* Invoice.m in Sources */ = {isa = PBXBuildFile; fileRef = D4AD232E1670653F00F21E96 /* Invoice.m */; };
 		D4AD23321670653F00F21E96 /* InvoiceItem.m in Sources */ = {isa = PBXBuildFile; fileRef = D4AD23311670653F00F21E96 /* InvoiceItem.m */; };
@@ -99,6 +100,8 @@
 		D489FA1B16795E4000A5E8D1 /* nav_bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "nav_bg@2x.png"; sourceTree = "<group>"; };
 		D489FA1D16795EB400A5E8D1 /* total_bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "total_bg@2x.png"; sourceTree = "<group>"; };
 		D489FA1F16795F4100A5E8D1 /* cell_bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cell_bg@2x.png"; sourceTree = "<group>"; };
+		D491B29E16985652009A1C31 /* MIConnectionDetector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MIConnectionDetector.h; sourceTree = "<group>"; };
+		D491B29F16985652009A1C31 /* MIConnectionDetector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MIConnectionDetector.m; sourceTree = "<group>"; };
 		D4937E88168216A200AA41B1 /* MIRestJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MIRestJSON.h; sourceTree = "<group>"; };
 		D4937E89168216A200AA41B1 /* MIRestJSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MIRestJSON.m; sourceTree = "<group>"; };
 		D4AD232D1670653F00F21E96 /* Invoice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Invoice.h; sourceTree = "<group>"; };
@@ -268,6 +271,8 @@
 				D4937E89168216A200AA41B1 /* MIRestJSON.m */,
 				D4FCA881168291B200D3751D /* MIQuery.h */,
 				D4FCA882168291B200D3751D /* MIQuery.m */,
+				D491B29E16985652009A1C31 /* MIConnectionDetector.h */,
+				D491B29F16985652009A1C31 /* MIConnectionDetector.m */,
 			);
 			name = Foundation;
 			sourceTree = "<group>";
@@ -377,6 +382,7 @@
 				D4FCA87B1682708600D3751D /* MIStoryboardSegueNoAnim.m in Sources */,
 				D4FCA883168291B200D3751D /* MIQuery.m in Sources */,
 				D4EE97511697B19E00CB8E0D /* Tina.xcdatamodeld in Sources */,
+				D491B2A016985652009A1C31 /* MIConnectionDetector.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
