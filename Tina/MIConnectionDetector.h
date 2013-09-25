@@ -23,26 +23,26 @@ typedef enum {
     SCNetworkReachabilityRef reachabilityRef;
 }
 
-//connectionDetectorWithHostName- Use to check the reachability of a particular host name.
-+ (MIConnectionDetector*) connectionDetectorWithHostName: (NSString*) hostName;
-
-//connectionDetectorWithAddress- Use to check the reachability of a particular IP address.
-+ (MIConnectionDetector*) connectionDetectorWithAddress: (const struct sockaddr_in*) hostAddress;
-
-//cennectionDetectorForInternetConnection- checks whether the default route is available.
-//  Should be used by applications that do not connect to a particular host
-+ (MIConnectionDetector*) connectionDetectorForInternetConnection;
-
-//connectionDetectorForLocalWiFi- checks whether a local wifi connection is available.
-+ (MIConnectionDetector*) connectionDetectorForLocalWiFi;
-
-//Start listening for connection detector notifications on the current run loop
-- (BOOL) startNotifier;
-
-- (void) stopNotifier;
-
-- (NetworkStatus) currentReachabilityStatus;
-//WWAN may be available, but not active until a connection has been established.
-//WiFi may require a connection for VPN on Demand.
-- (BOOL) connectionRequired;
+////connectionDetectorWithHostName- Use to check the reachability of a particular host name.
+//+ (MIConnectionDetector*) connectionDetectorWithHostName: (NSString*) hostName;
+//
+////connectionDetectorWithAddress- Use to check the reachability of a particular IP address.
+//+ (MIConnectionDetector*) connectionDetectorWithAddress: (const struct sockaddr_in*) hostAddress;
+//
+////cennectionDetectorForInternetConnection- checks whether the default route is available.
+////  Should be used by applications that do not connect to a particular host
+//+ (MIConnectionDetector*) connectionDetectorForInternetConnection;
+//
+////connectionDetectorForLocalWiFi- checks whether a local wifi connection is available.
+//+ (MIConnectionDetector*) connectionDetectorForLocalWiFi;
+//
+////Start listening for connection detector notifications on the current run loop
+//- (BOOL) startNotifier;
+//
+//- (void) stopNotifier;
+//
+//- (NetworkStatus) currentReachabilityStatus;
+////WWAN may be available, but not active until a connection has been established.
+////WiFi may require a connection for VPN on Demand.
+//- (BOOL) connectionRequired;
 @end

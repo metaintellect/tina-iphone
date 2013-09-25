@@ -32,7 +32,7 @@
     [request setValue:[NSString stringWithFormat:@"%d", [data length]] forHTTPHeaderField:@"Content-Length"];
     [request setHTTPBody: data];
        
-     NSLog(@"JSON data: %@", [[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding]);
+     // NSLog(@"JSON data: %@", [[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding]);
     
     return request;
 }
@@ -55,7 +55,7 @@
         && error == nil) {
                 
         NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
-                                
+        
         if ([query savedAccountFromJSON:json]) {
             
             return YES;
@@ -102,9 +102,9 @@
                    
                    // NSLog(@"%@", item);
                    
-                   product.id = [NSNumber numberWithInt:[(NSString *)[item objectForKey:@"id"] intValue]];
-                   product.name = (NSString *)[item objectForKey:@"name"];
-                   product.price = [NSNumber numberWithInt:[(NSString *)[item objectForKey:@"price"] intValue]];
+                   product.id = @([(NSString *)item[@"id"] intValue]);
+                   product.name = (NSString *)item[@"name"];
+                   product.price = @([(NSString *)item[@"price"] intValue]);
                    
                    [result addObject:product];
                }
@@ -146,7 +146,7 @@
                                                NSData *data,
                                                NSError *error) {
                                
-                               NSLog(@"%@", [[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding]);
+                               // NSLog(@"%@", [[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding]);
                                
                                if ((nil != data || [data length] > 0)
                                    && error == nil) {
@@ -171,7 +171,7 @@
     
     NSURL *apiFullURL =  [NSURL URLWithString:[NSString stringWithFormat:@"%@/%@", kApiURLString, apiActionURL]];
     
-    NSLog(@"API full URL: %@", [apiFullURL absoluteString]);
+    // NSLog(@"API full URL: %@", [apiFullURL absoluteString]);
     
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:apiFullURL
                                                            cachePolicy:NSURLRequestReloadIgnoringCacheData

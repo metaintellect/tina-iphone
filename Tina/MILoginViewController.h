@@ -6,6 +6,7 @@
 //  Copyright (c) 2012 Metaintellect. All rights reserved.
 //
 
+#import <QuartzCore/QuartzCore.h>
 #import <UIKit/UIKit.h>
 #import "MIQuery.h"
 
@@ -16,8 +17,6 @@
 @property (weak, nonatomic) IBOutlet UITextField *passwordTextField;
 
 @property (weak, nonatomic) IBOutlet UIButton *loginButton;
-
-@property (weak, nonatomic) IBOutlet UIImageView *loginInputImage;
 
 @property (weak, nonatomic) IBOutlet UIImageView *logoImage;
 

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>D1F56D7B-E2B8-4939-9A6F-D0951C253811</string>
+	<key>IDESourceControlProjectName</key>
+	<string>Tina</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>5D61FB0B-CCED-49F6-8EA6-10A65D21DC92</key>
+		<string>ssh://github.com/metaintellect/tina-iphone.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>Tina.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>5D61FB0B-CCED-49F6-8EA6-10A65D21DC92</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>ssh://github.com/metaintellect/tina-iphone.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>5D61FB0B-CCED-49F6-8EA6-10A65D21DC92</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>5D61FB0B-CCED-49F6-8EA6-10A65D21DC92</string>
+			<key>IDESourceControlWCCName</key>
+			<string>tina-iphone</string>
+		</dict>
+	</array>
+</dict>
+</plist>

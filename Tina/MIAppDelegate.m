@@ -19,7 +19,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    [self _setDarkGradientToNavigationBar];
+    [self _setTintToNavigationBar];
     // [self _createProductsDummyData];
     // [self _fetchAllProducts];
     
@@ -145,11 +145,20 @@
 
 # pragma mark - Custom Navigation appearance
 
--(void)_setDarkGradientToNavigationBar {
-    
-    UIImage *backgroundImage = [UIImage imageNamed:@"nav_bg.png"];
-    [[UINavigationBar appearance] setBackgroundImage:backgroundImage forBarMetrics:UIBarMetricsDefault];
-    [[UIBarButtonItem appearance] setTintColor:[UIColor blackColor]];
+-(void)_setTintToNavigationBar {
+
+    NSArray *versionCompatibility = [[UIDevice currentDevice].systemVersion componentsSeparatedByString:@"."];
+    if ([[versionCompatibility objectAtIndex:0] intValue] >= 7) {
+        [[UINavigationBar appearance] setBarTintColor:[UIColor colorWithRed:177/255.0f green:224/255.0f blue:1/255.0f alpha:1.0f]];
+        
+        // UIColor colorWithRed:153/255.0f green:204/255.0f blue:0/255.0f alpha:1.0f]
+    }
+    else
+    {
+        UIImage *backgroundImage = [UIImage imageNamed:@"nav_bg.png"];
+        [[UINavigationBar appearance] setBackgroundImage:backgroundImage forBarMetrics:UIBarMetricsDefault];
+        [[UIBarButtonItem appearance] setTintColor:[UIColor blackColor]];
+    }
     
 }
 

@@ -49,7 +49,7 @@
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SettingsCellItem"];
     
-    NSString *labelText = [self.settingsItems objectAtIndex:[indexPath row]];
+    NSString *labelText = (self.settingsItems)[[indexPath row]];
     
     UILabel *label = (UILabel *)[cell viewWithTag:1];
     [label setText:labelText];
@@ -98,7 +98,7 @@
 
 - (void)_logOutFromApplication {
     
-  //  [MIHelper setAuthToken:nil AndUserId:nil AndCashRegisterId:nil];
+    [MIHelper setAuthToken:nil AndUserId:nil AndCashRegisterId:nil];
     
     //[MIHelper getAuthToken];
     MILoginViewController *loginController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil]

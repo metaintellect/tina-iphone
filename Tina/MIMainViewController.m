@@ -33,6 +33,7 @@
 - (void)viewDidLoad {
     
     [super viewDidLoad];
+
     _authToken = [MIHelper getAuthToken];
     
     self.query = [[MIQuery alloc] init];
@@ -47,7 +48,7 @@
         [self _checkIfAnyProductsAndGetFromServer];
     }
     
-    [self _animateBottomViewOnYAxis:46];	    
+    [self _animateBottomViewOnYAxis:110];
 
     self.currentInvoice = (Invoice *)[NSEntityDescription insertNewObjectForEntityForName:@"Invoice"
                                                              inManagedObjectContext:[self.query context]];
@@ -57,18 +58,19 @@
     [self _setTotalPriceLabel:@0.00];
     
     _numberToolbar = [[UIToolbar alloc]initWithFrame:CGRectMake(0, 0, 320, 50)];
-    _numberToolbar.barStyle = UIBarStyleBlackTranslucent;
-    
-    [self _showAndFocusProductCode];
-    
+    _numberToolbar.backgroundColor = [UIColor colorWithRed:105/255.0f green:159/255.0f blue:34/255.0f alpha:1.0f];
+    _numberToolbar.tintColor = [UIColor colorWithRed:56/255.0f green:37/255.0f blue:19/255.0f alpha:1.0f];
     [_numberToolbar sizeToFit];
+    
     self.productCodeTextField.inputAccessoryView = _numberToolbar;
     self.quantityTextField.inputAccessoryView = _numberToolbar;
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     
-   
+    [self _showAndFocusProductCode];
+    // Removing gap on top for Grouped UITableView
+    _invoiceTableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, _invoiceTableView.bounds.size.width, 0.01f)];
 }
 
 
@@ -76,7 +78,7 @@
 
 - (void)nextNumberPad {
     
-    NSNumber *productId = [NSNumber numberWithInt:[[self.productCodeTextField text] intValue]];
+    NSNumber *productId = @([[self.productCodeTextField text] intValue]);
     
     if ([productId intValue] > 0) {
         
@@ -92,7 +94,7 @@
 - (void)addOrChangeNumberPad {
     
     NSUInteger idFromItemsCount = [[self.currentInvoice items] count] + 1;
-    NSNumber *quantity = [NSNumber numberWithInt:[[self.quantityTextField text] intValue]];
+    NSNumber *quantity = @([[self.quantityTextField text] intValue]);
     NSString *productName = allTrim([_currentProduct name]);
     NSNumber *productPrice = [_currentProduct price];
     
@@ -192,7 +194,7 @@
     if (items != nil && [items count] > 0) {
 
         UILabel *label;
-        InvoiceItem *item = [items objectAtIndex:[indexPath row]];
+        InvoiceItem *item = items[[indexPath row]];
         
         label = (UILabel *)[cell viewWithTag:1];
         [label setText:[item productName]];
@@ -206,19 +208,19 @@
     return cell;
 }
 
-- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    // cell.backgroundColor = (indexPath.row%2)?[UIColor lightGrayColor]:[UIColor grayColor];
-    cell.backgroundColor = [UIColor colorWithPatternImage: [UIImage imageNamed: @"cell_bg.png"]];
-}
+//- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+//    
+//    // cell.backgroundColor = (indexPath.row%2)?[UIColor lightGrayColor]:[UIColor grayColor];
+//    cell.backgroundColor = [UIColor colorWithPatternImage: [UIImage imageNamed: @"cell_bg.png"]];
+//}
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     [self.invoiceTableView beginUpdates];
     
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-        [self.invoiceTableView deleteRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath, nil] withRowAnimation:YES];
+        [self.invoiceTableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:YES];
          
-        InvoiceItem *item = [_invoiceItems objectAtIndex:[indexPath row]];
+        InvoiceItem *item = _invoiceItems[[indexPath row]];
         
         [[self.currentInvoice items] removeObject:item];
         
@@ -243,7 +245,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    _selectedItem = [_invoiceItems objectAtIndex:[indexPath row]];
+    _selectedItem = _invoiceItems[[indexPath row]];
     
     if (nil != _selectedItem) {
         
@@ -293,7 +295,7 @@
         totalPrice += ([[item productPrice] doubleValue] * [[item quantity] intValue]);
     }    
     
-    NSNumber *result = [NSNumber numberWithDouble:totalPrice];
+    NSNumber *result = @(totalPrice);
     
     [self.currentInvoice setTotalPrice:result];
     return result;
@@ -312,13 +314,14 @@
     
     [self.productCodeTextField setHidden:NO];
     [self.productLabel setHidden:YES];
-    [self _animateBottomViewOnYAxis:46];
+    [self _animateBottomViewOnYAxis:110];
     [self.productCodeTextField becomeFirstResponder];
     
-    _numberToolbar.items = [NSArray arrayWithObjects:
-                           [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil],
-                           [[UIBarButtonItem alloc]initWithTitle:NSLocalizedString(@"Next", nil) style:UIBarButtonItemStyleDone target:self action:@selector(nextNumberPad)],
-                           nil];
+    _numberToolbar.items = @[[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil],
+                           [[UIBarButtonItem alloc]initWithTitle:NSLocalizedString(@"Next", nil)
+                                                           style:UIBarButtonItemStyleDone
+                                                          target:self
+                                                          action:@selector(nextNumberPad)]];
 }
 
 - (void)_checkIfAnyProductsAndGetFromServer {
@@ -337,7 +340,7 @@
 
 - (void)_cleanAndReloadInvoiceItemsForTableView:(NSSet *)items {
     
-    NSArray *sortDescriptors = [NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"id" ascending:NO]];
+    NSArray *sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"id" ascending:NO]];
     NSArray *sorteditems = [[[self.currentInvoice items] allObjects] sortedArrayUsingDescriptors:sortDescriptors];
     _invoiceItems = [NSMutableArray arrayWithArray:sorteditems];
 }
@@ -411,7 +414,7 @@
     [self.productLabel setText:[NSString stringWithFormat:@"%@ %@", name, [self _formatPriceNumber:price]]];
     [self.productCodeTextField setHidden:YES];
     [self.productLabel setHidden:NO];
-    [self _animateBottomViewOnYAxis:85];
+    [self _animateBottomViewOnYAxis:149];
     [self.quantityTextField becomeFirstResponder];
                                           
     NSString *saveText;
@@ -425,11 +428,17 @@
         saveText = NSLocalizedString(@"Change", nil);
     }
     
-    _numberToolbar.items = [NSArray arrayWithObjects:
-                           [[UIBarButtonItem alloc]initWithTitle:NSLocalizedString(@"Cancel", nil) style:UIBarButtonItemStyleBordered target:self action:@selector(cancelNumberPad)],
-                           [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil],
-                           [[UIBarButtonItem alloc]initWithTitle:saveText style:UIBarButtonItemStyleDone target:self action:@selector(addOrChangeNumberPad)],
-                           nil];
+    _numberToolbar.items = @[[[UIBarButtonItem alloc]initWithTitle:NSLocalizedString(@"Cancel", nil)
+                                                             style:UIBarButtonSystemItemCancel
+                                                            target:self
+                                                            action:@selector(cancelNumberPad)],
+                           [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
+                                                                        target:nil
+                                                                        action:nil],
+                           [[UIBarButtonItem alloc]initWithTitle:saveText
+                                                           style:UIBarButtonItemStyleDone
+                                                          target:self
+                                                          action:@selector(addOrChangeNumberPad)]];
 }
 
 @end

@@ -39,11 +39,11 @@
     Account *account = (Account *)[NSEntityDescription insertNewObjectForEntityForName:@"Account"
                                                                 inManagedObjectContext:[self context]];
         
-    account.id = [NSNumber numberWithInt:[(NSString *)[json objectForKey:@"userId"] intValue]];
-    account.fullName = (NSString *)[json objectForKey:@"fullName"];
-    account.cashRegister = (NSString *)[json objectForKey:@"cashRegister"];
-    account.cashRegisterId = [NSNumber numberWithInt:[(NSString *)[json objectForKey:@"cashRegisterId"] intValue]];
-    account.token = (NSString *)[json objectForKey:@"token"];
+    account.id = @([(NSString *)json[@"userId"] intValue]);
+    account.fullName = (NSString *)json[@"fullName"];
+    account.cashRegister = (NSString *)json[@"cashRegister"];
+    account.cashRegisterId = @([(NSString *)json[@"cashRegisterId"] intValue]);
+    account.token = (NSString *)json[@"token"];
             
     [MIHelper setAuthToken:[account token] AndUserId:[account id] AndCashRegisterId:[account cashRegisterId]];
     
@@ -88,7 +88,7 @@
 
 - (Product *)getProductById:(NSNumber *)productId {
     
-    NSDictionary *var = [NSDictionary dictionaryWithObject:productId forKey:@"PRODUCT_ID"];
+    NSDictionary *var = @{@"PRODUCT_ID": productId};
     NSFetchRequest *request = [self.objectModel fetchRequestFromTemplateWithName:@"GetProductById"
                                                            substitutionVariables:var];
     
@@ -106,7 +106,7 @@
 
 - (NSArray *)getAccountByUserId:(NSNumber *)userId {
     
-    NSDictionary *var = [NSDictionary dictionaryWithObject:userId forKey:@"USER_ID"];
+    NSDictionary *var = @{@"USER_ID": userId};
     NSFetchRequest *request = [self.objectModel fetchRequestFromTemplateWithName:@"GetAccountsByUserId"
                                                            substitutionVariables:var];
     
@@ -124,7 +124,7 @@
 
 - (Account *)getAccountByToken:(NSString *)authToken {
     
-    NSDictionary *var = [NSDictionary dictionaryWithObject:authToken forKey:@"AUTH_TOKEN"];
+    NSDictionary *var = @{@"AUTH_TOKEN": authToken};
     NSFetchRequest *request = [self.objectModel fetchRequestFromTemplateWithName:@"GetAccountByToken"
                                                            substitutionVariables:var];
     
