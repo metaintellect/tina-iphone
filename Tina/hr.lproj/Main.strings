@@ -1,0 +1,63 @@
+
+/* Class = "IBUITextField"; placeholder = "http://"; ObjectID = "2AN-rt-0Yq"; */
+"2AN-rt-0Yq.placeholder" = "http://";
+
+/* Class = "IBUIButton"; disabledTitle = "Log In"; ObjectID = "6nP-PB-U0e"; */
+"6nP-PB-U0e.disabledTitle" = "Prijava";
+
+/* Class = "IBUIButton"; normalTitle = "Log In"; ObjectID = "6nP-PB-U0e"; */
+"6nP-PB-U0e.normalTitle" = "Prijava";
+
+/* Class = "IBUIButton"; selectedTitle = "Log In"; ObjectID = "6nP-PB-U0e"; */
+"6nP-PB-U0e.selectedTitle" = "Prijava";
+
+/* Class = "IBUILabel"; text = "Label"; ObjectID = "81v-Ij-auX"; */
+"81v-Ij-auX.text" = "";
+
+/* Class = "IBUITextField"; placeholder = "Enter quantity"; ObjectID = "BFA-3i-zPR"; */
+"BFA-3i-zPR.placeholder" = "Unesite količinu";
+
+/* Class = "IBUILabel"; text = "Main Custom Domain URL:"; ObjectID = "Cdq-mF-lpo"; */
+"Cdq-mF-lpo.text" = "URL adresa glavne domene:";
+
+/* Class = "IBUINavigationItem"; title = "Settings"; ObjectID = "KwE-R9-lBz"; */
+"KwE-R9-lBz.title" = "Postavke";
+
+/* Class = "IBUIButton"; normalTitle = "Get more info"; ObjectID = "Mf4-Gy-YrW"; */
+"Mf4-Gy-YrW.normalTitle" = "Više informacija";
+
+/* Class = "IBUITextField"; placeholder = "Password"; ObjectID = "P20-Eh-8m8"; */
+"P20-Eh-8m8.placeholder" = "Zaporka";
+
+/* Class = "IBUILabel"; text = "Label"; ObjectID = "Thk-xL-JmW"; */
+"Thk-xL-JmW.text" = "";
+
+/* Class = "IBUITextField"; placeholder = "Username"; ObjectID = "U2j-6n-Hpm"; */
+"U2j-6n-Hpm.placeholder" = "Korisničko ime";
+
+/* Class = "IBUILabel"; text = "x"; ObjectID = "dKY-o4-sBs"; */
+"dKY-o4-sBs.text" = "x";
+
+/* Class = "IBUILabel"; text = "Label"; ObjectID = "dzg-Jq-NCX"; */
+"dzg-Jq-NCX.text" = "";
+
+/* Class = "IBUILabel"; text = "Label"; ObjectID = "f7Q-aj-x0d"; */
+"f7Q-aj-x0d.text" = "";
+
+/* Class = "IBUILabel"; text = "Total:"; ObjectID = "fR1-Pm-din"; */
+"fR1-Pm-din.text" = "Total:";
+
+/* Class = "IBUINavigationItem"; title = "Products"; ObjectID = "hr7-si-ps9"; */
+"hr7-si-ps9.title" = "Artikli";
+
+/* Class = "IBUITextField"; placeholder = "Enter product code"; ObjectID = "iOM-p9-9Q3"; */
+"iOM-p9-9Q3.placeholder" = "Unesite šifru artikla";
+
+/* Class = "IBUILabel"; text = "Label"; ObjectID = "jhr-9g-hdq"; */
+"jhr-9g-hdq.text" = "";
+
+/* Class = "IBUILabel"; text = "Label"; ObjectID = "jjT-Ql-DNM"; */
+"jjT-Ql-DNM.text" = "";
+
+/* Class = "IBUINavigationItem"; title = "New invoice"; ObjectID = "y5r-Ic-Xaw"; */
+"y5r-Ic-Xaw.title" = "Novi račun";

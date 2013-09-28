@@ -25,6 +25,8 @@
 
 - (NSArray *)getAllProducts;
 
+- (NSArray *)getAllProductsSortedById;
+
 - (Product *)getProductById:(NSNumber *)productId;
 
 - (NSArray *)getAccountByUserId:(NSNumber *)userId;

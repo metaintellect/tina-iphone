@@ -86,6 +86,21 @@
     return result;
 }
 
+- (NSArray *)getAllProductsSortedById {
+    NSEntityDescription *entityDescription = [NSEntityDescription entityForName:@"Product" inManagedObjectContext:self.context];
+    
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    [request setEntity:entityDescription];
+    
+    
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"id" ascending:YES];
+    [request setSortDescriptors:@[sortDescriptor]];
+    
+    NSArray *result = [self.context executeFetchRequest:request error:error];
+    
+    return result;
+}
+
 - (Product *)getProductById:(NSNumber *)productId {
     
     NSDictionary *var = @{@"PRODUCT_ID": productId};

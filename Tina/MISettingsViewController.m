@@ -10,6 +10,7 @@
 #import "MIHelper.h"
 #import "MILoginViewController.h"
 #import "MIRestJSON.h"
+#import "MIProductsViewController.h"
 
 
 @interface MISettingsViewController ()
@@ -40,20 +41,44 @@
 
 #pragma mark - Table view data source
 
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return 2;
+}
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    return [self.settingsItems count];
+    if (section == 0) return 1;
+    if (section == 1) return [self.settingsItems count];
+    
+    return 0;
 }
+
+- (NSString *)tableView:(UITableView *)tableView
+titleForHeaderInSection:(NSInteger)section
+{
+    if (section == 0) return @"";
+    if (section == 1) return @"";
+    return @"Other";
+}
+
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SettingsCellItem"];
     
-    NSString *labelText = (self.settingsItems)[[indexPath row]];
-    
-    UILabel *label = (UILabel *)[cell viewWithTag:1];
-    [label setText:labelText];
-    
+    if (indexPath.section == 0)
+    {
+        cell.textLabel.text = NSLocalizedString(@"Products List", nil);
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    }
+    else
+    {
+        NSString *labelText = (self.settingsItems)[[indexPath row]];
+        
+        UILabel *label = (UILabel *)[cell viewWithTag:1];
+        [label setText:labelText];
+    }
+        
     return cell;
 }
 
@@ -63,14 +88,25 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 
     NSInteger row = [indexPath row];
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
     
-    if (0 == row) {
-        
-        [self _syncProductsFromServer];
-        
-    } else if (1 == row) {
-        
-        [self _logOutFromApplication];
+    switch (row) {
+        case 0:
+            if (indexPath.section == 0) {
+               [self _showAllProductsView];
+            } else {
+                [self _syncProductsFromServer];
+            }
+            
+            break;
+        case 1:
+            [self _logOutFromApplication];
+            break;
+        case 2:
+            
+            break;
+        default:
+            break;
     }
 }
 
@@ -105,6 +141,14 @@
                                        instantiateViewControllerWithIdentifier:@"LoginViewController"];
     
     [self presentViewController:loginController animated:YES completion:nil];
+}
+
+- (void)_showAllProductsView {
+    
+    MIProductsViewController *productsController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil]
+                                              instantiateViewControllerWithIdentifier:@"ProductsViewController"];
+    
+    [self.navigationController pushViewController:productsController animated:YES];
 }
 
 @end

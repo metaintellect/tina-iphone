@@ -41,6 +41,7 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     
+    [super viewDidAppear:animated];
     [self _animateLoginControlsOnYAxis:35 usernameTextField:108 passwordTextField:146 loginButton:194];
     //[self.usernameTextFileld becomeFirstResponder];
 }
@@ -120,8 +121,8 @@
 
 #pragma mark - Private methods
 
-- (void)_validateAndRedirect:(id)sender {
-    
+- (void)_validateAndRedirect:(id)sender
+{    
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     
     NSError *error;

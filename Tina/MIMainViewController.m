@@ -47,8 +47,6 @@
         
         [self _checkIfAnyProductsAndGetFromServer];
     }
-    
-    [self _animateBottomViewOnYAxis:110];
 
     self.currentInvoice = (Invoice *)[NSEntityDescription insertNewObjectForEntityForName:@"Invoice"
                                                              inManagedObjectContext:[self.query context]];
@@ -58,7 +56,7 @@
     [self _setTotalPriceLabel:@0.00];
     
     _numberToolbar = [[UIToolbar alloc]initWithFrame:CGRectMake(0, 0, 320, 50)];
-    _numberToolbar.backgroundColor = [UIColor colorWithRed:105/255.0f green:159/255.0f blue:34/255.0f alpha:1.0f];
+    _numberToolbar.backgroundColor = [UIColor darkGrayColor];
     _numberToolbar.tintColor = [UIColor colorWithRed:56/255.0f green:37/255.0f blue:19/255.0f alpha:1.0f];
     [_numberToolbar sizeToFit];
     
@@ -68,6 +66,7 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     
+    [super viewDidAppear:animated];
     [self _showAndFocusProductCode];
     // Removing gap on top for Grouped UITableView
     _invoiceTableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, _invoiceTableView.bounds.size.width, 0.01f)];
@@ -315,6 +314,7 @@
     [self.productCodeTextField setHidden:NO];
     [self.productLabel setHidden:YES];
     [self _animateBottomViewOnYAxis:110];
+
     [self.productCodeTextField becomeFirstResponder];
     
     _numberToolbar.items = @[[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil],
